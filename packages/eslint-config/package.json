@@ -1,0 +1,10 @@
+{
+  "name": "@codelife-ui/eslint-config",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "devDependencies": {
+    "@rocketseat/eslint-config": "^1.2.0",
+    "eslint": "^8.37.0"
+  }
+}

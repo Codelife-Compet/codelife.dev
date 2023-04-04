@@ -1,0 +1,32 @@
+{
+  "name": "@codelife-ui/react",
+  "version": "0.0.0",
+  "description": "A design system to our codelife projects",
+  "main": "dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs --dts",
+    "dev": "tsup src/index.ts --format esm,cjs --dts --watch",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint src/**/*.ts* --fix"
+  },
+  "keywords": [
+    "codelife",
+    "user-interface",
+    "UI",
+    "ui-tokens"
+  ],
+  "author": "tec.henriquedepaula@gmail.com",
+  "license": "ISC",
+  "devDependencies": {
+    "@codelife-ui/eslint-config": "*",
+    "@codelife-ui/tokens": "*",
+    "@codelife-ui/ts-config": "*",
+    "@types/react": "^18.0.33",
+    "@types/react-dom": "^18.0.11",
+    "react": "^18.2.0",
+    "tsup": "^6.7.0",
+    "typescript": "^5.0.3"
+  }
+}

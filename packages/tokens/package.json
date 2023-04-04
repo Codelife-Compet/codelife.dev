@@ -1,0 +1,29 @@
+{
+  "name": "@codelife-ui/tokens",
+  "version": "0.0.0",
+  "description": "A design system to our codelife projects",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build":"tsup src/index.ts --format esm,cjs --dts",
+    "dev":"tsup src/index.ts --format esm,cjs --dts --watch",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint":"eslint src/**/*.ts* --fix"
+  },
+  "keywords": [
+    "codelife",
+    "user-interface",
+    "UI",
+    "ui-tokens"
+  ],
+  "author": "tec.henriquedepaula@gmail.com",
+  "license": "ISC",
+  "devDependencies": {
+    "tsup": "^6.7.0",
+    "typescript": "^5.0.3",
+    "@codelife-ui/ts-config":"*",
+    "@codelife-ui/eslint-config":"*"
+
+  }
+}

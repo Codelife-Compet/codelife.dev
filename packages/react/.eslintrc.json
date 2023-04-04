@@ -1,0 +1,3 @@
+{
+  "extends":["@codelife-ui/eslint-config"]
+}
