@@ -1,7 +1,7 @@
 {
   "name": "@codelife-ui/tokens",
   "version": "0.0.0",
-  "description": "A design system to our codelife projects",
+  "description": "The tokens for the codelife Design System",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",

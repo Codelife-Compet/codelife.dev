@@ -1,0 +1,19 @@
+rules:
+  - name: "Bug"
+    # Match "bug" or "fix" in the title or body
+    anyOf:
+      - contains: ["bug"]
+      - contains: ["fix"]
+    # Add the label "bug"
+    actions:
+      - label: "bug"
+        color: "ee0701"
+
+  - name: "Feature Request"
+    # Match "feature" in the title or body
+    contains:
+      - "feature"
+    # Add the label "feature-request"
+    actions:
+      - label: "feature-request"
+        color: "336699"

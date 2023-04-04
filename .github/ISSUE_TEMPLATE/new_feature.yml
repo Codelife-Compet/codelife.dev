@@ -1,0 +1,45 @@
+name: New Feature
+description: Template to create a new feature
+title: "[DATE]: [FEATURE NAME]"
+labels: ["enhancement","feature"]
+assignees: ["bidwolf","Francis1408","luizleroy01","PedroRonzani18"]
+body:
+- type: dropdown
+  id: feature
+  attributes:
+    label: What your feature is related?
+    options:
+      - Styles
+      - Components
+      - Tests
+      - Devops/Deploy
+      - Performance
+      - Another
+  validations:
+    required: true
+- type: textarea
+  id: description
+  attributes:
+    label: Description
+    description: "Your feature description"
+    placeholder: "Your description goes here..."
+- type: textarea
+  id: tasks
+  attributes:
+    label: Tasks
+    description: "The tasks to be done"
+    value: |
+      - [ ] Task 1
+      - [ ] Task 2
+      - [ ] Task 3
+      ...
+- type: textarea
+  id: acceptance
+  attributes:
+    label: Acceptance Criteria
+    description: "List of conditions that your feature must meet to be considered complete:"
+    value: |
+      1. First criteria : be nice
+      2. Second criteria : be smart
+      3. Third criteria : be sheap
+      ...
