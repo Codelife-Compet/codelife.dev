@@ -16,6 +16,8 @@
     "@codelife-ui/eslint-config": "*",
     "@codelife-ui/react": "*",
     "@codelife-ui/tokens": "*",
+    "@phosphor-icons/react": "^2.0.8",
+    "@radix-ui/react-avatar": "^1.0.2",
     "@storybook/addon-a11y": "^7.1.0-alpha.0",
     "@storybook/addon-actions": "^7.0.2",
     "@storybook/addon-docs": "^7.0.2",
