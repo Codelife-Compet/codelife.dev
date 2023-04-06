@@ -1,7 +1,7 @@
 import React from 'react'
 import '../styles/tokens-grid.css'
 interface TokensGridProps {
-  tokens: Record<string, string>
+  tokens: Record<string, string | number>
   hasRemValue?: boolean
 }
 export function TokensGrid({ tokens, hasRemValue = false }: TokensGridProps) {
@@ -21,14 +21,15 @@ export function TokensGrid({ tokens, hasRemValue = false }: TokensGridProps) {
               <td>{key}</td>
               <td>
                 {hasRemValue
-                  ? value.replace('rem', ' rem')
-                  : value.includes('px')
-                  ? value.replace('px', ' px')
+                  ? value.toString().replace('rem', ' rem')
+                  : value.toString().includes('px')
+                  ? value.toString().replace('px', ' px')
                   : value}
               </td>
               {hasRemValue && (
                 <td>
-                  {Number((value.replace('rem', '') as any) * 16) + ' px'}
+                  {Number((value.toString().replace('rem', '') as any) * 16) +
+                    ' px'}
                 </td>
               )}
             </tr>
