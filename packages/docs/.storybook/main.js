@@ -7,13 +7,16 @@ const config = {
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
+    "@storybook/addon-a11y",
+    "@storybook/addon-actions",
+    "@storybook/addon-docs",
   ],
+  docs:{
+    autodocs:'tag',
+  },
   framework: {
     name: "@storybook/react-vite",
     options: {},
-  },
-  docs: {
-    autodocs: "tag",
   },
   "features":{
     storyStoreV7:true

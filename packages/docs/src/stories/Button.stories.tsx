@@ -3,6 +3,7 @@ import { Button, ButtonProps } from '@codelife-ui/react'
 export default {
   title: 'Form/Button',
   component: Button,
+  tags: ['autodocs'],
   args: { children: 'Login' },
 } as Meta<ButtonProps>
 
