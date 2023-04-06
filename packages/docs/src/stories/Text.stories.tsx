@@ -3,6 +3,7 @@ import { Text, TextProps } from '@codelife-ui/react'
 export default {
   title: 'Typograph/Text',
   component: Text,
+  tags: ['autodocs'],
   args: {
     children:
       'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, ipsam praesentium, ullam voluptate eaque pariatur, minus ducimus obcaecati vero magnam suscipit recusandae facere commodi cum doloribus. Quis illo quia eveniet.',

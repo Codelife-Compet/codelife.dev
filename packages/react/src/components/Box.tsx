@@ -1,12 +1,9 @@
 import { ComponentProps, ElementType } from 'react'
 import { styled } from '../../styles'
 export const Box = styled('div', {
-  padding: '$16',
+  padding: '$6',
   borderRadius: '$md',
-  background: '$codelife-black-700',
-  '&:hover ': {
-    background: '$codelife-black-500',
-  },
+  background: '$codelife-black-900',
 })
 export type BoxProps = ComponentProps<typeof Box> & {
   as?: ElementType
