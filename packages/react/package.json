@@ -30,8 +30,8 @@
     "typescript": "^5.0.3"
   },
   "dependencies": {
-    "@phosphor-icons/react": "^2.0.8",
     "@radix-ui/react-avatar": "^1.0.2",
-    "@stitches/react": "^1.2.8"
+    "@stitches/react": "^1.2.8",
+    "react-icons": "^4.8.0"
   }
 }

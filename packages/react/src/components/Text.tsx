@@ -4,7 +4,7 @@ export const Text = styled('p', {
   fontFamily: '$body',
   lineHeight: '$base',
   margin: 0,
-  color: '$gray100',
+  color: '$codelife-gray-100',
   variants: {
     fontfamily: {
       body: { fontFamily: '$body' },

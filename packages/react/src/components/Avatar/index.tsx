@@ -1,6 +1,6 @@
 import React, { ComponentProps } from 'react'
 import { AvatarContainer, AvatarFallback, AvatarImage } from './styles'
-import { User } from '@phosphor-icons/react'
+import { FaUser } from 'react-icons/fa'
 export interface AvatarProps extends ComponentProps<typeof AvatarImage> {
   size: 'sm' | 'md' | 'lg' | 'xl'
 }
@@ -9,7 +9,7 @@ export const Avatar: React.FC<AvatarProps> = ({ size, ...props }) => {
     <AvatarContainer size={size}>
       <AvatarImage {...props} />
       <AvatarFallback delayMs={600} size={size}>
-        <User />
+        <FaUser />
       </AvatarFallback>
     </AvatarContainer>
   )

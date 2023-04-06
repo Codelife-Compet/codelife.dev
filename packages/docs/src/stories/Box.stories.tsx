@@ -6,11 +6,7 @@ export default {
   component: Box,
   tags: ['autodocs'],
   args: {
-    children: (
-      <>
-        <Text>Box element</Text>
-      </>
-    ),
+    children: <Text>Box element</Text>,
   },
 } as Meta<BoxProps>
 
