@@ -13,9 +13,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@codelife-ui/eslint-config": "*",
     "@codelife-ui/react": "*",
     "@codelife-ui/tokens": "*",
-    "@codelife-ui/eslint-config": "*"
+    "polished": "^4.2.2"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.0.2",
