@@ -20,11 +20,11 @@ export function TokensGrid({ tokens, hasRemValue = false }: TokensGridProps) {
             <tr key={key}>
               <td>{key}</td>
               <td>
-                {hasRemValue
-                  ? value.toString().replace('rem', ' rem')
-                  : value.toString().includes('px')
-                  ? value.toString().replace('px', ' px')
-                  : value}
+                {value
+                  .toString()
+                  .replace(/rem$/, ' rem')
+                  .replace(/px$/, ' px')
+                  .replace(/%$/, ' %')}
               </td>
               {hasRemValue && (
                 <td>
