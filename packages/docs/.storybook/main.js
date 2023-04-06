@@ -11,6 +11,7 @@ const config = {
     "@storybook/addon-actions",
     "@storybook/addon-docs",
   ],
+  staticDirs: ['../public'],
   docs:{
     autodocs:'tag',
   },
