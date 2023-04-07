@@ -1,4 +1,4 @@
-# Deploy docs on Github-Pages
+# Deploy docs on Github-Pages from push on main branch
 name: Deploy docs
 
 on:
