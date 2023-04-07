@@ -7,12 +7,13 @@ export default {
   args: {
     src: 'https://github.com/bidwolf.png',
     alt: 'Henrique de Paula Rodrigues',
+    size: 'sm',
   },
   argTypes: {
     size: {
       options: ['sm', 'md', 'lg', 'xl'],
       control: {
-        type: 'select',
+        type: 'inline-select',
       },
     },
   },
@@ -57,3 +58,4 @@ export const ExtraLargeWithFallback: StoryObj<AvatarProps> = {
     size: 'xl',
   },
 }
+Avatar.displayName = 'Avatar'
