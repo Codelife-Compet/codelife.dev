@@ -6,7 +6,26 @@ export default {
   title: 'Form/Button',
   component: Button,
   tags: ['autodocs'],
-  args: { children: 'Send', size: 'sm' },
+  args: { variant: 'primary', size: 'md', children: 'Send' },
+  argTypes: {
+    variant: {
+      options: ['primary', 'secondary', 'tertiary'],
+      control: {
+        type: 'inline-radio',
+      },
+    },
+    size: {
+      options: ['sm', 'md', 'lg'],
+      control: {
+        type: 'inline-radio',
+      },
+    },
+    disabled: {
+      control: {
+        type: 'boolean',
+      },
+    },
+  },
 } as Meta<ButtonProps>
 
 export const Primary: StoryObj<ButtonProps> = {}
@@ -19,6 +38,7 @@ export const WithIcon: StoryObj<ButtonProps> = {
     ),
   },
 }
+
 export const Secondary: StoryObj<ButtonProps> = {
   args: {
     children: 'Create new',
@@ -37,3 +57,4 @@ export const Disabled: StoryObj<ButtonProps> = {
     disabled: true,
   },
 }
+Button.displayName = 'Button'
