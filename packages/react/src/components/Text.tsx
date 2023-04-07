@@ -6,10 +6,6 @@ export const Text = styled('p', {
   margin: 0,
   color: '$codelife-gray-100',
   variants: {
-    fontfamily: {
-      body: { fontFamily: '$body' },
-      heading: { fontFamily: '$heading' },
-    },
     size: {
       xxs: { fontSize: '$xxs' },
       xs: { fontSize: '$xs' },
@@ -28,7 +24,6 @@ export const Text = styled('p', {
   },
   defaultVariants: {
     size: 'md',
-    fontfamily: 'body',
   },
 })
 export type TextProps = ComponentProps<typeof Text> & {

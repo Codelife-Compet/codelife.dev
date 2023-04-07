@@ -6,14 +6,23 @@ export default {
   tags: ['autodocs'],
   args: {
     children: 'Heading',
+    size: 'md',
   },
-} satisfies Meta<TextProps>
+  argTypes: {
+    size: {
+      description: 'The size of the heading.',
+      options: ['sm', 'md', 'lg', 'xl', '2xl', '4xl', '5xl', '6xl'],
+      control: {
+        type: 'inline-radio',
+      },
+    },
+  },
+} as Meta<TextProps>
 
 export const Body: StoryObj<TextProps> = {}
 export const Heading: StoryObj<TextProps> = {
   args: {
     children: 'H1 Heading',
-    fontfamily: 'heading',
     as: 'h1',
   },
   parameters: {
@@ -25,3 +34,4 @@ export const Heading: StoryObj<TextProps> = {
     },
   },
 }
+Text.displayName = 'Heading'

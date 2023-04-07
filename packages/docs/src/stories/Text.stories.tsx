@@ -4,7 +4,31 @@ export default {
   title: 'Typograph/Text',
   component: Text,
   tags: ['autodocs'],
+  argTypes: {
+    size: {
+      description: 'The size of the text',
+      options: [
+        'xxs',
+        'xs',
+        'sm',
+        'md',
+        'lg',
+        'xl',
+        '2xl',
+        '4xl',
+        '5xl',
+        '6xl',
+        '7xl',
+        '8xl',
+        '9xl',
+      ],
+      control: {
+        type: 'inline-radio',
+      },
+    },
+  },
   args: {
+    size: 'md',
     children:
       'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, ipsam praesentium, ullam voluptate eaque pariatur, minus ducimus obcaecati vero magnam suscipit recusandae facere commodi cum doloribus. Quis illo quia eveniet.',
   },
@@ -17,3 +41,4 @@ export const CustomTag: StoryObj<TextProps> = {
     as: 'strong',
   },
 }
+Text.displayName = 'Text'

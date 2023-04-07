@@ -47,9 +47,6 @@ export const CheckboxIndicator = styled(Checkbox.Indicator, {
   color: '$codelife-primary-300',
   '&[data-state="checked"]': {
     animation: `${slideIn} 200ms ease-out`,
-    '&:hover':{
-      color:
-    },
   },
   '&[data-state="unchecked"]': {
     animation: `${slideOut} 200ms ease-out`,

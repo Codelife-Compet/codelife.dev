@@ -15,6 +15,10 @@ export const Button = styled('button', {
   gap: '$2',
   outline: 0,
   padding: '0 $4',
+  transition: 'all ease 275ms',
+  '&:not(:disabled):active': {
+    filter: 'brightness(120%)',
+  },
   '&:disabled': {
     cursor: 'not-allowed',
   },
@@ -23,39 +27,62 @@ export const Button = styled('button', {
     height: '$4',
   },
   variants: {
-    variant: {
+    colors: {
       primary: {
-        color: '$codelife-black-900',
+        color: '$codelife-primary-700',
+        border: '2px solid $codelife-primary-700',
         backgroundColor: '$codelife-primary-700',
+      },
+      secondary: {
+        color: '$codelife-secondary-700',
+        border: '2px solid $codelife-secondary-700',
+        backgroundColor: '$codelife-secondary-700',
+      },
+      tertiary: {
+        color: '$codelife-tertiary-700',
+        border: '2px solid $codelife-tertiary-700',
+        backgroundColor: '$codelife-tertiary-700',
+      },
+    },
+    variant: {
+      default: {
+        color: '$codelife-black-900 !important',
         '&:not(:disabled):hover': {
-          backgroundColor: '$codelife-primary-500',
+          opacity: 1,
         },
         '&:disabled': {
-          backgroundColor: '$codelife-primary-700',
           opacity: 0.5,
         },
       },
-      secondary: {
-        color: '$codelife-primary-500',
-        border: '2px solid $codelife-primary-700',
-        '&:not(:disabled):hover': {
-          backgroundColor: '$codelife-primary-700',
+      outlined: {
+        opacity: 1,
+        '&:not(:hover)': {
+          border: '2px solid currentColor ',
+          backgroundColor: 'transparent',
+        },
+        '&:disabled': {
+          color: '$codelife-gray-700 !important',
+          backgroundColor: 'transparent !important',
+          borderColor: '$codelife-gray-700 !important',
+          filter: 'brightness(70%)',
+        },
+        '&:hover': {
           color: '$codelife-black-900',
         },
-        '&:disabled': {
-          color: '$codelife-gray-200',
-          borderColor: '$codelife-gray-200',
-        },
       },
-      tertiary: {
-        color: '$codelife-gray-100',
+      text: {
+        borderColor: 'transparent !important',
+        backgroundColor: 'transparent !important',
         '&:not(:disabled):hover': {
-          color: '#fff',
-          backgroundColor: '$codelife-gray-900',
+          opacity: 0.8,
         },
         '&:disabled': {
-          color: '$codelife-gray600',
-          borderColor: '$codelife-gray-200',
+          color: '$codelife-gray-700',
+          backgroundColor: 'transparent !important',
+          filter: 'brightness(70%)',
+        },
+        '&:not(:disabled):active': {
+          opacity: 0.5,
         },
       },
     },
@@ -74,8 +101,9 @@ export const Button = styled('button', {
     },
   },
   defaultVariants: {
-    variant: 'primary',
     size: 'md',
+    colors: 'primary',
+    variant: 'default',
   },
 })
 export type ButtonProps = ComponentProps<typeof Button> & {

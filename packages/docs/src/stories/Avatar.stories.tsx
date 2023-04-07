@@ -8,16 +8,25 @@ export default {
     src: 'https://github.com/bidwolf.png',
     alt: 'Henrique de Paula Rodrigues',
     size: 'sm',
+    theme: 'regular',
   },
   argTypes: {
     size: {
       options: ['sm', 'md', 'lg', 'xl'],
       control: {
-        type: 'inline-select',
+        type: 'inline-radio',
+      },
+    },
+    src: { control: { type: 'text' } },
+    alt: { control: { type: 'text' } },
+    theme: {
+      options: ['regular', 'owner', 'contributor', 'moderator'],
+      control: {
+        type: 'inline-radio',
       },
     },
   },
-} satisfies Meta<AvatarProps>
+} as Meta<AvatarProps>
 
 export const Small: StoryObj<AvatarProps> = {}
 export const Medium: StoryObj<AvatarProps> = {

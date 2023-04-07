@@ -4,8 +4,21 @@ import React from 'react'
 export default {
   title: 'Form/TextInput',
   component: TextInput,
-  args: {},
+  args: {
+    disabled: false,
+  },
   tags: ['autodocs'],
+  argTypes: {
+    disabled: {
+      description: 'Toggle the button disable property',
+      control: {
+        type: 'boolean',
+      },
+    },
+    placeholder: {
+      description: 'The input placeholder ',
+    },
+  },
   decorators: [
     (Story) => (
       <Box

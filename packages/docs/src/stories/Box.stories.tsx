@@ -8,6 +8,14 @@ export default {
   args: {
     children: <Text>Box element</Text>,
   },
+  argTypes: {
+    children: {
+      control: {
+        type: null,
+      },
+    },
+  },
 } as Meta<BoxProps>
 
 export const Primary: StoryObj<BoxProps> = {}
+Box.displayName = 'Box'

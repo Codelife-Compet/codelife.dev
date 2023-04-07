@@ -1,15 +1,11 @@
 import { ComponentProps, ElementType } from 'react'
 import { styled } from '../../styles'
 export const Heading = styled('h2', {
-  fontFamily: '$body',
+  fontFamily: '$heading',
   lineHeight: '$base',
   margin: 0,
   color: '$codelife-gray-100',
   variants: {
-    fontfamily: {
-      body: { fontFamily: '$body' },
-      heading: { fontFamily: '$heading' },
-    },
     size: {
       sm: { fontSize: '$xl' },
       md: { fontSize: '$2xl' },
@@ -23,7 +19,6 @@ export const Heading = styled('h2', {
   },
   defaultVariants: {
     size: 'md',
-    fontfamily: 'body',
   },
 })
 export type HeadingProps = ComponentProps<typeof Heading> & {

@@ -5,38 +5,62 @@ export const AvatarContainer = styled(Avatar.Root, {
   borderRadius: '$full',
   display: 'inline-block',
   overflow: 'hidden',
-  backgroundColor: 'inherit',
+  border: '0 solid $codelife-black-900',
+  outline: '0 solid transparent',
   variants: {
     size: {
       sm: {
-        width: '$12',
-        height: '$12',
+        width: '$14',
+        height: '$14',
+        borderWidth: '2px',
+        outlineWidth: '1px',
       },
       md: {
-        width: '$16',
-        height: '$16',
+        width: 'calc(2*$14)',
+        height: 'calc(2*$14)',
+        borderWidth: '4px',
+        outlineWidth: '2px',
       },
       lg: {
-        width: '$20',
-        height: '$20',
+        width: 'calc(4*$14)',
+        height: 'calc(4*$14)',
+        borderWidth: '8px',
+        outlineWidth: '4px',
       },
       xl: {
-        width: '$40',
-        height: '$40',
+        width: 'calc(6*$14)',
+        height: 'calc(6*$14)',
+        borderWidth: '12px',
+        outlineWidth: '6px',
+      },
+    },
+    theme: {
+      regular: {
+        outlineColor: '$codelife-gray-900',
+      },
+      moderator: {
+        outlineColor: '$codelife-tertiary-900',
+      },
+      owner: {
+        outlineColor: '$codelife-primary-900',
+      },
+      contributor: {
+        outlineStyle: 'solid',
+        outlineColor: '$codelife-secondary-900',
       },
     },
   },
   defaultVariants: {
     size: 'sm',
+    theme: 'regular',
   },
 })
 export const AvatarImage = styled(Avatar.Image, {
   width: '100%',
   height: '100%',
   objectFit: 'cover',
-  overflow: 'clip',
-  overflowClipMargin: 'content-box',
   borderRadius: 'inherit',
+  backgroundColor: '$codelife-primary-500',
 })
 export const AvatarFallback = styled(Avatar.Fallback, {
   display: 'flex',
@@ -44,7 +68,8 @@ export const AvatarFallback = styled(Avatar.Fallback, {
   width: '100%',
   alignItems: 'center',
   justifyContent: 'center',
-  backgroundColor: '$sky-light',
+  backgroundColor: '$codelife-primary-500',
+  color: '$codelife-primary-900',
   variants: {
     size: {
       sm: {
@@ -55,20 +80,20 @@ export const AvatarFallback = styled(Avatar.Fallback, {
       },
       md: {
         svg: {
-          width: '$12',
-          height: '$12',
+          width: 'calc(2*$10)',
+          height: 'calc(2*$10)',
         },
       },
       lg: {
         svg: {
-          width: '$14',
-          height: '$14',
+          width: 'calc(4*$10)',
+          height: 'calc(4*$10)',
         },
       },
       xl: {
         svg: {
-          width: '$28',
-          height: '$28',
+          width: 'calc(6*$10)',
+          height: 'calc(6*$10)',
         },
       },
     },
