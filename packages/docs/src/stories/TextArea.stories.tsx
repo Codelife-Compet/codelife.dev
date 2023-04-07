@@ -2,7 +2,7 @@ import { StoryObj, Meta } from '@storybook/react'
 import { Box, Text, TextArea, TextAreaProps } from '@codelife-ui/react'
 import React from 'react'
 export default {
-  title: 'Typograph/TextArea',
+  title: 'Form/TextArea',
   component: TextArea,
   args: {},
   tags: ['autodocs'],

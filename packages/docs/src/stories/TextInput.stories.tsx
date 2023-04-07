@@ -2,7 +2,7 @@ import { StoryObj, Meta } from '@storybook/react'
 import { Box, Text, TextInput, TextInputProps } from '@codelife-ui/react'
 import React from 'react'
 export default {
-  title: 'Typograph/TextInput',
+  title: 'Form/TextInput',
   component: TextInput,
   args: {},
   tags: ['autodocs'],
