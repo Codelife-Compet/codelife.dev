@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "storybook dev -p 6006",
     "build": "storybook build",
+    "deploy-storybook": "storybook-to-ghpages",
     "lint": "eslint src/**/*.{ts,js,tsx,jsx}* --fix"
   },
   "keywords": [],
@@ -30,6 +31,7 @@
     "@storybook/blocks": "^7.0.2",
     "@storybook/react": "^7.0.2",
     "@storybook/react-vite": "^7.0.2",
+    "@storybook/storybook-deployer": "^2.8.16",
     "@storybook/testing-library": "^0.0.14-next.2",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
