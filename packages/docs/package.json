@@ -1,0 +1,41 @@
+{
+  "name": "@codelife-ui/docs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "storybook dev -p 6006",
+    "build": "storybook build",
+    "deploy-storybook": "storybook-to-ghpages",
+    "lint": "eslint src/**/*.{ts,js,tsx,jsx}* --fix"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@codelife-ui/eslint-config": "*",
+    "@codelife-ui/react": "*",
+    "@codelife-ui/tokens": "*",
+    "@radix-ui/react-avatar": "^1.0.2",
+    "@storybook/addon-a11y": "^7.1.0-alpha.0",
+    "@storybook/addon-actions": "^7.0.2",
+    "@storybook/addon-docs": "^7.0.2",
+    "polished": "^4.2.2",
+    "react-icons": "^4.8.0"
+  },
+  "devDependencies": {
+    "@storybook/addon-essentials": "^7.0.2",
+    "@storybook/addon-interactions": "^7.0.2",
+    "@storybook/addon-links": "^7.0.2",
+    "@storybook/blocks": "^7.0.2",
+    "@storybook/react": "^7.0.2",
+    "@storybook/react-vite": "^7.0.2",
+    "@storybook/storybook-deployer": "^2.8.16",
+    "@storybook/testing-library": "^0.0.14-next.2",
+    "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "storybook": "^7.0.2"
+  }
+}

@@ -6,10 +6,10 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsup src/index.ts --format esm,cjs --dts",
-    "dev": "tsup src/index.ts --format esm,cjs --dts --watch",
+    "build": "tsup src/index.tsx --format esm,cjs --dts --external react",
+    "dev": "tsup src/index.tsx --format esm,cjs --dts --external react --watch",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint src/**/*.ts* --fix"
+    "lint": "eslint src/**/*.{js,jsx,ts,tsx}* --fix"
   },
   "keywords": [
     "codelife",
@@ -28,5 +28,11 @@
     "react": "^18.2.0",
     "tsup": "^6.7.0",
     "typescript": "^5.0.3"
+  },
+  "dependencies": {
+    "@radix-ui/react-avatar": "^1.0.2",
+    "@radix-ui/react-checkbox": "^1.0.3",
+    "@stitches/react": "^1.2.8",
+    "react-icons": "^4.8.0"
   }
 }
