@@ -21,6 +21,11 @@ const config = {
   },
   "features":{
     storyStoreV7:true
+  },
+  viteFinal: (config,{configType})=>{
+    if (configType === 'PRODUCTION') {
+      config.base = '/codelife-ui';
+    }
   }
 };
 export default config;
