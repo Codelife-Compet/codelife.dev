@@ -20,8 +20,14 @@ jobs:
 
       - run: npm run build
 
+      - name: setup .noJekyll configuration
+        working-directory: ./packages/docs
+        run: touch ./storybook-static/.nojekyll
+        
       - name: Deploy storybook
         working-directory: ./packages/docs
         run: npm run deploy-storybook -- --ci --existing-output-dir=storybook-static
+
+      
         env:
           GH_TOKEN: ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}
