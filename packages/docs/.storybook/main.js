@@ -1,3 +1,4 @@
+import { mergeConfig } from 'vite';
 /** @type { import('@storybook/react-vite').StorybookConfig } */
 const config = {
   stories: [
@@ -17,15 +18,26 @@ const config = {
   },
   framework: {
     name: "@storybook/react-vite",
-    options: {},
+    options: {
+      builder:'@storybook/builder-vite'
+    },
   },
   "features":{
     storyStoreV7:true
-  },
-  viteFinal: (config,{configType})=>{
+  },async viteFinal(config,{configType}) {
+    // Merge custom configuration into the default config
     if (configType === 'PRODUCTION') {
-      config.base = '/codelife-ui';
+      // Your production configuration goes here.
+      config.base = '/codelife-ui/';
     }
-  }
+    return mergeConfig(config, {
+      // Add dependencies to pre-optimization
+      optimizeDeps: {
+        include: ['storybook-dark-mode'],
+      },
+      
+    }
+    );
+  },
 };
 export default config;
