@@ -3,7 +3,6 @@ import { styled } from '../../styles'
 export const Button = styled('button', {
   all: 'unset',
   fontFamily: '$body',
-  border: 0,
   borderRadius: '$md',
   textAlign: 'center',
   fontWeight: '$medium',
@@ -13,6 +12,7 @@ export const Button = styled('button', {
   cursor: 'pointer',
   textDecoration: 'none',
   gap: '$2',
+  backgroundColor: 'transparent',
   outline: 0,
   padding: '0 $4',
   transition: 'all ease 275ms',
@@ -21,65 +21,44 @@ export const Button = styled('button', {
   },
   '&:disabled': {
     cursor: 'not-allowed',
+    color: '$codelife-gray-500',
+    backgroundColor: '$codelife-gray-900 ',
+    borderColor: '$codelife-gray-500',
+    filter: 'brightness(50%)',
   },
   svg: {
     width: '$4',
     height: '$4',
   },
   variants: {
-    colors: {
+    variant: {
       primary: {
-        color: '$codelife-primary-700',
-        border: '2px solid $codelife-primary-700',
         backgroundColor: '$codelife-primary-700',
+        '&:not(:disabled):hover': { backgroundColor: '$codelife-primary-900' },
       },
       secondary: {
-        color: '$codelife-secondary-700',
-        border: '2px solid $codelife-secondary-700',
         backgroundColor: '$codelife-secondary-700',
+        '&:hover': { backgroundColor: '$codelife-secondary-900' },
       },
       tertiary: {
-        color: '$codelife-tertiary-700',
-        border: '2px solid $codelife-tertiary-700',
         backgroundColor: '$codelife-tertiary-700',
+        '&:hover': { backgroundColor: '$codelife-tertiary-900' },
       },
     },
-    variant: {
-      default: {
-        color: '$codelife-black-900 !important',
-        '&:not(:disabled):hover': {
-          opacity: 1,
-        },
-        '&:disabled': {
-          opacity: 0.5,
-        },
+
+    outlined: {
+      true: {
+        border: '2px solid',
+        backgroundColor: 'transparent !important',
       },
-      outlined: {
-        opacity: 1,
-        '&:not(:hover)': {
-          border: '2px solid currentColor ',
-          backgroundColor: 'transparent',
-        },
-        '&:disabled': {
-          color: '$codelife-gray-700 !important',
-          backgroundColor: 'transparent !important',
-          borderColor: '$codelife-gray-700 !important',
-          filter: 'brightness(70%)',
-        },
-        '&:hover': {
-          color: '$codelife-black-900',
-        },
-      },
-      text: {
-        borderColor: 'transparent !important',
+    },
+    text: {
+      true: {
+        borderColor: 'transparent',
         backgroundColor: 'transparent !important',
         '&:not(:disabled):hover': {
+          backgroundColor: 'transparent',
           opacity: 0.8,
-        },
-        '&:disabled': {
-          color: '$codelife-gray-700',
-          backgroundColor: 'transparent !important',
-          filter: 'brightness(70%)',
         },
         '&:not(:disabled):active': {
           opacity: 0.5,
@@ -100,10 +79,70 @@ export const Button = styled('button', {
       },
     },
   },
+  compoundVariants: [
+    {
+      variant: 'primary',
+      outlined: true,
+      css: {
+        color: '$codelife-primary-700',
+        borderColor: '$codelife-primary-700',
+        '&:not(:disabled):hover': {
+          borderColor: '$codelife-primary-900',
+          color: '$codelife-black-900',
+          backgroundColor: '$codelife-primary-900 !important',
+        },
+      },
+    },
+    {
+      variant: 'secondary',
+      outlined: true,
+      css: {
+        color: '$codelife-secondary-700',
+        borderColor: '$codelife-secondary-700',
+        '&:not(:disabled):hover': {
+          borderColor: '$codelife-secondary-900',
+          color: '$codelife-black-900',
+          backgroundColor: '$codelife-secondary-900 !important',
+        },
+      },
+    },
+    {
+      variant: 'tertiary',
+      outlined: true,
+      css: {
+        color: '$codelife-tertiary-700',
+        borderColor: '$codelife-tertiary-700',
+        '&:not(:disabled):hover': {
+          color: '$codelife-black-900',
+          backgroundColor: '$codelife-tertiary-900 !important',
+        },
+      },
+    },
+    {
+      variant: 'primary',
+      text: true,
+      css: {
+        color: '$codelife-primary-700',
+      },
+    },
+    {
+      variant: 'secondary',
+      text: true,
+      css: {
+        color: '$codelife-secondary-700',
+      },
+    },
+    {
+      variant: 'tertiary',
+      text: true,
+      css: {
+        color: '$codelife-tertiary-700',
+      },
+    },
+  ],
   defaultVariants: {
     size: 'md',
-    colors: 'primary',
-    variant: 'default',
+    variant: 'primary',
   },
 })
 export type ButtonProps = ComponentProps<typeof Button> & {

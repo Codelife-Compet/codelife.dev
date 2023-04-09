@@ -8,12 +8,12 @@ export default {
   tags: ['autodocs'],
   args: {
     size: 'md',
-    variant: 'default',
-    colors: 'primary',
+    variant: 'primary',
+    disabled: false,
     children: 'Submit lesson',
   },
   argTypes: {
-    colors: {
+    variant: {
       description: 'The button variant color',
       options: ['primary', 'secondary', 'tertiary'],
       control: {
@@ -109,7 +109,7 @@ export default {
             args: {
               ...{ ...context.args },
               children: 'References',
-              variant: 'outlined',
+              outlined: true,
             },
           })}
         </div>
@@ -137,7 +137,7 @@ export default {
             args: {
               ...{ ...context.args },
               children: 'Learn more',
-              variant: 'text',
+              text: true,
             },
           })}
         </div>
@@ -151,12 +151,12 @@ export const Primary: StoryObj<ButtonProps> = {}
 export const Secondary: StoryObj<ButtonProps> = {
   args: {
     children: 'Create new',
-    colors: 'secondary',
+    variant: 'secondary',
   },
 }
 export const Tertiary: StoryObj<ButtonProps> = {
   args: {
-    colors: 'tertiary',
+    variant: 'tertiary',
   },
 }
 Button.displayName = 'Button'
