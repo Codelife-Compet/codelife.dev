@@ -6,7 +6,6 @@ export const TextInputContainer = styled('div', {
   gap: 8,
   width: '100%',
   borderRadius: '$sm',
-  padding: '$3 $4',
   boxSizing: 'border-box',
   opacity: 0.7,
   backgroundColor: '$surface',
@@ -26,6 +25,21 @@ export const TextInputContainer = styled('div', {
   '&:has(input:disabled) ': {
     opacity: 0.5,
     cursor: 'not-allowed',
+  },
+  variants: {
+    size: {
+      sm: {
+        paddingBlock: '$2',
+        paddingInline: '$3',
+      },
+      md: {
+        paddingBlock: '$3',
+        paddingInline: '$4',
+      },
+    },
+  },
+  defaultVariants: {
+    size: 'md',
   },
 })
 export const Prefix = styled('span', {
@@ -47,7 +61,7 @@ export const Input = styled('input', {
   '&:disabled ': {
     cursor: 'not-allowed',
   },
-  '&:placeholder ': {
+  '&::placeholder ': {
     color: '$text-additional',
   },
 })
