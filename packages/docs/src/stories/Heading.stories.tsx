@@ -1,8 +1,9 @@
 import { StoryObj, Meta } from '@storybook/react'
-import { Text, TextProps } from '@codelife-ui/react'
+import { Box, Heading as heading, HeadingProps } from '@codelife-ui/react'
+import { darkTheme } from '@codelife-ui/react/styles'
 export default {
   title: 'Typograph/Heading',
-  component: Text,
+  component: heading,
   tags: ['autodocs'],
   args: {
     children: 'Heading',
@@ -17,10 +18,33 @@ export default {
       },
     },
   },
-} as Meta<TextProps>
+  decorators: [
+    (Story, context) => (
+      <>
+        <Box
+          as="label"
+          css={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 2,
+            marginBlock: '$4',
+          }}
+          className={context.parameters.theme === 'dark' ? darkTheme : ''}
+        >
+          {Story()}
+        </Box>
+      </>
+    ),
+  ],
+} as Meta<HeadingProps>
 
-export const Body: StoryObj<TextProps> = {}
-export const Heading: StoryObj<TextProps> = {
+export const Body: StoryObj<HeadingProps> = {}
+export const OnDark: StoryObj<HeadingProps> = {
+  parameters: {
+    theme: 'dark',
+  },
+}
+export const Heading: StoryObj<HeadingProps> = {
   args: {
     children: 'H1 Heading',
     as: 'h1',
@@ -34,4 +58,4 @@ export const Heading: StoryObj<TextProps> = {
     },
   },
 }
-Text.displayName = 'Heading'
+heading.displayName = 'Heading'
