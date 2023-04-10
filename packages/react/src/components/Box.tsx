@@ -3,7 +3,8 @@ import { styled } from '../../styles'
 export const Box = styled('div', {
   padding: '$6',
   borderRadius: '$md',
-  background: '$codelife-black-900',
+  backgroundColor: '$background',
+  color: '$text-default',
 })
 export type BoxProps = ComponentProps<typeof Box> & {
   as?: ElementType
