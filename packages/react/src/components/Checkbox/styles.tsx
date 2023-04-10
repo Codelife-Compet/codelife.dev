@@ -27,24 +27,24 @@ export const CheckBoxContainer = styled(Checkbox.Root, {
   overflow: 'hidden',
   boxSizing: 'border-box',
   display: 'flex',
-  backgroundColor: '$codelife-black-900',
+  backgroundColor: '$surface',
   alignItems: 'center',
   justifyContent: 'center',
   cursor: 'pointer',
-  border: '2px solid $codelife-primary-300',
+  boxShadow: '0px 3px 4px rgba(0, 0, 0, 0.2)',
   transition: 'all 275ms',
   '&[data-state="checked"]': {
-    backgroundColor: '$codelife-black-700',
+    backgroundColor: '$paper',
   },
 
   '&:focus ': {
-    border: '2px solid $codelife-primary-300',
+    border: '2px solid $codelife-primary-500',
   },
 })
 export const CheckboxIndicator = styled(Checkbox.Indicator, {
   width: '$4',
   height: '$4',
-  color: '$codelife-primary-300',
+  color: '$codelife-primary-500',
   '&[data-state="checked"]': {
     animation: `${slideIn} 200ms ease-out`,
   },

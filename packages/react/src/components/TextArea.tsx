@@ -1,13 +1,13 @@
 import { ComponentProps } from 'react'
-import { styled } from '../../styles'
+import { darkTheme, styled } from '../../styles'
 
 export const TextArea = styled('textarea', {
+  border: 0,
   display: 'flex',
   alignItems: 'baseline',
   gap: 8,
-
-  backgroundColor: '$codelife-black-500',
-  color: '$codelife-gray-100',
+  backgroundColor: '$surface',
+  color: '$text-default',
   fontFamily: '$body',
 
   fontSize: '$sm',
@@ -17,20 +17,28 @@ export const TextArea = styled('textarea', {
   minHeight: 88,
   width: '100%',
   padding: '$3 $4',
-
+  opacity: 0.8,
   boxSizing: 'border-box',
-  border: '1px solid $codelife-black-700',
+  boxShadow: '0px 3px 4px rgba(0, 0, 0, 0.2)',
+
+  [`.${darkTheme} &`]: {
+    boxShadow: 'none',
+    border: '1px solid $codelife-black-700',
+    '&:has(input:focus) ': {
+      borderColor: '$codelife-primary-300',
+    },
+  },
 
   '&:focus ': {
     outline: 'none',
-    borderColor: '$codelife-primary-300',
+    opacity: 1,
   },
   '&:disabled ': {
     opacity: 0.5,
     cursor: 'not-allowed',
   },
   '&:placeholder ': {
-    color: '$codelife-gray-400',
+    opacity: 0.9,
   },
 })
 
