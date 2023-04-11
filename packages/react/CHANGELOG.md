@@ -1,5 +1,11 @@
 # @codelife-ui/react
 
+## 0.1.4
+
+### Patch Changes
+
+- c598a69: fix react package that can't send dist folder to npm
+
 ## 0.1.2
 
 ### Patch Changes
