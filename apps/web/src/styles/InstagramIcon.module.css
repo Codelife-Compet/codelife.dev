@@ -1,0 +1,16 @@
+.instagram-icon-container {
+    @apply fill-codelife-black-400;
+    @apply text-lg bg-gradient-to-r hover:from-instagram-0 hover:to-instagram-2 bg-clip-text hover:text-transparent;
+    @apply flex content-center text-codelife-black-400;
+
+}
+
+.instagram-icon {
+    @apply flex content-center;
+}
+.instagram-icon-container :hover{
+    fill:url(#instagram-gradient-hover);
+}
+.instagram{
+    @apply hidden sm:block pl-2;
+}

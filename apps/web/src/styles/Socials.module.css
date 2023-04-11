@@ -1,0 +1,57 @@
+.socials-inner-container {
+    @apply grid grid-flow-col gap-2 pt-4;
+}
+
+.socials-icon-container {
+    @apply flex px-2 transition-opacity content-center justify-center;
+}
+
+.facebook,
+.twitter,
+.youtube,
+.linkedin,
+.github {
+    @apply text-codelife-black-400 flex content-center text-lg fill-codelife-black-400;
+}
+
+.youtube:hover,
+.youtube:focus {
+    @apply fill-codelife-red-500 text-codelife-red-500;
+}
+
+.facebook:hover,
+.facebook:focus {
+    @apply fill-codelife-blue-600 text-codelife-blue-600;
+
+}
+
+.twitter:hover,
+.twitter:focus {
+    @apply fill-twitter-500 text-twitter-500;
+}
+
+.linkedin:hover,
+.linkedin:focus {
+    @apply fill-[#0077b5] text-[#0077b5];
+    
+}
+
+.github:hover,
+.github:focus {
+    @apply fill-[#333] text-[#333];
+}.instagram-icon-container {
+    @apply fill-codelife-black-400;
+    @apply text-lg bg-gradient-to-r hover:from-instagram-0 hover:to-instagram-2 bg-clip-text hover:text-transparent;
+    @apply flex content-center text-codelife-black-400;
+
+}
+
+.instagram-icon {
+    @apply flex content-center;
+}
+.instagram-icon-container :hover{
+    fill:url(#instagram-gradient-hover);
+}
+.instagram{
+    @apply hidden sm:block pl-2;
+}
