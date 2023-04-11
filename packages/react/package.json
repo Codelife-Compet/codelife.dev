@@ -1,6 +1,6 @@
 {
   "name": "@codelife-ui/react",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A design system to codelife react-ui components",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -12,7 +12,7 @@
     "lint": "eslint src/**/*.{js,jsx,ts,tsx}* --fix"
   },
   "files": [
-    "dist"
+    "dist/**"
   ],
   "keywords": [
     "codelife",
@@ -20,7 +20,7 @@
     "UI",
     "ui-tokens"
   ],
-  "author": "tec.henriquedepaula@gmail.com",
+  "author": "Henrique de Paula Rodrigues",
   "license": "ISC",
   "devDependencies": {
     "@codelife-ui/eslint-config": "*",
