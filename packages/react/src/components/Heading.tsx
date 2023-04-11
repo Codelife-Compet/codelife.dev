@@ -4,7 +4,7 @@ export const Heading = styled('h2', {
   fontFamily: '$heading',
   lineHeight: '$base',
   margin: 0,
-  color: '$codelife-gray-100',
+  color: '$text-default',
   variants: {
     size: {
       sm: { fontSize: '$xl' },

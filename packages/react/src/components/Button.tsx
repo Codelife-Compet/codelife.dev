@@ -16,15 +16,14 @@ export const Button = styled('button', {
   outline: 0,
   padding: '0 $4',
   transition: 'all ease 275ms',
-  '&:not(:disabled):active': {
-    filter: 'brightness(120%)',
-  },
+  opacity: 0.8,
   '&:disabled': {
     cursor: 'not-allowed',
-    color: '$codelife-gray-500',
-    backgroundColor: '$codelife-gray-900 ',
-    borderColor: '$codelife-gray-500',
-    filter: 'brightness(50%)',
+    color: '$text-disabled',
+    opacity: '33%',
+  },
+  '&:not(:disabled):hover': {
+    opacity: 1,
   },
   svg: {
     width: '$4',
@@ -34,15 +33,23 @@ export const Button = styled('button', {
     variant: {
       primary: {
         backgroundColor: '$codelife-primary-700',
-        '&:not(:disabled):hover': { backgroundColor: '$codelife-primary-900' },
+        border: '2px solid $codelife-primary-700',
       },
       secondary: {
         backgroundColor: '$codelife-secondary-700',
-        '&:hover': { backgroundColor: '$codelife-secondary-900' },
+        border: '2px solid $codelife-secondary-700',
       },
       tertiary: {
         backgroundColor: '$codelife-tertiary-700',
-        '&:hover': { backgroundColor: '$codelife-tertiary-900' },
+        border: '2px solid $codelife-tertiary-700',
+      },
+      danger: {
+        backgroundColor: '$codelife-danger-700',
+        border: '2px solid $codelife-danger-700',
+        color: '$codelife-gray-100',
+        '&:disabled': {
+          color: '$codelife-gray-300 ',
+        },
       },
     },
 
@@ -50,32 +57,37 @@ export const Button = styled('button', {
       true: {
         border: '2px solid',
         backgroundColor: 'transparent !important',
+        '&:disabled': {
+          borderColor: '$text-additional',
+        },
       },
     },
     text: {
       true: {
-        borderColor: 'transparent',
+        borderColor: 'transparent !important',
         backgroundColor: 'transparent !important',
         '&:not(:disabled):hover': {
           backgroundColor: 'transparent',
-          opacity: 0.8,
         },
-        '&:not(:disabled):active': {
-          opacity: 0.5,
+        '&:disabled': {
+          borderColor: 'transparent',
         },
       },
     },
     size: {
       sm: {
         height: '$8',
+        fontSize: '$sm',
       },
       md: {
         height: '$12',
         padding: '0 $8',
+        fontSize: '$md',
       },
       lg: {
         height: '$14',
         padding: '0 $10',
+        fontSize: '$lg',
       },
     },
   },
@@ -87,9 +99,8 @@ export const Button = styled('button', {
         color: '$codelife-primary-700',
         borderColor: '$codelife-primary-700',
         '&:not(:disabled):hover': {
-          borderColor: '$codelife-primary-900',
-          color: '$codelife-black-900',
-          backgroundColor: '$codelife-primary-900 !important',
+          color: '$text-default',
+          backgroundColor: '$codelife-primary-700 !important',
         },
       },
     },
@@ -100,9 +111,8 @@ export const Button = styled('button', {
         color: '$codelife-secondary-700',
         borderColor: '$codelife-secondary-700',
         '&:not(:disabled):hover': {
-          borderColor: '$codelife-secondary-900',
-          color: '$codelife-black-900',
-          backgroundColor: '$codelife-secondary-900 !important',
+          color: '$text-default',
+          backgroundColor: '$codelife-secondary-700 !important',
         },
       },
     },
@@ -113,8 +123,20 @@ export const Button = styled('button', {
         color: '$codelife-tertiary-700',
         borderColor: '$codelife-tertiary-700',
         '&:not(:disabled):hover': {
-          color: '$codelife-black-900',
-          backgroundColor: '$codelife-tertiary-900 !important',
+          color: '$text-default',
+          backgroundColor: '$codelife-tertiary-700 !important',
+        },
+      },
+    },
+    {
+      variant: 'danger',
+      outlined: true,
+      css: {
+        color: '$codelife-danger-500',
+        borderColor: '$codelife-danger-500',
+        '&:not(:disabled):hover': {
+          color: '$text-default',
+          backgroundColor: '$codelife-danger-500 !important',
         },
       },
     },
@@ -129,7 +151,7 @@ export const Button = styled('button', {
       variant: 'secondary',
       text: true,
       css: {
-        color: '$codelife-secondary-700',
+        color: '$codelife-secondary-500',
       },
     },
     {

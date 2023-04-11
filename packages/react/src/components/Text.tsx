@@ -3,8 +3,8 @@ import { styled } from '../../styles'
 export const Text = styled('p', {
   fontFamily: '$body',
   lineHeight: '$base',
+  color: '$text-default',
   margin: 0,
-  color: '$codelife-gray-100',
   variants: {
     size: {
       xxs: { fontSize: '$xxs' },
