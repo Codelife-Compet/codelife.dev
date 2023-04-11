@@ -86,7 +86,7 @@
   opacity: 0.8;
   border-bottom-width: 1px;
   border-color: #596161;
-  @apply font-roboto text-lg text-codelife-green-500 transition-opacity;
+  @apply text-lg text-codelife-green-500 transition-opacity;
 }
 
 @media (min-width: 640px) {

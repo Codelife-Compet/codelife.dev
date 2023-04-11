@@ -1,6 +1,6 @@
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
-import i18n from "@/i18n"
+import i18n from '@/i18n'
 import { I18nextProvider } from 'react-i18next'
 import { useRouter } from 'next/router'
 import { GlobalContext } from '@/context'

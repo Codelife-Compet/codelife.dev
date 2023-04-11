@@ -74,7 +74,12 @@ export const GlobalStyles = globalCss({
     fontSize: '$md',
     fontWeight: '$regular',
     lineHeight: '$base',
+    '-webkit-font-smoothing': 'antialiased',
+  },
+  '#__next': {
+    display: 'flex',
+    flexDirection: 'column',
+    minHeight: '100vh',
+    width: '100vw',
   },
 })
-// The initializer to use in _app.tsx
-GlobalStyles()
