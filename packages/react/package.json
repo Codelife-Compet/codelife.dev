@@ -1,6 +1,6 @@
 {
   "name": "@codelife-ui/react",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A design system to codelife react-ui components",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

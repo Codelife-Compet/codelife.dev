@@ -1,5 +1,11 @@
 # @codelife-ui/react
 
+## 0.1.2
+
+### Patch Changes
+
+- 3f09b05: add gitignore on each package
+
 ## 0.1.1
 
 ### Patch Changes
