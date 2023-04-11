@@ -23,6 +23,6 @@
     "@codelife-ui/eslint-config": "*",
     "@codelife-ui/ts-config": "*",
     "tsup": "^6.7.0",
-    "typescript": "^5.0.3"
+    "typescript": "^5.0.4"
   }
 }
