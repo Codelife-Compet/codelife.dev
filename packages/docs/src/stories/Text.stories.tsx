@@ -1,5 +1,6 @@
 import { StoryObj, Meta } from '@storybook/react'
-import { Text, TextProps } from '@codelife-ui/react'
+import { Box, Text, TextProps } from '@codelife-ui/react'
+import { darkTheme } from '@codelife-ui/react/styles'
 export default {
   title: 'Typograph/Text',
   component: Text,
@@ -7,26 +8,36 @@ export default {
   argTypes: {
     size: {
       description: 'The size of the text',
-      options: [
-        'xxs',
-        'xs',
-        'sm',
-        'md',
-        'lg',
-        'xl',
-        '2xl',
-        '4xl',
-        '5xl',
-        '6xl',
-        '7xl',
-        '8xl',
-        '9xl',
-      ],
+      options: ['xxs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'],
       control: {
         type: 'inline-radio',
       },
     },
   },
+  decorators: [
+    (Story, context) => (
+      <>
+        <Box
+          as="label"
+          css={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 2,
+            marginBlock: '$4',
+          }}
+          className={context.parameters.theme === 'dark' ? darkTheme : ''}
+        >
+          {Story()}
+          {Story({
+            ...context.args,
+            args: {
+              as: 'strong',
+            },
+          })}
+        </Box>
+      </>
+    ),
+  ],
   args: {
     size: 'md',
     children:
@@ -35,6 +46,11 @@ export default {
 } as Meta<TextProps>
 
 export const Primary: StoryObj<TextProps> = {}
+export const OnDark: StoryObj<TextProps> = {
+  parameters: {
+    theme: 'dark',
+  },
+}
 export const CustomTag: StoryObj<TextProps> = {
   args: {
     children: 'Strong Text',

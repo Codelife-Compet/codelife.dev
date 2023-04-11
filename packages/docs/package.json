@@ -1,7 +1,7 @@
 {
   "homepage": "http://codelife-compet.github.io/codelife-ui",
   "name": "@codelife-ui/docs",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "@codelife-ui/eslint-config": "*",
-    "@codelife-ui/ts-config":"*",
+    "@codelife-ui/ts-config": "*",
     "@codelife-ui/react": "*",
     "@codelife-ui/tokens": "*",
     "@radix-ui/react-avatar": "^1.0.2",

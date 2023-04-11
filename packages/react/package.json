@@ -11,13 +11,16 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint src/**/*.{js,jsx,ts,tsx}* --fix"
   },
+  "files": [
+    "dist/**"
+  ],
   "keywords": [
     "codelife",
     "user-interface",
     "UI",
     "ui-tokens"
   ],
-  "author": "tec.henriquedepaula@gmail.com",
+  "author": "Henrique de Paula Rodrigues",
   "license": "ISC",
   "devDependencies": {
     "@codelife-ui/eslint-config": "*",
