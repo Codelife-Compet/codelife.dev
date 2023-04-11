@@ -16,7 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "@codelife-ui/eslint-config": "*",
-    "@codelife-ui/ts-config":"*",
+    "@codelife-ui/ts-config": "*",
     "@codelife-ui/react": "*",
     "@codelife-ui/tokens": "*",
     "@radix-ui/react-avatar": "^1.0.2",
