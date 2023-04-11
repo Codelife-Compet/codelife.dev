@@ -28,7 +28,7 @@ const config = {
     // Merge custom configuration into the default config
     if (configType === 'PRODUCTION') {
       // Your production configuration goes here.
-      config.base = '/codelife-ui/';
+      config.base = '/codelife.dev/';
     }
     return mergeConfig(config, {
       // Add dependencies to pre-optimization
