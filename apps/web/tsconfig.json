@@ -18,6 +18,7 @@
       "@/*": ["./src/*"]
     }
   },
+  "extends":"@codelife-ui/ts-config/base.json",
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }

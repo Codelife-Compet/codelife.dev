@@ -1,6 +1,6 @@
 {
   "name": "codelife-2.0",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -48,9 +48,13 @@
     "react-i18next": "^12.2.0",
     "react-icons": "^4.8.0",
     "typescript": "5.0.3",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "@codelife-ui/react": "*",
+    "@codelife-ui/tokens": "*"
   },
   "devDependencies": {
+    "@codelife-ui/eslint-config": "*",
+    "@codelife-ui/ts-config": "*",
     "@types/cookie": "^0.5.1",
     "@types/uuid": "^9.0.1",
     "autoprefixer": "^10.4.14",
