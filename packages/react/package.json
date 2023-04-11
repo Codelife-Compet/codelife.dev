@@ -1,6 +1,6 @@
 {
   "name": "@codelife-ui/react",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A design system to codelife react-ui components",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -11,7 +11,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint src/**/*.{js,jsx,ts,tsx}* --fix"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "keywords": [
     "codelife",
     "user-interface",
