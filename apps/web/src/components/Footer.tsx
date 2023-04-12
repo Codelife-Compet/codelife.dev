@@ -202,7 +202,9 @@ function Footer() {
       </div>
     </footer>
   ) : (
-    <></>
+    <>
+      <p>Loading</p>
+    </>
   )
 }
 
