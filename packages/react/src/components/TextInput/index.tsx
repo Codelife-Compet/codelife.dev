@@ -4,7 +4,7 @@ export type TextInputProps = ComponentProps<typeof Input> & {
   prefix?: string
 }
 export const TextInput = forwardRef<ElementRef<typeof Input>, TextInputProps>(
-  ({ prefix, ref, ...props }: TextInputProps) => {
+  ({ prefix, ...props }: TextInputProps, ref) => {
     return (
       <TextInputContainer>
         {!!prefix && <Prefix>{prefix}</Prefix>}

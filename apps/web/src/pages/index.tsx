@@ -1,15 +1,21 @@
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
 import Footer from '@/components/Footer'
-import { useContext } from 'react'
-import { AuthContext } from '@/context/auth/AuthContext'
+import { useAuth } from '@/context/auth/AuthContext'
 import { Button, Heading, Text } from '@codelife-ui/react'
+import { useTheme } from 'next-themes'
+import { useEffect } from 'react'
 // import NavBar from '@/components/NavBar' Componente com defeito visual: linha 23
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-  const { signIn } = useContext(AuthContext)
+  const { signIn } = useAuth()
+  const { theme, systemTheme, setTheme } = useTheme()
+  useEffect(() => {
+    if (!systemTheme || theme === systemTheme) return
+    setTheme(systemTheme)
+  }, [systemTheme])
   return (
     <>
       <Head>

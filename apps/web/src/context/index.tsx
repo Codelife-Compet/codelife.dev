@@ -1,8 +1,16 @@
-import React, { PropsWithChildren } from "react";
-import { AuthProvider } from "./auth/AuthContext";
-
+import React, { PropsWithChildren } from 'react'
+import { AuthProvider } from './auth/AuthContext'
+import { darkTheme } from '@codelife-ui/react'
+import { ThemeProvider } from 'next-themes'
 export const GlobalContext: React.FC<PropsWithChildren> = ({ children }) => (
-  <AuthProvider>
-    {children}
-  </AuthProvider>
+  <ThemeProvider
+    attribute="class"
+    enableSystem={true}
+    defaultTheme="system"
+    enableColorScheme
+    value={{ dark: darkTheme, light: 'light', kids: 'kids' }}
+    themes={['dark', 'light', 'kids']}
+  >
+    <AuthProvider>{children}</AuthProvider>
+  </ThemeProvider>
 )

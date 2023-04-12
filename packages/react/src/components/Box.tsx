@@ -31,3 +31,4 @@ export const Box = styled('div', {
 export type BoxProps = ComponentProps<typeof Box> & {
   as?: ElementType
 }
+Box.displayName = 'Box'
