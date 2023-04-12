@@ -5,6 +5,7 @@ import { ThemeProvider } from 'next-themes'
 export const GlobalContext: React.FC<PropsWithChildren> = ({ children }) => (
   <ThemeProvider
     attribute="class"
+    storageKey="codelife-theme"
     enableSystem={true}
     defaultTheme="system"
     enableColorScheme
