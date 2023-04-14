@@ -51,7 +51,11 @@ export const Layout: React.FC<React.PropsWithChildren<LayoutProps>> = ({
       </Head>
       {hydrated && (
         <>
-          <Box css={{ display: 'flex' }} elevation={'1'}>
+          <Box
+            css={{ display: 'flex' }}
+            elevation={'1'}
+            className="bg-codelife-primary-500/5"
+          >
             {' '}
             {/* Navbar goes here... */}
             <Switch
