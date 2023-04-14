@@ -1,13 +1,14 @@
 import Link from 'next/link'
 import CompetIcon from './CompetIcon'
-import Socials from './Socials'
 import styles from '@/styles/Footer.module.css'
 import { useTranslation } from 'react-i18next'
 import { UserPermissions } from '@/@types/user'
 import { useAuth } from '@/context/auth/AuthContext'
 import { useEffect, useState } from 'react'
-import { Text } from '@codelife-ui/react'
+import { Socials, Text } from '@codelife-ui/react'
 import Image from 'next/image'
+import { FaFacebookSquare, FaYoutube } from 'react-icons/fa'
+import { InstagramSVGIcon } from './InstagramSVGIcon'
 function Footer() {
   const [hydrated, setHydrated] = useState(false)
   const { user } = useAuth()
@@ -183,23 +184,18 @@ function Footer() {
           </div>
         </div>
       </div>
-      <div className={styles['socials-container']}>
-        <Socials
-          size="sm"
-          facebook={{
-            id: '/CodelifeBR',
-            link: 'https://www.facebook.com/CodeLifeBR/',
-          }}
-          youtube={{
-            id: '@CodelifeBR',
-            link: 'https://www.youtube.com/channel/UCR6iTxyV9jdSy21eqS1Ovyg',
-          }}
-          instagram={{
-            id: '@CodelifeBR',
-            link: 'https://www.instagram.com/codelifebr/',
-          }}
-        />
-      </div>
+
+      <Socials.Root className="py-2 border-t border-codelife-black-400 justify-around">
+        <Socials.IconContainer link="https://www.facebook.com/CodeLifeBR/">
+          <FaFacebookSquare className="text-codelife-black-400 hover:text-codelife-blue-600" />
+        </Socials.IconContainer>
+        <Socials.IconContainer link="https://www.youtube.com/channel/UCR6iTxyV9jdSy21eqS1Ovyg">
+          <FaYoutube className="text-codelife-black-400 hover:text-codelife-red-600" />
+        </Socials.IconContainer>
+        <Socials.IconContainer link="https://www.instagram.com/codelifebr/">
+          <InstagramSVGIcon className="fill-codelife-black-400 hover:fill-[url(#instagram-gradient-hover)]" />
+        </Socials.IconContainer>
+      </Socials.Root>
     </footer>
   ) : (
     <>

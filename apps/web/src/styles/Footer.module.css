@@ -21,13 +21,13 @@
 
 .inner-footer {
   display: flex;
-  padding: 0 2rem 3rem;
+  padding: 0 2rem 1rem;
   flex-direction: column;
   justify-content: space-between;
 
 }
 
-@media (min-width: 640px) {
+@media (min-width: 989px) {
   .inner-footer {
       flex-direction: row;
   }
@@ -204,10 +204,4 @@
   min-width: 2.5rem;
   grid-column: span 1 / span 1;
   width: fit-content;
-}
-
-.socials-container {
-  border-top-width: 1px;
-  border-color: #d2d5d5;
-  padding-bottom: 1rem;
 }
