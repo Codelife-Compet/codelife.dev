@@ -67,6 +67,20 @@ export const darkTheme = createTheme('dark-theme', {
   },
 })
 export const GlobalStyles = globalCss({
+  '*': {
+    boxSizing: 'border-box',
+  },
+  'body, html': {
+    height: '100%',
+    margin: 0,
+    padding: 0,
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  '#__next': {
+    display: 'flex',
+    flexDirection: 'column',
+  },
   body: {
     backgroundColor: '$background',
     color: '$text-default',
@@ -75,11 +89,5 @@ export const GlobalStyles = globalCss({
     fontWeight: '$regular',
     lineHeight: '$base',
     '-webkit-font-smoothing': 'antialiased',
-  },
-  '#__next': {
-    display: 'flex',
-    flexDirection: 'column',
-    minHeight: '100vh',
-    width: '100vw',
   },
 })

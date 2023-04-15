@@ -5,15 +5,22 @@ import { Box, Switch, Text } from '@codelife-ui/react'
 import { useTheme } from 'next-themes'
 import React, { useEffect, useState } from 'react'
 import { FaMoon, FaSun } from 'react-icons/fa'
+import { useRouter } from 'next/router'
+import { useTranslation } from 'react-i18next'
 interface LayoutProps {}
 export const Layout: React.FC<React.PropsWithChildren<LayoutProps>> = ({
   children,
 }) => {
+  const { locale } = useRouter()
+  const { i18n } = useTranslation()
   const { theme, systemTheme, setTheme } = useTheme()
   const [hydrated, setHydrated] = useState(false)
   useEffect(() => {
     setHydrated(true)
   }, [])
+  useEffect(() => {
+    i18n.changeLanguage(locale)
+  }, [locale, i18n])
   useEffect(() => {
     const storagedTheme = localStorage.getItem('codelife-theme')
     if (!systemTheme || theme === systemTheme || storagedTheme !== systemTheme)
@@ -44,7 +51,11 @@ export const Layout: React.FC<React.PropsWithChildren<LayoutProps>> = ({
       </Head>
       {hydrated && (
         <>
-          <Box css={{ display: 'flex' }} elevation={'1'}>
+          <Box
+            css={{ display: 'flex' }}
+            elevation={'1'}
+            className="bg-codelife-primary-500/5"
+          >
             {' '}
             {/* Navbar goes here... */}
             <Switch

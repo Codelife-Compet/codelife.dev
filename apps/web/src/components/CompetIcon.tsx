@@ -1,7 +1,7 @@
-import { SVGIconProps } from '@/@types/SvgIcon'
 import * as React from 'react'
+import { IconType } from 'react-icons'
 
-const CompetIcon: React.FC<SVGIconProps> = (props) => (
+const CompetIcon: IconType = (props) => (
   <svg
     width="50"
     height="50"
@@ -11,7 +11,7 @@ const CompetIcon: React.FC<SVGIconProps> = (props) => (
     {...props}
   >
     <path
-      d="M99.4 140.6L80.9 65.6L147.4 106.1L124.4 112.1L141.9 136.1L131.4 146.6L111.4 120.1L99.4 140.6Z"
+      d="M99.9 140.6L80.9 65.6L147.4 106.1L124.4 112.1L141.9 136.1L131.4 146.6L111.4 120.1L99.4 140.6Z"
       fill="#398956"
       stroke="#398956"
       strokeWidth="2"
