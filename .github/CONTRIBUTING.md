@@ -1,6 +1,86 @@
 # Contributing to CodeLife-UI
 Thank you for considering contributing to CodeLife-UI! We appreciate your interest in helping us build a better platform for developers and programmers.
 
+## Style guidelines
+In above we have some guidelines to help you to work with us as a maintainer and a contributor.
+
+### Preferred IDE and plugins
+We strongly recommends you to use [![vscode](https://img.shields.io/badge/-Visual%20Studio%20Code-007ACC?logo=visualstudiocode&style=flat-square)](https://code.visualstudio.com) as your editor, and for boost your productivity we recommends you to install the following extensions in vscode:
+```json
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "burkeholland.simple-react-snippets",
+    "unifiedjs.vscode-mdx",
+    "bradlc.vscode-tailwindcss"
+  ]
+}
+```
+> You will see there on `.vscode` folder 
+
+### Atomic commits
+
+No specials attention is required, all you have to do is create short commits and each commit must be related to a unique change in your repository. 
+
+### Semver
+
+This repository use semantic versioning.
+That means the version will follow MAJOR.MINOR.PATCH sintax where:
+
+1. MAJOR version when you make incompatible API changes
+
+2. MINOR version when you add functionality in a backwards compatible manner
+
+3. PATCH version when you make backwards compatible bug fixes
+
+To learn more deep about Semver, see [this article](https://semver.org/).
+
+### Conventional commits
+
+We use [Husky](https://typicode.github.io/husky) with [![Commitlint](https://img.shields.io/badge/-Commitlint-000000?logo=commitlint&style=flat-square)](https://commitlint.js.org) to automatically lint the commits and improve an history more comprehensive and readable. We also are [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/) , that means if you have any problem to understand deep conventional commits, you can use commitizen to remind you the steps that you have follow to use this convention accordingly 
+
+If you haven't contribute in others repositories yet, this is a guideline to teach you [how you can use conventional commits with husky and commitlint](https://dev.to/talohana/husky-and-commitlint-for-clean-git-log-44be) to improve padronization in your repositories.
+
+### How it works in hands-on
+
+We have to use the structure in below:
+```shell
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional(s) footer(s)]
+```
+Here is an example:
+
+```shell
+chore(contributing): add husky, commitlint and commitizen to improve comprehensive history in the repository  
+```
+
+`Type` is a required parameter, that have to be one of these:
+
+- feat: To new features
+- fix: To bugfixes
+- docs: Documentation only changes
+- style: Changes that do not affect the meaning of the code (like formatting,missing semi-colons, etc)
+- refactor: A code change that neither fixes a bug or adds new features
+- perf: A code that improves more performance
+- test: Adding missing tests
+- chore: Changes to the build process or auxiliary tools and libraries such as documentation generation
+
+With commitizen we improve this more easy to you, all you have to do is use 
+
+```shell
+
+git commit
+
+``` 
+
+and all steps mentioned above will automacally prompted in terminal to help you.
+
+To learn more about Conventional Commits see [this article](https://www.conventionalcommits.org/en/v1.0.0/).
+
 ## Ways to Contribute
 There are many ways in which you can contribute to CodeLife-UI, including:
 
