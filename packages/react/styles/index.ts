@@ -25,6 +25,15 @@ export const {
     height: 'space',
     width: 'space',
   },
+  media: {
+    phoneOnly: '(max-width:599px)',
+    tabletPortrait: '(min-width:600px)',
+    tabletLandscape: '(min-width:900px)',
+    desktop: '(min-width:1200px)',
+    largeDesktop: '(min-width:1800px)',
+    dark: '(prefers-color-scheme: dark)',
+    light: '(prefers-color-scheme: light)',
+  },
   theme: {
     colors: {
       ...colors,
@@ -48,8 +57,30 @@ export const darkTheme = createTheme('dark-theme', {
     'text-additional': `${colors['codelife-gray-100']}`,
     'text-disabled': `${colors['codelife-gray-100']}54`,
   },
+  fontWeights: {
+    thin: 50,
+    light: 250,
+    regular: 350,
+    medium: 450,
+    bold: 650,
+    extrabold: 850,
+  },
 })
 export const GlobalStyles = globalCss({
+  '*': {
+    boxSizing: 'border-box',
+  },
+  'body, html': {
+    height: '100%',
+    margin: 0,
+    padding: 0,
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  '#__next': {
+    display: 'flex',
+    flexDirection: 'column',
+  },
   body: {
     backgroundColor: '$background',
     color: '$text-default',
@@ -57,7 +88,6 @@ export const GlobalStyles = globalCss({
     fontSize: '$md',
     fontWeight: '$regular',
     lineHeight: '$base',
+    '-webkit-font-smoothing': 'antialiased',
   },
 })
-// The initializer to use in _app.tsx
-GlobalStyles()
