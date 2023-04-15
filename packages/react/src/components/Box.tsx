@@ -4,7 +4,6 @@ export const Box = styled('div', {
   padding: '$6',
   borderRadius: '$md',
   backgroundColor: '$background',
-  color: '$text-default',
   '@light': {
     boxShadow: '8px 10px 13px -6px rgba(0, 0, 0, 0.61)',
   },

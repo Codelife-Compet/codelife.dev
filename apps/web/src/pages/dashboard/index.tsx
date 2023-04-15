@@ -1,4 +1,3 @@
-import Footer from '@/components/Footer'
 import { AuthContext } from '@/context/auth/AuthContext'
 import { GetServerSideProps } from 'next'
 import { parseCookies } from 'nookies'
