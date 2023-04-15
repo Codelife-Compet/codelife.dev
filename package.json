@@ -7,12 +7,22 @@
   "scripts": {
     "dev": "turbo run dev --parallel",
     "build": "turbo run build",
-    "changeset":"changeset",
-    "version-packages":"changeset version",
-    "release":"turbo run build --filter='^(?!.*\\/(packages\\/docs|apps)\\/).*' && changeset publish"
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "turbo run build --filter='^(?!.*\\/(packages\\/docs|apps)\\/).*' && changeset publish"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.1",
+    "@commitlint/cli": "^17.6.1",
+    "@commitlint/config-conventional": "^17.6.1",
+    "commitizen": "^4.3.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "husky": "^8.0.3",
     "turbo": "^1.8.8"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

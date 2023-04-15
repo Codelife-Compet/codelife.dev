@@ -1,5 +1,14 @@
-# Codelife-ui
-The codelife-ui project is a react based design system designed to be used in codelife projects like web sites, apps or desktop applications to avoid re-implementations and add design patterns in colors, sizes and components to be reused.
+# Codelife.dev [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/) [![pages-build-deployment](https://github.com/Codelife-Compet/codelife.dev/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/Codelife-Compet/codelife.dev/actions/workflows/pages/pages-build-deployment) [![Dependency Review](https://github.com/Codelife-Compet/codelife.dev/actions/workflows/dependency-review.yml/badge.svg)](https://github.com/Codelife-Compet/codelife.dev/actions/workflows/dependency-review.yml)
+
+The codelife.dev project is a monorepo created to develop the web site of codelife, a Brazilian open source platform to teach programming to young public.
+
+## Technologies used
+
+[![next.js](https://img.shields.io/badge/-Next.js-000000?logo=next.js&style=for-the-badge)](https://next.js.js.org)
+[![tailwindcss](https://img.shields.io/badge/-tailwindcss-06B6D4?logo=tailwindcss&logoColor=000000&style=for-the-badge)](https://tailwindcss.com/docs/installation)
+[![storybook](https://img.shields.io/badge/-storybook-FF4785?logo=storybook&logoColor=000000&style=for-the-badge)](https://storybook.js.org/docs/react/get-started/install/)
+[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/learn)
+[![Typescript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 
 ## Getting started
 
@@ -8,11 +17,11 @@ To get started you need to install this package using npm or others package mana
 Using npm, you can install the dependencies using:
 
 ```shell
-npm install @codelife-ui/react
+npm install @codelife.dev/react
 ```
 ## Contribution
 
-To contribute with our repository, just clone/fork this repository, and let's colaborate wich each other! Don't forget to read the [colaboration guide](https://github.com/Codelife-Compet/codelife-ui/blob/main/.github/CONTRIBUTING.md)
+To contribute with our repository, just clone/fork this repository, and let's colaborate wich each other! Don't forget to read the [colaboration guide](https://github.com/Codelife-Compet/codelife.dev/blob/main/.github/CONTRIBUTING.md)
 
 ### install and run Locally
 
@@ -23,8 +32,8 @@ This Design system is documented with [storybook](https://storybook.js.org/tutor
 - clone the repository 
 
 ``` shell
-git clone https://github.com/Codelife-Compet/codelife-ui.git
-cd codelife-ui
+git clone https://github.com/Codelife-Compet/codelife.dev.git
+cd codelife.dev
 ```
 
 - Install dependencies
@@ -64,6 +73,6 @@ git push my-fork-name the-name-of-my-branch
 ```
  > Replacing My message with a commit message, such as Fix header logo on Android to stage and commit your changes
 
-- Go to the codelife-ui repo and you should see recently pushed branches.
+- Go to the codelife.dev repo and you should see recently pushed branches.
 - Follow GitHub's instructions.
 - If possible, include screenshots of visual changes. A preview build is triggered after your changes are pushed to GitHub.
