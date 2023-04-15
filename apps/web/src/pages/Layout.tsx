@@ -8,7 +8,7 @@ import { FaMoon, FaSun } from 'react-icons/fa'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 interface LayoutProps {}
-export const Layout: React.FC<React.PropsWithChildren<LayoutProps>> = ({
+const Layout: React.FC<React.PropsWithChildren<LayoutProps>> = ({
   children,
 }) => {
   const { locale } = useRouter()
@@ -80,3 +80,4 @@ export const Layout: React.FC<React.PropsWithChildren<LayoutProps>> = ({
     </>
   )
 }
+export default Layout

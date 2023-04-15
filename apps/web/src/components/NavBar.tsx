@@ -5,24 +5,24 @@ import { InstagramSVGIcon } from './InstagramSVGIcon'
 function NavBar() {
   return (
     <nav className="m-0 box-border flex items-center justify-between gap-8 px-4 py-0">
-      <Link href="/" className="">
+      <Link href="#" className="">
         CODELIFE
       </Link>
       <ul className="m-0 flex list-none gap-4 p-0 text-sm">
         <li className=" text-codelife-green-400 hover:text-codelife-black-900 font-semibold">
-          <a href="/">ENTRE</a>
+          <Link href="#">ENTRE</Link>
         </li>
         <li className=" text-codelife-green-400 hover:text-codelife-black-900 font-semibold">
-          <a href="/">CRIE UMA CONTA</a>
+          <Link href="#">CRIE UMA CONTA</Link>
         </li>
         <li className=" text-codelife-green-400 hover:text-codelife-black-900 font-semibold">
-          <a href="/">SOBRE O CODELIFE</a>
+          <Link href="#">SOBRE O CODELIFE</Link>
         </li>
         <li className=" text-codelife-green-400 hover:text-codelife-black-900 font-semibold">
-          <a href="/">PORTUGUÊS</a>
+          <Link href="#">PORTUGUÊS</Link>
         </li>
         <li className=" text-codelife-green-400 hover:text-codelife-black-900 font-semibold">
-          <a href="/">INGLÊS</a>
+          <Link href="#">INGLÊS</Link>
         </li>
         <li className=" text-codelife-green-400 hover:text-codelife-black-900 font-semibold">
           <FaFacebookSquare />

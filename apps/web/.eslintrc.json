@@ -1,5 +1,4 @@
 {
   "root": true,
-  "extends": ["next/core-web-vitals","@codelife-ui/eslint-config"
-]
+  "extends": ["next/core-web-vitals","@codelife-ui/eslint-config"]
 }

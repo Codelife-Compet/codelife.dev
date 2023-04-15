@@ -25,6 +25,7 @@ export default function Home() {
               Perspiciatis quae voluptatem numquam quis officiis, nobis, quaerat
               perferendis hic, ad dolore deserunt.
             </Text>
+
             <Button
               onClick={() =>
                 signIn({ email: 'teste@teste.com', password: '123456' })
