@@ -1,5 +1,5 @@
-# Contributing to CodeLife-UI
-Thank you for considering contributing to CodeLife-UI! We appreciate your interest in helping us build a better platform for developers and programmers.
+# Contributing to CodeLife.dev
+Thank you for considering contributing to CodeLife.dev! We appreciate your interest in helping us build a better platform for developers and programmers.
 
 ## Style guidelines
 In above we have some guidelines to help you to work with us as a maintainer and a contributor.
