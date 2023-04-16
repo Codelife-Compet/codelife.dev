@@ -33,7 +33,7 @@ const Layout: React.FC<React.PropsWithChildren<LayoutProps>> = ({
       {hydrated && (
         <>
           <Box
-            css={{ display: 'flex' }}
+            css={{ display: 'flex', paddingBlock: '$7' }}
             elevation={'1'}
             className="bg-codelife-primary-500/5"
           >
