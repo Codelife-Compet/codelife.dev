@@ -7,7 +7,7 @@ export const Header = styled('div', {
   alignItems: 'center',
   textAlign: 'center',
   gap: '$4',
-  '@tabletPortrait': {
+  '@tabletLandscape': {
     display: 'grid',
     gridTemplateRows: '2fr, 1fr',
     gridAutoFlow: 'row',
@@ -25,7 +25,7 @@ export const IconContainer = styled('div', {
   height: '$8',
   width: '$8',
   color: '$codelife-black-100',
-  '@tabletPortrait': {
+  '@tabletLandscape': {
     height: '$12',
     width: '$12',
     padding: '$4',
@@ -47,8 +47,9 @@ export const Root = styled(Box, {
   flexDirection: 'column',
   paddingBlock: '$6',
   paddingInline: '$6',
-  minWidth: '$80',
-  '@tabletPortrait': {
+  minWidth: '$64',
+  width: '100%',
+  '@tabletLandscape': {
     minHeight: '$80',
     maxWidth: '$80',
     justifyContent: 'space-evenly',

@@ -58,7 +58,10 @@ export default function Home() {
                 allowFullScreen
               />
             </section>
-            <section id="for-you" className="flex justify-around gap-4">
+            <section
+              id="for-you"
+              className="mx-4 flex flex-col justify-around content-center gap-4 sm:flex-row flex-wrap"
+            >
               <Card.Root elevation={'1'} variant={'primary'}>
                 <Card.Header key={'Card-header-1'}>
                   <Card.IconContainer>
