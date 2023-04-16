@@ -3,13 +3,13 @@ import { initReactI18next } from 'react-i18next'
 import en from '../public/locales/en/common.json'
 import pt from '../public/locales/pt/common.json'
 i18next.use(initReactI18next).init({
-  lng: 'pt',
-  fallbackLng: 'pt',
+  lng: 'pt-BR',
+  fallbackLng: 'pt-BR',
   resources: {
     en: {
       translation: en,
     },
-    pt: {
+    'pt-BR': {
       translation: pt,
     },
   },
