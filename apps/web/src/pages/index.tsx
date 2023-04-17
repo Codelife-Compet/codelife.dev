@@ -3,7 +3,14 @@ import { useAuth } from '@/context/auth/AuthContext'
 import { Button, Heading, Text, Card } from '@codelife-ui/react'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { FaArrowRight, FaMap, FaPaste, FaTerminal } from 'react-icons/fa'
+import {
+  FaArrowRight,
+  FaGithub,
+  FaGoogle,
+  FaMap,
+  FaPaste,
+  FaTerminal,
+} from 'react-icons/fa'
 // import NavBar from '@/components/NavBar' Componente com defeito visual: linha 23
 
 export default function Home() {
@@ -17,12 +24,11 @@ export default function Home() {
     <>
       {hydrated && (
         <>
-          <div className="p-10 w-full"></div>
           <main className="mb-20 flex items-center flex-col gap-20">
             {/* <NavBar /> Componente com defeito visual no sm breakpoint */}
             <section
               id="codelife-presenter"
-              className="max-w-[83%] py-20 flex flex-col items-center gap-10"
+              className="max-w-[83%] flex flex-col items-center justify-around h-[80vh] xl:h-auto xl:gap-14"
             >
               <Heading size={'2xl'} css={{ textAlign: 'center' }}>
                 {t('Home.Headline')}
@@ -45,10 +51,45 @@ export default function Home() {
                 {t('Home.Start')}
                 <FaArrowRight />
               </Button>
+              <div className="flex items-center opacity-50 py-2 justify-center w-full after:block after:h-[1px] after:mx-2.5 after:bg-current after:w-[20%] before:block before:h-[1px] before:mx-2.5 before:bg-current before:w-[20%]">
+                {t('Or')}
+              </div>
+              <div className="flex justify-around items-center gap-8">
+                <Button
+                  onClick={() => console.log('mock login with github ')}
+                  css={{
+                    '@phoneOnly': {
+                      height: '$8',
+                      fontSize: 'small',
+                    },
+                    backgroundColor: '$codelife-black-800',
+                    color: '$codelife-black-100',
+                    borderColor: '$codelife-black-800',
+                  }}
+                >
+                  <FaGithub />
+                  Github
+                </Button>
+                <Button
+                  onClick={() => console.log('mock login with Google ')}
+                  css={{
+                    '@phoneOnly': {
+                      height: '$8',
+                      fontSize: 'small',
+                    },
+                    backgroundColor: '#DB4437',
+                    color: '$codelife-black-100',
+                    borderColor: '#DB4437',
+                  }}
+                >
+                  <FaGoogle />
+                  Google
+                </Button>
+              </div>
             </section>
             <section
               id="videoPresenter"
-              className="w-[80%] border border-black dark:border-gray-600"
+              className="w-[80%] overflow-hidden rounded border border-gray-500 "
             >
               <iframe
                 className="w-full aspect-video"
