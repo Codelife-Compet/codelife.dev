@@ -77,7 +77,14 @@ git commit
 
 ``` 
 
-and all steps mentioned above will automacally prompted in terminal to help you.
+to use commitizen with husky just run the following commands:
+```shell
+npx husky add .husky/commit-msg  'npx --no -- commitlint --edit ${1}'
+
+npx husky add .husky/prepare-commit-msg "exec < /dev/tty && npx cz --hook || true"
+```
+
+and all steps mentioned above will automatically prompted in terminal to help you.
 
 To learn more about Conventional Commits see [this article](https://www.conventionalcommits.org/en/v1.0.0/).
 
