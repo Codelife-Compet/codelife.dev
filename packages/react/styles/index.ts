@@ -23,6 +23,10 @@ export const {
   themeMap: {
     ...defaultThemeMap,
     height: 'space',
+    minHeight: 'space',
+    minWidth: 'space',
+    maxWidth: 'space',
+    maxHeight: 'space',
     width: 'space',
   },
   media: {

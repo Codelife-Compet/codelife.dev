@@ -2,7 +2,7 @@ import { Html, Head, Main, NextScript } from 'next/document'
 import { getCssText } from '@codelife-ui/react'
 export default function Document() {
   return (
-    <Html lang="pt-BR">
+    <Html>
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link
         rel="preconnect"
