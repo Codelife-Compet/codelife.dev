@@ -10,6 +10,7 @@ import * as carousel from './styles'
 // import { useTransition, animated } from '@react-spring/web'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import { Heading } from '../Heading'
+import { Box } from '../Box'
 // This uses any kind of data to provide a carousel transition effect
 type TListItemProps<T> = {
   [key in keyof T]: T[key]
@@ -76,52 +77,58 @@ export function Carousel<T>({
   }
   return (
     <>
-      <CarouselContainer
-        as={'section'}
-        aria-labelledby={`Carousel-${resourceName}-Heading`}
-      >
+      <CarouselContainer aria-labelledby={`Carousel-${resourceName}-Heading`}>
         <Heading as={'h3'} sr-only id={`Carousel-${resourceName}-Heading`}>
           {resourceName}
         </Heading>
-        {
-          <carousel.InnerContainer
-            direction={direction}
-            key={`${resourceName}-${currentIndex}`}
-            onDragEnd={(e, { offset, velocity }) => {
-              e.preventDefault()
-              const swipe = swipePower(offset.x, velocity.x)
-              if (swipe < -swipeConfidenceThreshold) {
-                goToPrev()
-              } else if (swipe > swipeConfidenceThreshold) {
-                goToNext()
-              }
-            }}
-          >
+        <carousel.InnerContainer
+          direction={direction}
+          key={`${resourceName}-${currentIndex}`}
+          onDragEnd={(e, { offset, velocity }) => {
+            e.preventDefault()
+            const swipe = swipePower(offset.x, velocity.x)
+            if (swipe < -swipeConfidenceThreshold) {
+              goToPrev()
+            } else if (swipe > swipeConfidenceThreshold) {
+              goToNext()
+            }
+          }}
+        >
+          <Box css={{ all: 'unset' }} as={'ul'}>
             <ItemComponent
               id={`panel-${currentIndex}`}
+              aria-labelledby={`tab-${currentIndex}`}
               variant={variant}
               {...(items[currentIndex] as TListItemProps<T>)}
             />
-            <carousel.PrevButton
-              variant={variant}
-              onClick={goToPrev}
-              name="previous-slide"
-            >
-              <FaChevronLeft size={40} />
-            </carousel.PrevButton>
-            <carousel.NextButton
-              variant={variant}
-              onClick={goToNext}
-              name="next-slide"
-            >
-              <FaChevronRight size={40} />
-            </carousel.NextButton>
-          </carousel.InnerContainer>
-        }
-        <carousel.Dots>
+          </Box>
+        </carousel.InnerContainer>
+        <carousel.PrevButton
+          variant={variant}
+          onClick={goToPrev}
+          name="previous-slide"
+        >
+          <FaChevronLeft size={40} />
+        </carousel.PrevButton>
+        <carousel.NextButton
+          variant={variant}
+          onClick={goToNext}
+          name="next-slide"
+        >
+          <FaChevronRight size={40} />
+        </carousel.NextButton>
+        <carousel.Dots
+          role="tablist"
+          size={items.length < 5 ? 'lg' : items.length < 10 ? 'sm' : 'md'}
+        >
           {items.map((_, idx) => (
             <carousel.Dot
+              size={items.length < 5 ? 'lg' : items.length < 10 ? 'md' : 'sm'}
               data-slide={idx}
+              slot="tab"
+              role="tab"
+              id={`tab-${idx}`}
+              aria-controls={`panel-${idx}`}
               variant={variant}
               key={idx}
               aria-selected={idx === currentIndex}

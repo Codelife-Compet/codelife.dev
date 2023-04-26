@@ -2,6 +2,7 @@ import React, { ElementType } from 'react'
 import { styled } from '../../../styles'
 import { AnimatePresence, motion } from 'framer-motion'
 export const Container = styled('div', {
+  all: 'unset',
   width: '100%',
   height: '100%',
   overflow: 'hidden',
@@ -9,7 +10,8 @@ export const Container = styled('div', {
   transition: 'all 1s ',
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'space-between',
+  justifyContent: 'center',
+  alignItems: 'center',
 })
 export const SlideshowButton = styled(motion.button, {
   position: 'absolute',
@@ -63,7 +65,7 @@ export const SlideshowButton = styled(motion.button, {
           fill: '$codelife-tertiary-700',
         },
         '&:hover,&:focus': {
-          borderColor: '$codelife-secondary-900',
+          borderColor: '$codelife-tertiary-900',
         },
       },
     },
@@ -71,11 +73,11 @@ export const SlideshowButton = styled(motion.button, {
 })
 
 const StyledPrevButton = styled(SlideshowButton, {
-  left: '$4',
+  left: '$2',
 })
 
 const StyledNextButton = styled(SlideshowButton, {
-  right: '$4',
+  right: '$2',
 })
 
 export const Dots = styled('div', {
@@ -84,32 +86,62 @@ export const Dots = styled('div', {
   justifyContent: 'center',
   alignItems: 'center',
   justifyItems: 'center',
-  gap: '$4',
-  paddingBlockStart: '$4',
+  variants: {
+    size: {
+      sm: {
+        gap: '$2',
+        paddingBlock: '$2',
+      },
+      md: {
+        gap: '$4',
+        paddingBlock: '$4',
+      },
+      lg: {
+        gap: '$5',
+        paddingBlock: '$5',
+      },
+    },
+  },
 })
 export const Dot = styled('button', {
   all: 'unset',
   display: 'inline-block',
-  height: '$4',
-  width: '$4',
   borderRadius: '$full',
-  border: '3px solid transparent',
+  border: '2px solid transparent',
   cursor: 'pointer',
   backgroundColor: '$surface',
-  '&:not([aria-selected=true]):hover': {
+  '&:hover': {
+    cursor: 'pointer',
+  },
+  '&:not([aria-selected=true]):hover,&:not([aria-selected=true]):focus': {
     scale: 1.2,
   },
   '&[aria-selected=true]': {
-    height: '$5',
-    width: '$5',
+    scale: 1.4,
   },
   defaultVariants: {
     variant: 'primary',
+    size: 'lg',
   },
   variants: {
+    size: {
+      sm: {
+        height: '$2',
+        width: '$2',
+        borderWidth: '1px',
+      },
+      md: {
+        height: '$3',
+        width: '$3',
+      },
+      lg: {
+        height: '$4',
+        width: '$4',
+      },
+    },
     variant: {
       primary: {
-        '&[aria-selected=true]': {
+        '&[aria-selected=true],&:not([aria-selected=true]):hover': {
           backgroundColor: '$codelife-primary-500',
         },
         '&:hover,&:focus': {
@@ -117,7 +149,7 @@ export const Dot = styled('button', {
         },
       },
       secondary: {
-        '&[aria-selected=true]': {
+        '&[aria-selected=true],&:not([aria-selected=true]):hover': {
           backgroundColor: '$codelife-secondary-500',
         },
         '&:hover,&:focus': {
@@ -125,7 +157,7 @@ export const Dot = styled('button', {
         },
       },
       tertiary: {
-        '&[aria-selected=true]': {
+        '&[aria-selected=true],&:not([aria-selected=true]):hover': {
           backgroundColor: '$codelife-tertiary-500',
         },
         '&:hover,&:focus': {
@@ -135,7 +167,9 @@ export const Dot = styled('button', {
     },
   },
 })
-const InnerContainerDiv = styled(motion.div, {
+const InnerContainerDiv = styled(motion.ul, {
+  all: 'unset',
+  listStyle: 'none',
   position: 'relative',
 })
 export type TDirectionX = 'right' | 'left'
