@@ -5,11 +5,14 @@
     "apps/*"
   ],
   "scripts": {
+    "prepare": "husky install",
     "dev": "turbo run dev --parallel",
     "build": "turbo run build",
     "changeset": "changeset",
     "version-packages": "changeset version",
-    "release": "turbo run build --filter='^(?!.*\\/(packages\\/docs|apps)\\/).*' && changeset publish"
+    "release": "turbo run build --filter='^(?!.*\\/(packages\\/docs|apps)\\/).*' && changeset publish",
+    "test": "turbo run test",
+    "test:watch": "turbo run test:watch"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.1",
