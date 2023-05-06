@@ -5,6 +5,7 @@
     "apps/*"
   ],
   "scripts": {
+    "prepare": "husky install",
     "dev": "turbo run dev --parallel",
     "build": "turbo run build",
     "changeset": "changeset",

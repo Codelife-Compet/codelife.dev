@@ -44,7 +44,7 @@ export default {
 
 export const CardRoot: StoryObj<RootProps> = {
   args: {
-    elevation: 1,
+    elevation: 0,
     children: [
       <Card.Header key={'Card-Header'}>
         <Card.IconContainer>
