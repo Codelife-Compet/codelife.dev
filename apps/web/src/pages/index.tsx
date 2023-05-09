@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
   FaArrowRight,
+  FaFacebook,
   FaGithub,
   FaGoogle,
   FaMap,
@@ -28,7 +29,7 @@ export default function Home() {
             {/* <NavBar /> Componente com defeito visual no sm breakpoint */}
             <section
               id="codelife-presenter"
-              className="max-w-[83%] flex flex-col items-center justify-around h-[80vh] xl:h-auto xl:gap-14"
+              className="max-w-[83%] flex flex-col items-center justify-around h-[80vh] xl:h-auto xl:gap-14 bg-home bg-no-repeat bg-cover"
             >
               <Heading size={'2xl'} css={{ textAlign: 'center' }}>
                 {t('Home.Headline')}
@@ -44,8 +45,12 @@ export default function Home() {
                 {t('Home.IntroText')}
               </Text>
               <Button
-                onClick={() =>
-                  signIn({ email: 'teste@teste.com', password: '123456' })
+                size={'lg'}
+                css={{
+                  color: '$codelife-black-100',
+                }}
+                onClick={
+                  () => signIn({ email: 'teste@teste.com', password: '123456' }) // mock login with credentials
                 }
               >
                 {t('Home.Start')}
@@ -54,7 +59,7 @@ export default function Home() {
               <div className="flex items-center opacity-50 py-2 justify-center w-full after:block after:h-[1px] after:mx-2.5 after:bg-current after:w-[20%] before:block before:h-[1px] before:mx-2.5 before:bg-current before:w-[20%]">
                 {t('Or')}
               </div>
-              <div className="flex justify-around items-center gap-8">
+              <div className="flex justify-around items-center flex-col gap-3 sm:flex-row sm:gap-4 md:gap-8">
                 <Button
                   onClick={() => console.log('mock login with github ')}
                   css={{
@@ -68,7 +73,7 @@ export default function Home() {
                   }}
                 >
                   <FaGithub />
-                  Github
+                  Github &nbsp; &nbsp;
                 </Button>
                 <Button
                   onClick={() => console.log('mock login with Google ')}
@@ -83,10 +88,29 @@ export default function Home() {
                   }}
                 >
                   <FaGoogle />
-                  Google
+                  Google &nbsp; &nbsp;
+                </Button>
+                <Button
+                  onClick={() => console.log('mock login with Facebook ')}
+                  css={{
+                    '@phoneOnly': {
+                      height: '$8',
+                      fontSize: 'small',
+                    },
+                    backgroundColor: '#3b5998',
+                    color: '$codelife-black-100',
+                    borderColor: '#3b5998',
+                  }}
+                >
+                  <FaFacebook />
+                  Facebook
                 </Button>
               </div>
             </section>
+            <section
+              id="courses carrousel"
+              className="w-max-lg w-[80%] relative flex justify-center items-center"
+            ></section>
             <section
               id="videoPresenter"
               className="w-[80%] overflow-hidden rounded border border-gray-500 "

@@ -3,51 +3,67 @@ import { styled } from '../../../styles'
 
 export const AvatarContainer = styled(Avatar.Root, {
   borderRadius: '$full',
+  position: 'relative',
   display: 'inline-block',
   overflow: 'hidden',
-  border: '0 solid $codelife-black-900',
-  outline: '0 solid transparent',
+  outline: '2px solid transparent',
+  outlineOffset: '-1px',
+  '&::after': {
+    content: '',
+    position: 'absolute',
+    top: '3px',
+    left: '3px',
+    bottom: '3px',
+    right: '3px',
+    borderRadius: 'inherit',
+    boxShadow: '0 0 0 3px black',
+    zIndex: '1',
+  },
+  '&::before': {
+    content: '',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    background: 'radial-gradient(circle at center,transparent,black)',
+    opacity: 0.5,
+    transition: 'opacity 0.25s ease-in-out',
+  },
+  '&:hover': {
+    '&::before': {
+      opacity: '0.3',
+    },
+  },
+
   variants: {
     size: {
       sm: {
         width: '$14',
         height: '$14',
-        borderWidth: '2px',
-        outlineWidth: '1px',
+        outlineWidth: '2px',
       },
       md: {
         width: 'calc(2*$14)',
         height: 'calc(2*$14)',
-        borderWidth: '4px',
-        outlineWidth: '2px',
+        outlineWidth: '4px',
       },
       lg: {
         width: 'calc(4*$14)',
         height: 'calc(4*$14)',
-        borderWidth: '8px',
-        outlineWidth: '4px',
+        outlineWidth: '8px',
       },
       xl: {
         width: 'calc(6*$14)',
         height: 'calc(6*$14)',
-        borderWidth: '12px',
-        outlineWidth: '6px',
+        outlineWidth: '12px',
       },
     },
     theme: {
-      regular: {
-        outlineColor: '$codelife-gray-900',
-      },
-      moderator: {
-        outlineColor: '$codelife-tertiary-900',
-      },
-      owner: {
-        outlineColor: '$codelife-primary-900',
-      },
-      contributor: {
-        outlineStyle: 'solid',
-        outlineColor: '$codelife-secondary-900',
-      },
+      regular: { outlineColor: '$codelife-gray-500' },
+      moderator: { outlineColor: '$codelife-tertiary-500' },
+      owner: { outlineColor: '$codelife-secondary-500' },
+      contributor: { outlineColor: '$codelife-primary-500' },
     },
   },
   defaultVariants: {
