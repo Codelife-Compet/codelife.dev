@@ -116,7 +116,7 @@ function Footer() {
                   alt="Logotipo da Datawheel"
                   width={160}
                   height={160}
-                  className="cursor-pointer opacity-80 hover:opacity-100"
+                  className="cursor-pointer opacity-80 hover:opacity-100 h-12 w-auto"
                 />
               </Link>
             </div>
@@ -141,9 +141,9 @@ function Footer() {
                   <Image
                     src="/fapemig.svg"
                     alt="Logotipo da Fapemig"
-                    height={160}
-                    width={160}
-                    className=" cursor-pointer px-2 opacity-80 hover:opacity-100"
+                    height={100}
+                    width={100}
+                    className=" cursor-pointer px-2 opacity-80 hover:opacity-100 h-8 w-auto"
                   />
                 </Link>
               </div>
@@ -156,9 +156,9 @@ function Footer() {
                   <Image
                     src="/innpact.svg"
                     alt="Logotipo da Innpact"
-                    height={160}
-                    width={160}
-                    className=" cursor-pointer opacity-80 hover:opacity-100 "
+                    height={100}
+                    width={100}
+                    className=" cursor-pointer opacity-80 hover:opacity-100 h-8 w-auto"
                   />
                 </Link>
               </div>

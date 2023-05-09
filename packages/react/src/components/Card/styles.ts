@@ -1,4 +1,4 @@
-import { styled } from '../../../styles'
+import { darkTheme, styled } from '../../../styles'
 import { Box } from '../Box'
 
 export const Header = styled('div', {
@@ -49,6 +49,18 @@ export const Root = styled(Box, {
   paddingInline: '$6',
   minWidth: '$64',
   width: '100%',
+  [`.${darkTheme} &`]: {
+    boxShadow: 'none',
+  },
+  '@black': {
+    boxShadow: 'none',
+  },
+  '@black:hover': {
+    boxShadow: '8px 10px 13px -6px rgba(0, 0, 0, 0.61)',
+  },
+  [`.${darkTheme} &:hover`]: {
+    boxShadow: '8px 10px 13px -6px rgba(0, 0, 0, 0.61)',
+  },
   '@tabletLandscape': {
     minHeight: '$80',
     maxWidth: '$80',
