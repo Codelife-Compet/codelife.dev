@@ -14,7 +14,7 @@ export function useTheme() {
     if (storagedTheme && storagedTheme !== theme) {
       setTheme(storagedTheme)
     }
-  }, [])
+  }, [theme, setTheme])
   useEffect(() => {
     if (!theme) return
     localStorage.setItem('codelife-theme', theme)
