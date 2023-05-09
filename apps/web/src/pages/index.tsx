@@ -1,5 +1,4 @@
 'use-client'
-import { CourseCarousel } from '@/components/Carousel'
 import { useAuth } from '@/context/auth/AuthContext'
 import { Button, Heading, Text, Card } from '@codelife-ui/react'
 import { useEffect, useState } from 'react'
@@ -111,9 +110,7 @@ export default function Home() {
             <section
               id="courses carrousel"
               className="w-max-lg w-[80%] relative flex justify-center items-center"
-            >
-              <CourseCarousel />
-            </section>
+            ></section>
             <section
               id="videoPresenter"
               className="w-[80%] overflow-hidden rounded border border-gray-500 "
