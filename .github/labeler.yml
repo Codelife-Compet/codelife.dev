@@ -9,11 +9,15 @@ rules:
       - label: "bug"
         color: "ee0701"
 
-  - name: "Feature Request"
+  - name: "Feature"
     # Match "feature" in the title or body
     contains:
       - "feature"
-    # Add the label "feature-request"
+      - "feat"
+      - "enhancement"
+    # Add the label "feat"
     actions:
-      - label: "feature-request"
+      - label: "feat"
         color: "336699"
+    
+      

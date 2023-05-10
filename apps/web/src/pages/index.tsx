@@ -3,6 +3,7 @@ import { useAuth } from '@/context/auth/AuthContext'
 import { Button, Heading, Text, Card } from '@codelife-ui/react'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Teste } from '@codelife-ui/react'
 import {
   FaArrowRight,
   FaGithub,
@@ -25,6 +26,9 @@ export default function Home() {
       {hydrated && (
         <>
           <main className="mb-20 flex items-center flex-col gap-20">
+            <Teste>
+              <p>Teste</p>
+            </Teste>
             {/* <NavBar /> Componente com defeito visual no sm breakpoint */}
             <section
               id="codelife-presenter"

@@ -1,12 +1,11 @@
 'use-client'
 import Head from 'next/head'
 import Footer from '@/components/Footer'
-import { Box, Switch, Text } from '@codelife-ui/react'
+import { Box, Text } from '@codelife-ui/react'
 import React, { useEffect, useState } from 'react'
-import { FaMoon, FaSun } from 'react-icons/fa'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
-import { useTheme } from '@/hooks/useTheme'
+
 interface LayoutProps {}
 const Layout: React.FC<React.PropsWithChildren<LayoutProps>> = ({
   children,
@@ -14,7 +13,6 @@ const Layout: React.FC<React.PropsWithChildren<LayoutProps>> = ({
   const { locale } = useRouter()
   const { i18n } = useTranslation()
   const [hydrated, setHydrated] = useState(false)
-  const { theme, toggleTheme } = useTheme()
   useEffect(() => {
     setHydrated(true)
   }, [])
@@ -33,27 +31,19 @@ const Layout: React.FC<React.PropsWithChildren<LayoutProps>> = ({
       {hydrated && (
         <>
           <Box
-            css={{ display: 'flex', paddingBlock: '$7' }}
-            elevation={'1'}
-            className="bg-codelife-primary-500/5"
+            css={{
+              '@dark': {
+                '& .java': {
+                  color: '$codelife-black-100',
+                  fontFamily: '$body',
+                  borderRadius: '$md',
+                },
+              },
+            }}
           >
-            {' '}
-            {/* Navbar goes here... */}
-            <Switch
-              id="toggleTheme"
-              onCheckedChange={toggleTheme}
-              isActive={theme === 'dark'}
-              CheckedIcon={FaMoon}
-              UncheckedIcon={FaSun}
-            />
-            <Text
-              as={'label'}
-              css={{ paddingInline: '$4' }}
-              htmlFor="toggleTheme"
-            >
-              Toggle Theme
-            </Text>
+            <Text>TESTE</Text>
           </Box>
+          {/* Nav bar goes here */}
           <main className="mb-20">{children}</main>
           <Footer />
         </>
