@@ -1,10 +1,10 @@
 'use-client'
 import Head from 'next/head'
 import Footer from '@/components/Footer'
-import { Box, Text } from '@codelife-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
+import NavBar from '@/components/NavBar'
 
 interface LayoutProps {}
 const Layout: React.FC<React.PropsWithChildren<LayoutProps>> = ({
@@ -30,7 +30,9 @@ const Layout: React.FC<React.PropsWithChildren<LayoutProps>> = ({
       </Head>
       {hydrated && (
         <>
-          <Box
+          <NavBar />
+          {/*
+         <Box
             css={{
               '@dark': {
                 '& .java': {
@@ -40,10 +42,10 @@ const Layout: React.FC<React.PropsWithChildren<LayoutProps>> = ({
                 },
               },
             }}
-          >
-            <Text>TESTE</Text>
+          >  
+            <NavBar />
           </Box>
-          {/* Nav bar goes here */}
+          */}
           <main className="mb-20">{children}</main>
           <Footer />
         </>

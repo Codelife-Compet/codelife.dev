@@ -1,41 +1,47 @@
 import Link from 'next/link'
-import { FaYoutube, FaFacebookSquare } from 'react-icons/fa'
-import { InstagramSVGIcon } from './InstagramSVGIcon'
+import { Button } from '@codelife-ui/react'
+import { useTranslation } from 'react-i18next'
 
 function NavBar() {
+  const { t } = useTranslation()
+
   return (
     <nav className="m-0 box-border flex items-center justify-between gap-8 px-4 py-0">
       <Link href="#" className="">
         CODELIFE
       </Link>
-      <ul className="m-0 flex list-none gap-4 p-0 text-sm">
-        <li className=" text-codelife-green-400 hover:text-codelife-black-900 font-semibold">
-          <Link href="#">ENTRE</Link>
-        </li>
-        <li className=" text-codelife-green-400 hover:text-codelife-black-900 font-semibold">
-          <Link href="#">CRIE UMA CONTA</Link>
-        </li>
-        <li className=" text-codelife-green-400 hover:text-codelife-black-900 font-semibold">
-          <Link href="#">SOBRE O CODELIFE</Link>
-        </li>
-        <li className=" text-codelife-green-400 hover:text-codelife-black-900 font-semibold">
-          <Link href="#">PORTUGUÊS</Link>
-        </li>
-        <li className=" text-codelife-green-400 hover:text-codelife-black-900 font-semibold">
-          <Link href="#">INGLÊS</Link>
-        </li>
-        <li className=" text-codelife-green-400 hover:text-codelife-black-900 font-semibold">
-          <FaFacebookSquare />
-        </li>
-        <li className=" text-codelife-green-400 hover:text-codelife-black-900 font-semibold">
-          <FaYoutube />
-        </li>
-        <li className=" text-codelife-green-400 hover:text-codelife-black-900 font-semibold">
-          <InstagramSVGIcon />
-        </li>
-      </ul>
+
+      <Button
+        text
+        onClick={() => console.log('mock login with Google ')}
+        css={{
+          '@phoneOnly': {
+            height: '$8',
+            fontSize: 'small',
+          },
+          backgroundColor: '#DB4437',
+          color: '$codelife-black-100',
+          borderColor: '#DB4437',
+          padding: '1px',
+          textTransform: 'uppercase',
+          fontSize: '$sm',
+          
+        }}
+      >
+        {t('Enter')}
+      </Button>
     </nav>
   )
+}
+
+// eslint-disable-next-line no-lone-blocks
+{
+  /*
+  Buttons: text-codelife-green-400 hover:text-codelife-black-900 font-semibold
+  ul: m-0 flex list-none gap-4 p-0 text-sm
+  nav: m-0 box-border flex items-center justify-between gap-8 px-4 py-0
+
+*/
 }
 
 export default NavBar
