@@ -21,7 +21,8 @@
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
     "husky": "^8.0.3",
-    "turbo": "^1.9.3"
+    "turbo": "^1.9.3",
+    "vitest": "^0.31.0"
   },
   "config": {
     "commitizen": {
