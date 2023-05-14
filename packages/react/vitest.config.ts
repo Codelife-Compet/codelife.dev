@@ -9,7 +9,11 @@ export default defineConfig({
   plugins: [react()],
   test: {
     globals: true,
+    setupFiles: ['tests/setupTests.ts'],
     environment: 'jsdom',
+    coverage: {
+      reporter: ['html'],
+    },
     ...(process.env.CI && {
       minThreads: 4,
       maxThreads: 4,

@@ -1,8 +1,5 @@
 {
   "extends": "@codelife-ui/ts-config/react.json",
-  "include": ["src", "components"],
-  "compilerOptions": {
-    "types": ["vitest/globals"],
-  },
+  "include": ["src", "tests/components"],
 
 }
