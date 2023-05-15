@@ -60,7 +60,7 @@ describe('test useCarousel hook', () => {
       preventDefault: vi.fn(),
     } as any
     const info = {
-      offset: { x: 1000, y: 0 },
+      offset: { x: 1001, y: 0 },
       velocity: { x: 1, y: 0 },
       delta: { x: 0, y: 0 },
       point: { x: 0, y: 0 },
@@ -76,13 +76,13 @@ describe('test useCarousel hook', () => {
     expect(event.preventDefault).toBeCalledTimes(1)
     expect(result.current.currentIndex).toBe(1)
   })
-  it('should go to next when the swipePower is greater than 1000', () => {
+  it('should go to next when the swipePower is minor than -1000', () => {
     const event: MouseEvent | TouchEvent | PointerEvent = {
       preventDefault: vi.fn(),
     } as any
     const info = {
-      offset: { x: -1000, y: 0 },
-      velocity: { x: 1, y: 0 },
+      offset: { x: -1001, y: 0 },
+      velocity: { x: -1, y: 0 },
       delta: { x: 0, y: 0 },
       point: { x: 0, y: 0 },
     } as PanInfo

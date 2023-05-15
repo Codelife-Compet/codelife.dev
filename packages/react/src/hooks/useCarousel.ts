@@ -61,7 +61,7 @@ export function useCarousel<T>(items: T[]) {
   const dragHandler = useCallback(
     (e: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
       e.preventDefault()
-      const swipe = swipePower(info.offset.x, info.offset.x)
+      const swipe = swipePower(info.offset.x, info.velocity.x)
       if (swipe < -swipeConfidenceThreshold) {
         goToPrev()
       } else if (swipe > swipeConfidenceThreshold) {
