@@ -34,6 +34,25 @@ describe('Carousel test', () => {
     },
   ]
   it('should be able to use any kind of data', async () => {
+    const anotherItemComponent: TItemComponent<{
+      name: string
+      email: string
+    }> = ({ email, name, ...props }) => (
+      <div data-testid="anotherComponent" {...props}>
+        <h1>{name}</h1>
+        <span>{email}</span>
+      </div>
+    )
+    const anotherDummyData: { name: string; email: string }[] = [
+      {
+        name: 'Henrique',
+        email: 'henrique@gmail.com',
+      },
+      {
+        name: 'Sebastian',
+        email: 'sebastian@gmail.com',
+      },
+    ]
     // act
     render(
       <Carousel
@@ -44,6 +63,14 @@ describe('Carousel test', () => {
     )
     // expect
     expect(screen.getByTestId(/anyComponent/i)).toBeInTheDocument()
+    render(
+      <Carousel
+        resourceName={'anotherItem'}
+        ItemComponent={anotherItemComponent}
+        items={anotherDummyData}
+      />,
+    )
+    expect(screen.getByTestId(/anotherComponent/i)).toBeInTheDocument()
   })
 
   it('should have same number of indicative dots that data length', async () => {
