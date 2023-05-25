@@ -11,7 +11,7 @@ export const Avatar = forwardRef<
 >(({ size, theme, ...props }, ref) => {
   return (
     <AvatarContainer size={size} theme={theme} ref={ref}>
-      <AvatarImage {...props} />
+      <AvatarImage {...props} as={'img'} />
       <AvatarFallback delayMs={600} size={size}>
         <FaUser />
       </AvatarFallback>
