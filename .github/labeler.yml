@@ -11,9 +11,96 @@ rules:
 
   - name: "Feature Request"
     # Match "feature" in the title or body
-    contains:
-      - "feature"
+    anyOf:
+      - contains: ["feature"]
+      - contains: ["feat"]
+      - contains: ["enhancement"]
     # Add the label "feature-request"
     actions:
       - label: "feature-request"
         color: "336699"
+  - name: "Tests"
+    # Match "tests" in the title or body
+    anyOf:
+      - contains: ["test"]
+      - contains: ["tests"]
+      - contains: ["teste"]
+      - contains: ["testes"]
+    # Add the label "test"
+    actions:
+      - label: "test"
+        color: "fef2c0"
+  - name: "Documentation"
+    # Match "docs" in the title or body
+    anyOf:
+      - contains: ["docs"]
+      - contains: ["documentation"]
+      - contains: ["documentação"]
+    # Add the label "docs"
+    actions:
+      - label: "documentation"
+        color: "0075ca"
+  - name: "Chore"
+    # Match "chore" in the title or body
+    anyOf:
+      - contains: ["chore"]
+    # Add the label "chore"
+    actions:
+      - label: "chore"
+        color: "AA51F6"
+  - name: "Release"
+    # Match "chore" in the title or body
+    anyOf:
+      - contains: ["release"]
+    # Add the label "release"
+    actions:
+      - label: "release"
+        color: "C2E0C6"
+  - name: "Style"
+    # Match "style" in the title or body
+    anyOf:
+      - contains: ["style"]
+    # Add the label "style"
+    actions:
+      - label: "style"
+        color: "BFDADC"
+  - name: "Perf"
+    # Match "perf" in the title or body
+    anyOf:
+      - contains: ["perf"]
+    # Add the label "perf"
+    actions:
+      - label: "perf"
+        color: "E99695"
+  - name: "Refactor"
+    # Match "refactor" in the title or body
+    anyOf:
+      - contains: ["refactor"]
+    # Add the label "refactor"
+    actions:
+      - label: "refactor"
+        color: "440033"
+  - name: "Build"
+    # Match "build" in the title or body
+    anyOf:
+      - contains: ["build"]
+    # Add the label "build"
+    actions:
+      - label: "build"
+        color: "6AE1BC"
+  - name: "Ci"
+    # Match "ci" in the title or body
+    anyOf:
+      - contains: ["ci"]
+    # Add the label "ci"
+    actions:
+      - label: "ci"
+        color: "C1A604"
+  - name: "Revert"
+    # Match "revert" in the title or body
+    anyOf:
+      - contains: ["revert"]
+    # Add the label "revert"
+    actions:
+      - label: "revert"
+        color: "ECDBD1"
