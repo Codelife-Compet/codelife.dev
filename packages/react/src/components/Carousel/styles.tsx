@@ -1,7 +1,6 @@
 import React, { ElementType } from 'react'
 import { styled } from '../../../styles'
-import { motion } from 'framer-motion'
-import { InnerContainerAnimationVariants } from '../../hooks/useCarousel'
+import { AnimatePresence, motion } from 'framer-motion'
 export const Container = styled('div', {
   all: 'unset',
   width: '100%',
@@ -183,6 +182,25 @@ interface ButtonProps
   extends React.ComponentProps<
     typeof StyledNextButton | typeof StyledPrevButton
   > {}
+const InnerContainerAnimationVariants = {
+  enter: (direction: TDirectionX) => {
+    return {
+      x: direction === 'left' ? '100%' : '-100%',
+      opacity: 0,
+    }
+  },
+  center: {
+    zindex: 1,
+    x: 0,
+    opacity: 1,
+  },
+  exit: (direction: TDirectionX) => {
+    return {
+      x: direction === 'left' ? '-100%' : '100%',
+      opacity: 0,
+    }
+  },
+}
 
 export const PrevButton = (props: ButtonProps) => {
   return <StyledPrevButton {...props}>{props.children}</StyledPrevButton>
@@ -196,23 +214,25 @@ export const InnerContainer = ({
   ...props
 }: InnerContainerProps) => {
   return (
-    <InnerContainerDiv
-      as={props.as}
-      custom={direction}
-      variants={InnerContainerAnimationVariants}
-      initial={'enter'}
-      animate={'center'}
-      exit={'exit'}
-      transition={{
-        x: { type: 'spring', stiffness: 300, damping: 30 },
-        opacity: { duration: 0.2 },
-      }}
-      drag="x"
-      dragConstraints={{ left: 0, right: 0 }}
-      dragElastic={1}
-      {...props}
-    >
-      {children}
-    </InnerContainerDiv>
+    <AnimatePresence mode="wait">
+      <InnerContainerDiv
+        as={props.as}
+        custom={direction}
+        variants={InnerContainerAnimationVariants}
+        initial={'enter'}
+        animate={'center'}
+        exit={'exit'}
+        transition={{
+          x: { type: 'spring', stiffness: 300, damping: 30 },
+          opacity: { duration: 0.2 },
+        }}
+        drag="x"
+        dragConstraints={{ left: 0, right: 0 }}
+        dragElastic={1}
+        {...props}
+      >
+        {children}
+      </InnerContainerDiv>
+    </AnimatePresence>
   )
 }

@@ -1,5 +1,4 @@
 {
   "extends": "@codelife-ui/ts-config/react.json",
-  "include": ["src", "tests/components"],
-
+  "include": ["src"]
 }
