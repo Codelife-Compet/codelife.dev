@@ -8,7 +8,8 @@
   "scripts": {
     "build": "tsup src/index.tsx --format esm,cjs --dts --external react",
     "dev": "tsup src/index.tsx --format esm,cjs --dts --external react --watch",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "lint": "eslint src/**/*.{js,jsx,ts,tsx}* --fix"
   },
   "files": [
@@ -26,8 +27,12 @@
     "@codelife-ui/eslint-config": "*",
     "@codelife-ui/tokens": "*",
     "@codelife-ui/ts-config": "*",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/react-hooks": "^8.0.1",
     "@types/react": "^18.0.35",
     "@types/react-dom": "^18.0.11",
+    "jsdom": "^22.0.0",
     "react": "^18.2.0",
     "tsup": "^6.7.0",
     "typescript": "^5.0.3"
