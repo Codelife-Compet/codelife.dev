@@ -2,7 +2,7 @@ import StyledRadio from './styles'
 import React, { ComponentProps, ElementRef, forwardRef } from 'react'
 export type RadioProps = ComponentProps<typeof StyledRadio.Input> & {
   children: React.ReactNode
-  variant: 'primary' | 'secondary' | 'tertiary'
+  variant?: 'primary' | 'secondary' | 'tertiary'
 }
 
 const Radio = forwardRef<ElementRef<typeof StyledRadio.Input>, RadioProps>(
