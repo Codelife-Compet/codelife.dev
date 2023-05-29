@@ -1,7 +1,12 @@
 import Link from 'next/link'
 import { Button } from '@codelife-ui/react'
 import { useTranslation } from 'react-i18next'
-import { FaDoorOpen, FaUserPlus, FaQuestionCircle } from 'react-icons/fa'
+import {
+  FaDoorOpen,
+  FaUserPlus,
+  FaQuestionCircle,
+  FaGlobeAmericas,
+} from 'react-icons/fa'
 import Image from 'next/image'
 import SiteLogo from '../../public/codelife.svg'
 
@@ -9,18 +14,19 @@ function NavBar() {
   const { t } = useTranslation()
 
   return (
-    <nav className="m-0 box-border flex items-center justify-between gap-8 px-4 py-0 pr-25 pl-10 h-15">
+    <nav className="m-0 box-border flex items-center justify-between gap-8 px-4 pr-auto pl-auto h-12 ">
       <Link href="#" className="">
-        <Image src={SiteLogo} alt="Codelife" className="w-fit h-7 "></Image>
+        <Image src={SiteLogo} alt="Codelife" className="w-fit h-6 "></Image>
       </Link>
-      <div className="flex">
+      <div className="flex gap-4 items-center">
         <Button
           text
+          variant="primary"
           onClick={() => console.log('mock login with Google ')}
           css={{
             padding: '1px',
             textTransform: 'uppercase',
-            fontSize: '$sm',
+            fontSize: '14px',
             gap: '3px',
             height: 'fit-content',
           }}
@@ -35,7 +41,7 @@ function NavBar() {
           css={{
             padding: '1px',
             textTransform: 'uppercase',
-            fontSize: '$sm',
+            fontSize: '14px',
             gap: '3px',
             height: 'fit-content',
           }}
@@ -50,7 +56,7 @@ function NavBar() {
           css={{
             padding: '1px',
             textTransform: 'uppercase',
-            fontSize: '$sm',
+            fontSize: '14px',
             gap: '3px',
             height: 'fit-content',
           }}
@@ -60,11 +66,36 @@ function NavBar() {
           {t('About')}
         </Button>
 
-        <div className="flex">
-          <Button text>Teste</Button>
+        <Button
+          text
+          onClick={() => console.log('Create account')}
+          css={{
+            padding: '1px',
+            textTransform: 'uppercase',
+            fontSize: '14px',
+            gap: '3px',
+            height: 'fit-content',
+          }}
+          className="hover:underline "
+        >
+          <FaGlobeAmericas className="pb-0.5 h-100%" />
+          {t('Portuguese')}
+        </Button>
 
-          <Button text>Teste2</Button>
-        </div>
+        <Button
+          text
+          onClick={() => console.log('Create account')}
+          css={{
+            padding: '1px',
+            textTransform: 'uppercase',
+            fontSize: '14px',
+            gap: '3px',
+            height: 'fit-content',
+          }}
+          className="hover:underline"
+        >
+          {t('English')}
+        </Button>
       </div>
     </nav>
   )
