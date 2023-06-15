@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 
 export const Dialog = styled('dialog', {
   background: 'transparent',
+  border: 0,
   overflow: 'hidden',
   '&::backdrop': {
     background: 'rgba(0,0,0,0.2)',
@@ -15,23 +16,24 @@ export const Dialog = styled('dialog', {
     },
   },
 })
-export const Trigger = styled('button', {})
+export const Trigger = styled('div', {})
 export type TriggerProps = ComponentProps<typeof Trigger> & {
   as?: ElementType
 }
 Trigger.displayName = 'Trigger'
 export const Content = styled(motion.div, {
   position: 'relative',
+  border: 0,
 })
 export const CloseButton = styled('button', {
+  border: 0,
   position: 'absolute',
+  background: 'transparent',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  width: '$6',
-  height: '$6',
-  right: '$3',
-  top: '$3',
+  right: '$2',
+  top: '$2',
   opacity: 0.8,
   '&:is(:hover,:active)': {
     svg: {
@@ -39,8 +41,8 @@ export const CloseButton = styled('button', {
     },
   },
   svg: {
-    width: '100%',
-    height: '100%',
+    width: '$6',
+    height: '$6',
     color: '$codelife-danger-500',
   },
 })
