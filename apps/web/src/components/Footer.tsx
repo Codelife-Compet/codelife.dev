@@ -30,7 +30,7 @@ function Footer() {
             <h3>{t('About ')}</h3>
             <ul>
               <li>
-                <Link href="">{t('About')}</Link>
+                <Link href="/about">{t('About')}</Link>
               </li>
               <li>
                 <Link href="">{t('Privacy Policy')}</Link>
