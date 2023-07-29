@@ -1,0 +1,7 @@
+{
+    "extends": "@codelife-ui/ts-config/base.json",
+    "include": [
+        "src",
+        "tests/components"
+    ],
+}

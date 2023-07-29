@@ -1,0 +1,24 @@
+{
+  "name": "@codelife/backend",
+  "version": "0.0.0",
+  "description": "backend para @codelife",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsup src --out-dir dist",
+    "start": "node build/index.js",
+    "dev": "tsx watch src/index.ts"
+  },
+  "keywords": [],
+  "author": "Pedro Augusto",
+  "license": "ISC",
+  "devDependencies": {
+    "@codelife-ui/eslint-config": "*",
+    "@codelife-ui/ts-config": "*",
+    "tsup": "^7.1.0",
+    "tsx": "^3.12.7",
+    "typescript": "^5.1.6"
+  }
+}
