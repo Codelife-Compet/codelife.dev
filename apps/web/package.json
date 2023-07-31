@@ -39,7 +39,7 @@
     "@types/cookie": "^0.5.1",
     "@types/uuid": "^9.0.1",
     "autoprefixer": "^10.4.14",
-    "eslint": "^8.38.0",
+    "eslint": "^8.46.0",
     "eslint-plugin-tailwindcss": "^3.11.0",
     "jsdom": "^22.0.0",
     "postcss": "^8.4.24",
