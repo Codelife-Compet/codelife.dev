@@ -25,10 +25,6 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const router = useRouter()
   const { locale } = router
   async function signIn({ email, password }: SignInData) {
-    if (user) {
-      router.push(`${locale}/dashboard`)
-      return
-    }
     const { token, user: userAuthenticated } = await signInRequest({
       email,
       password,
@@ -39,20 +35,16 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
       maxAge,
     })
     setUser(userAuthenticated)
-
     // This will update the Authorization Header from the api axios client
     api.defaults.headers.Authorization = `Bearer ${token}`
-    router.push(`${locale}/dashboard`)
+    locale && router.push(`/${locale}/dashboard`)
   }
   useEffect(() => {
     const { 'codelifeAuth-token': token } = parseCookies()
     if (token) {
       recoverUserInformation({ token }).then((response) => {
-        console.log(response.user)
-
         setUser(response.user)
       })
-      router.push(`${locale}/dashboard`)
     }
   }, [])
   return (

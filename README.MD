@@ -17,7 +17,7 @@ To get started you need to install this package using npm or others package mana
 Using npm, you can install the dependencies using:
 
 ```shell
-npm install @codelife.dev/react
+npm install @codelife.ui/react
 ```
 ## Contribution
 
