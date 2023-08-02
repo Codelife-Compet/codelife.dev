@@ -2,14 +2,14 @@
   "name": "@codelife/backend",
   "version": "0.0.0",
   "description": "backend para @codelife",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/core/index.js",
+  "module": "./dist/core/index.mjs",
+  "types": "./dist/core/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsup src --out-dir dist",
-    "start": "node build/index.js",
-    "dev": "tsx watch src/index.ts"
+    "start": "node build/core/index.js",
+    "start:dev": "tsx watch src/core/index.ts"
   },
   "keywords": [],
   "author": "Pedro Augusto",
@@ -17,8 +17,15 @@
   "devDependencies": {
     "@codelife-ui/eslint-config": "*",
     "@codelife-ui/ts-config": "*",
+    "prisma": "^5.1.0",
     "tsup": "^7.1.0",
     "tsx": "^3.12.7",
     "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.1.0",
+    "dotenv": "^16.3.1",
+    "fastify": "^4.21.0",
+    "zod": "^3.21.4"
   }
 }
