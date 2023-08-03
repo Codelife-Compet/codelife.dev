@@ -6,10 +6,13 @@
   "module": "./dist/core/index.mjs",
   "types": "./dist/core/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsup src --out-dir dist",
     "start": "node build/core/index.js",
-    "start:dev": "tsx watch src/core/index.ts"
+    "start:dev": "tsx watch src/core/index.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui"
   },
   "keywords": [],
   "author": "Pedro Augusto",
@@ -17,10 +20,14 @@
   "devDependencies": {
     "@codelife-ui/eslint-config": "*",
     "@codelife-ui/ts-config": "*",
+    "@vitest/coverage-v8": "^0.34.1",
+    "@vitest/ui": "^0.34.1",
     "prisma": "^5.1.0",
     "tsup": "^7.1.0",
     "tsx": "^3.12.7",
-    "typescript": "^5.1.6"
+    "typescript": "^5.1.6",
+    "vite-tsconfig-paths": "^4.2.0",
+    "vitest": "^0.34.1"
   },
   "dependencies": {
     "@prisma/client": "^5.1.0",
