@@ -22,7 +22,7 @@ export const Button = styled('button', {
     color: '$text-disabled',
     opacity: '33%',
   },
-  '&:not(:disabled):hover': {
+  '&:not(:disabled):is(:hover,:focus)': {
     opacity: 1,
   },
   svg: {
