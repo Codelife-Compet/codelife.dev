@@ -14,9 +14,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 16
-          cache: npm
-          cache-dependency-path: '**/package-lock.json'
+          node-version: 18
       - run: npm ci
 
       - run: npm run build
