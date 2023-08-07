@@ -17,10 +17,9 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 16
-          cache: npm
-          cache-dependency-path: '**/package-lock.json'
+          node-version: 18
       - run: npm ci
+      
       - name: Build
         run: npm run build # Adicione o comando para construir o pacote aqui      
       - name: Create Release Pull Request or Publish to npm
