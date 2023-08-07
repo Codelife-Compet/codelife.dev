@@ -1,0 +1,30 @@
+name: pull request
+description: template for pull request
+title: "[#CODE_ISSUE] [Short description]"
+reviewers:["bidwolf","PedroRonzani18"]
+body:
+- type: dropdown
+  id: feature
+  attributes:
+    label: What your feature is related?
+    options:
+      - Styles
+      - Components
+      - Tests
+      - Devops/Deploy
+      - Performance
+      - backend
+      - Another
+  validations:
+    required: true
+- type: checkboxes
+  attributes:
+    label: Code of Conduct
+    description: The Code of Conduct helps create a safe space for everyone. We require
+      that everyone agrees to it.
+    options:
+      - label: I agree to follow this project's [Code of Conduct](link/to/coc)
+        required: true
+- type: markdown
+  attributes:
+    value: "Thanks for helping us with your contribution!"
