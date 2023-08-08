@@ -2,9 +2,9 @@
 
 ## Technologies used
 
-[![fastify](https://img.shields.io/badge/-Next.js-000000?logo=next.js&style=for-the-badge)](https://next.js.js.org)
-[![prisma](https://img.shields.io/badge/-tailwindcss-06B6D4?logo=tailwindcss&logoColor=000000&style=for-the-badge)](https://tailwindcss.com/docs/installation)
-[![docker](https://img.shields.io/badge/-storybook-FF4785?logo=storybook&logoColor=000000&style=for-the-badge)](https://storybook.js.org/docs/react/get-started/install/)
+[![Fastify](https://img.shields.io/badge/fastify-%23000000.svg?style=for-the-badge&logo=fastify&logoColor=white)](https://fastify.dev/docs/latest/Guides/)
+[![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white)](https://www.prisma.io/docs)
+[![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)](https://docs.docker.com/)
 [![Typescript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 
 ## Getting started
@@ -31,7 +31,8 @@ npm run docker:start
 
 ### Getting Prisma up do date
 
-- this project uses Prisma as the database ORM. To make sure you have the mos current state of the database schema in your copy of the project, run:
+- This project uses Prisma as the database ORM. 
+- To make sure you have the most recent state of the database's schema, run:
 
 ```shell
 npm run prisma:migrate:dev
