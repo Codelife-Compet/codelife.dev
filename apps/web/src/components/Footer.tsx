@@ -33,7 +33,7 @@ function Footer() {
                 <Link href="/about">{t('About')}</Link>
               </li>
               <li>
-                <Link href="">{t('Privacy Policy')}</Link>
+                <Link href="/privacy">{t('Privacy Policy')}</Link>
               </li>
               <li>
                 <Link href="">{t('Partners')}</Link>
