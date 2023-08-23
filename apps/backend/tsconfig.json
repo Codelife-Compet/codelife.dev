@@ -4,4 +4,11 @@
         "src",
         "tests/components"
     ],
+
+    "compilerOptions": {
+        "baseUrl": "./",
+        "paths": {
+            "@/*": ["./src/*"]
+        }
+    },
 }
