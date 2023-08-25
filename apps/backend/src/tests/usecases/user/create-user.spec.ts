@@ -1,4 +1,4 @@
-import { CreateUserUseCase } from '@/domain/usecases/source/create-user-use-case'
+import { CreateUserUseCase } from '@/domain/usecases/source/create-user'
 import { InMemoryUsersRepository } from '@/tests/repositories/in-memory-users-repository'
 
 let inMemoryUsersRepository: InMemoryUsersRepository

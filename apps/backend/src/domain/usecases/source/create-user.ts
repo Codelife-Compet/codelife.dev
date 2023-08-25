@@ -1,17 +1,17 @@
 import { Either, right } from "@/core/types/either"
-import { UserProps } from "@/domain/entities/user"
 import { UsersRepository } from "@/domain/repositories/interface/users-repository"
+import { User } from "@prisma/client"
 
 interface CreateUserUseCaseRequest {
     name: string,
     email: string,
-    linkedin_token?: string,
-    github_token?: string,
+    linkedin_token: string | undefined,
+    github_token: string | undefined,
 }
 
 type CreateUserUseCaseResponse = Either<
     null,
-    { user: UserProps }
+    { user: User }
 >
 
 export class CreateUserUseCase {
@@ -20,8 +20,7 @@ export class CreateUserUseCase {
 
     async execute({ email, name, github_token, linkedin_token }: CreateUserUseCaseRequest): Promise<CreateUserUseCaseResponse> {
 
-        github_token = (github_token ? github_token : "")
-        linkedin_token = (linkedin_token ? linkedin_token : "")
+        
 
         const user = await this.usersRepository.create({
             email, github_token, linkedin_token, name,
