@@ -3,4 +3,4 @@ import fastify from 'fastify'
 
 export const app = fastify()
 
-app.register(userRoutes)
+app.register(userRoutes, { prefix: 'user' })
