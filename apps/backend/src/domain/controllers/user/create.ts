@@ -19,5 +19,11 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
 		email, name, github_token, linkedin_token
 	});
 
+	if(user.isLeft()) {
+		return reply
+			.status(400)
+			.send({ error_message: user.value.message })
+	}
+
 	return reply.status(201).send({ created_user: user.value });
 }
