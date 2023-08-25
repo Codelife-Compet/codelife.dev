@@ -15,8 +15,17 @@ function Footer() {
   useEffect(() => {
     setHydrated(true)
   }, [])
-  const { t } = useTranslation()
+  const { t, 
+    i18n: {changeLanguage, language}, 
+    } = useTranslation()
 
+  const  [currentLanguage, setCurrentLanguage] = useState("language")
+
+  const handleChangeLanguage = () => {
+    const newLanguage = currentLanguage === 'en' ? 'pt' : 'en'
+    changeLanguage (newLanguage)
+    setCurrentLanguage(newLanguage)
+  }
   return hydrated ? (
     <footer className={styles.footer}>
       <div className={styles['inner-footer']}>
@@ -33,7 +42,7 @@ function Footer() {
                 <Link href="/about">{t('About')}</Link>
               </li>
               <li>
-                <Link href="/privacy">{t('Privacy Policy')}</Link>
+                <Link href="">{t('Privacy Policy')}</Link>
               </li>
               <li>
                 <Link href="">{t('Partners')}</Link>
@@ -87,13 +96,13 @@ function Footer() {
           <div className={styles['nav-footer-section']}>
             <h3>{t('Language')}</h3>
             <ul>
-              <li>
-                <Link href="/" locale="en">
+              <li onClick={handleChangeLanguage}>
+                <Link href="" locale="en">
                   {t('English')}
                 </Link>
               </li>
-              <li>
-                <Link href="/" locale="pt-BR">
+              <li onClick={handleChangeLanguage}>
+                <Link href="" locale="pt-BR">
                   {t('Portuguese')}
                 </Link>
               </li>
