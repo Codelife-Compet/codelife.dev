@@ -2,15 +2,15 @@
 
 import { prisma } from "@/core/db/prisma";
 import { UsersRepository } from "../interface/users-repository";
-import { Prisma, User } from "@prisma/client";
-
+import { Prisma } from "@prisma/client";
+import { UserProps, User } from "@/domain/entities/user";
 
 export class PrismaUsersRepository implements UsersRepository {
 
-    async create(data: Prisma.UserCreateInput) : Promise<User> {
-        const user = await prisma.user.create({ data });
+    async create(data: UserProps) : Promise<User> {
+        const user = await prisma.user.create({data});
 
-        return user
+        return new User(user)
     }
 
     async findByGithubToken(github_token: string): Promise<User | null> {
@@ -18,7 +18,7 @@ export class PrismaUsersRepository implements UsersRepository {
             where: { github_token }
         })
 
-        return user
+        return (user ? new User(user) : null)
     }
 
     async findByLinkedinToken(linkedin_token: string): Promise<User | null> {
@@ -26,6 +26,6 @@ export class PrismaUsersRepository implements UsersRepository {
             where: { linkedin_token }
         })
 
-        return user
+        return (user ? new User(user) : null)
     }
 }

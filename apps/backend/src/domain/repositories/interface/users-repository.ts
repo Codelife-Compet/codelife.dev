@@ -1,7 +1,7 @@
-import { Prisma, User } from "@prisma/client"
+import { User, UserProps } from "@/domain/entities/user"
 
 export interface UsersRepository { // define quais metodos vao existir na comunicação entre repositorio e casos de uso
-    create(data: Prisma.UserCreateInput): Promise<User>
+    create(data: UserProps): Promise<User>
     findByGithubToken(github_token: string): Promise<User | null>
     findByLinkedinToken(linkedin_token: string): Promise<User | null>
 }

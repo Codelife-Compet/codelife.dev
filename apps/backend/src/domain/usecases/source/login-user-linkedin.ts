@@ -1,7 +1,8 @@
 import { Either, left, right } from "@/core/types/either"
 import { User } from "@prisma/client"
-import { makeFindUserByLinkedinTokenUseCase } from "../factories/make-find-user-by-linkedin-use-case"
 import { ResourceNotFoundError } from "@/core/errors/resource-not-found-error"
+import { FindUserByLinkedinTokenUseCase } from "./find-user-by-linkedin"
+import { UsersRepository } from "@/domain/repositories/interface/users-repository"
 
 interface LoginUserLinkedinUseCaseRequest {
     linkedin_token: string,
@@ -14,11 +15,11 @@ type LoginUserLinkedinUseCaseResponse = Either<
 
 export class LoginUserLinkedinUseCase {
 
-    constructor() { }
+    constructor(private usersRepository: UsersRepository) { }
 
     async execute({ linkedin_token }: LoginUserLinkedinUseCaseRequest): Promise<LoginUserLinkedinUseCaseResponse> {
 
-        const findUserByLinkedin = makeFindUserByLinkedinTokenUseCase()
+        const findUserByLinkedin = new FindUserByLinkedinTokenUseCase(this.usersRepository)
         const possibleUserLinkedin = await findUserByLinkedin.execute({ linkedin_token })
 
         if(possibleUserLinkedin.isRight())
