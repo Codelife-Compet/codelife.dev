@@ -6,7 +6,7 @@ async function testPrismaConnection() {
     try {
         await prisma.$connect();
 		await prisma.$disconnect();
-        console.log("Prisma is connected");
+        console.log("Prisma: connected");
     } catch (error) {
         console.error("Prisma connection failed:", error);
         process.exit(1); // Exit the process with an error code
@@ -20,7 +20,7 @@ async function startServer() {
             port: env.PORT,
         });
 
-        console.log("Backend Running on http://localhost:" + env.PORT);
+        console.log("Backend: Running on http://localhost:" + env.PORT);
 
         await testPrismaConnection();
 
