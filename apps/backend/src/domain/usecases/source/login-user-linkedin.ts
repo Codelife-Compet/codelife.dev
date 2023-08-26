@@ -1,5 +1,5 @@
 import { Either, left, right } from "@/core/types/either"
-import { User } from "@prisma/client"
+import { User } from "@/domain/entities/user"
 import { ResourceNotFoundError } from "@/core/errors/resource-not-found-error"
 import { FindUserByLinkedinTokenUseCase } from "./find-user-by-linkedin"
 import { UsersRepository } from "@/domain/repositories/interface/users-repository"

@@ -2,7 +2,6 @@
 
 import { prisma } from "@/core/db/prisma";
 import { UsersRepository } from "../interface/users-repository";
-import { Prisma } from "@prisma/client";
 import { UserProps, User } from "@/domain/entities/user";
 
 export class PrismaUsersRepository implements UsersRepository {

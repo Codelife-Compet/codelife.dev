@@ -1,9 +1,9 @@
 import { Either, left, right } from "@/core/types/either"
 import { UsersRepository } from "@/domain/repositories/interface/users-repository"
-import { User } from "@prisma/client"
 import { ResourceAlreadyExistsError } from "@/core/errors/resource-already-exists-error"
-import { makeFindUserByGithubTokenUseCase } from "../factories/make-find-user-by-github-use-case"
-import { makeFindUserByLinkedinTokenUseCase } from "../factories/make-find-user-by-linkedin-use-case"
+import { FindUserByGithubTokenUseCase } from "./find-user-by-github"
+import { FindUserByLinkedinTokenUseCase } from "./find-user-by-linkedin"
+import { User } from "@/domain/entities/user"
 
 interface CreateUserUseCaseRequest {
     name: string,
@@ -24,7 +24,7 @@ export class CreateUserUseCase {
     async execute({ email, name, github_token, linkedin_token }: CreateUserUseCaseRequest): Promise<CreateUserUseCaseResponse> {
 
         if(github_token) {
-            const findUserByGithubTokenUseCase = makeFindUserByGithubTokenUseCase()
+            const findUserByGithubTokenUseCase = new FindUserByGithubTokenUseCase(this.usersRepository)
             const possibleUser = await findUserByGithubTokenUseCase.execute({ github_token })
             
             if(possibleUser.isRight())
@@ -32,7 +32,7 @@ export class CreateUserUseCase {
         }
 
         if(linkedin_token) {
-            const findUserByLinkedinTokenUseCase = makeFindUserByLinkedinTokenUseCase()
+            const findUserByLinkedinTokenUseCase = new FindUserByLinkedinTokenUseCase(this.usersRepository)
             const possibleUser = await findUserByLinkedinTokenUseCase.execute({ linkedin_token })
             
             if(possibleUser.isRight())
@@ -40,7 +40,7 @@ export class CreateUserUseCase {
         }
 
         const user = await this.usersRepository.create({
-            email, github_token, linkedin_token, name,
+            email, github_token, linkedin_token, name, role: "USER"
         })
 
         return right({ user })
