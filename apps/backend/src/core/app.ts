@@ -1,6 +1,6 @@
-import { testingRoutes } from '@/domain/subdomain/application/controllers/testing/routes'
+import { userRoutes } from '@/domain/controllers/user/routes'
 import fastify from 'fastify'
 
 export const app = fastify()
 
-app.register(testingRoutes)
+app.register(userRoutes, { prefix: 'user' })

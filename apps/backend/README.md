@@ -17,6 +17,12 @@ To get started you need to install this package using npm or others package mana
 npm install
 ```
 
+### .Env variabless
+
+- firstly you will need to adjust your .env variables accordingly to the <b>.env.example</b>.
+- to do so, just create a <b>.env</b> file in your root folder, filling up the variables shown in the <b>.env.example</b> file.
+
+
 ### Setting up Docker
 
 - if you don't have docker installed in your machine, install it by entering this <a href="https://docs.docker.com/get-docker/">LINK</a>
