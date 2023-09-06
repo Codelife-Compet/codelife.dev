@@ -1,23 +1,23 @@
-import Link from 'next/link'
-import CompetIcon from './CompetIcon'
-import styles from '@/styles/Footer.module.css'
-import { useTranslation } from 'react-i18next'
-import { UserPermissions } from '@/@types/user'
-import { useAuth } from '@/context/auth/AuthContext'
-import { useEffect, useState } from 'react'
-import { Socials, Text } from '@codelife-ui/react'
-import Image from 'next/image'
-import { FaFacebookSquare, FaYoutube } from 'react-icons/fa'
-import { InstagramSVGIcon } from './InstagramSVGIcon'
+import Link from 'next/link';
+import CompetIcon from './CompetIcon';
+import styles from '@/styles/Footer.module.css';
+import { useTranslation } from 'react-i18next';
+import { UserPermissions } from '@/@types/user';
+import { useAuth } from '@/context/auth/AuthContext';
+import { useEffect, useState } from 'react';
+import { Socials, Text } from '@codelife-ui/react';
+import Image from 'next/image';
+import { FaFacebookSquare, FaYoutube } from 'react-icons/fa';
+import { InstagramSVGIcon } from './InstagramSVGIcon';
 function Footer() {
-  const [hydrated, setHydrated] = useState(false)
-  const { user } = useAuth()
+  const [hydrated, setHydrated] = useState(false);
+  const { user } = useAuth();
   useEffect(() => {
-    setHydrated(true)
-  }, [])
-  const { t } = useTranslation()
+    setHydrated(true);
+  }, []);
+  const { t } = useTranslation();
 
-  return hydrated ? (
+  return (
     <footer className={styles.footer}>
       <div className={styles['inner-footer']}>
         <nav
@@ -197,11 +197,7 @@ function Footer() {
         </Socials.IconContainer>
       </Socials.Root>
     </footer>
-  ) : (
-    <>
-      <p>Loading</p>
-    </>
-  )
+  );
 }
 
-export default Footer
+export default Footer;

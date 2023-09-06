@@ -1,22 +1,34 @@
-'use-client'
-import Head from 'next/head'
-import Footer from '@/components/Footer'
-import React, { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
-import { useTranslation } from 'react-i18next'
+import Head from 'next/head';
+import Footer from '@/components/Footer';
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { useTranslation } from 'react-i18next';
+import Loader from './Loader';
 interface LayoutProps {}
 const Layout: React.FC<React.PropsWithChildren<LayoutProps>> = ({
   children,
 }) => {
-  const { locale } = useRouter()
-  const { i18n } = useTranslation()
-  const [hydrated, setHydrated] = useState(false)
+  const { locale } = useRouter();
+  const { i18n } = useTranslation();
+  // const [hydrated, setHydrated] = useState(false);
+  const [isPageLoaded, setPageLoaded] = useState(false);
+
   useEffect(() => {
-    setHydrated(true)
-  }, [])
+    if (document.readyState === 'complete') {
+      setPageLoaded(true);
+    } else {
+      window.addEventListener('load', setPageLoaded);
+    }
+    return () => {
+      window.removeEventListener('load', setPageLoaded);
+    };
+  }, []);
+  // useEffect(() => {
+  //   setHydrated(true);
+  // }, []);
   useEffect(() => {
-    i18n.changeLanguage(locale)
-  }, [locale, i18n])
+    i18n.changeLanguage(locale);
+  }, [locale, i18n]);
 
   return (
     <>
@@ -26,13 +38,15 @@ const Layout: React.FC<React.PropsWithChildren<LayoutProps>> = ({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {hydrated && (
+      {!isPageLoaded ? (
+        <Loader />
+      ) : (
         <>
           <main className="mb-20">{children}</main>
           <Footer />
         </>
       )}
     </>
-  )
-}
-export default Layout
+  );
+};
+export default Layout;
