@@ -17,10 +17,10 @@ const Layout: React.FC<React.PropsWithChildren<LayoutProps>> = ({
     if (document.readyState === 'complete') {
       setPageLoaded(true);
     } else {
-      window.addEventListener('load', setPageLoaded);
+      window.addEventListener('load', () => setPageLoaded(false));
     }
     return () => {
-      window.removeEventListener('load', setPageLoaded);
+      window.removeEventListener('load', () => setPageLoaded(false));
     };
   }, []);
   // useEffect(() => {
