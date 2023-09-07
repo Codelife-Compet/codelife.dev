@@ -3,14 +3,20 @@
   "version": "0.0.0",
   "private": true,
   "description": "backend para @codelife",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/core/index.js",
+  "module": "./dist/core/index.mjs",
+  "types": "./dist/core/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsup src --out-dir dist",
-    "start": "node build/index.js",
-    "dev": "tsx watch src/index.ts"
+    "start": "node build/core/index.js",
+    "start:dev": "tsx watch src/core/index.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui",
+    "docker:start": "docker compose up -d",
+    "docker:stop": "docker compose stop",
+    "prisma:migrate:dev": "npx prisma migrate dev"
   },
   "keywords": [],
   "author": "Pedro Augusto",
@@ -18,8 +24,20 @@
   "devDependencies": {
     "@codelife-ui/eslint-config": "*",
     "@codelife-ui/ts-config": "*",
+    "@faker-js/faker": "^8.0.2",
+    "@vitest/coverage-v8": "^0.34.1",
+    "@vitest/ui": "^0.34.1",
+    "prisma": "^5.1.0",
     "tsup": "^7.1.0",
     "tsx": "^3.12.7",
-    "typescript": "^5.1.6"
+    "typescript": "^5.1.6",
+    "vite-tsconfig-paths": "^4.2.0",
+    "vitest": "^0.34.1"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.1.0",
+    "dotenv": "^16.3.1",
+    "fastify": "^4.21.0",
+    "zod": "^3.21.4"
   }
 }

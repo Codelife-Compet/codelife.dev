@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+model User {
+  id              String    @id @default(uuid())
+  name            String
+  profile_picture String?   
+  email           String    @unique
+  password        String?   
+  role            String    @default("USER")
+  github_token    String?   @unique
+  google_token    String?   @unique
+  facebook_token  String?   @unique
+  created_at      DateTime  @default(now())
+  updated_at      DateTime? @updatedAt
+
+  // checkIns CheckIn[] // usuario pode ter varios checkins || camelCase
+
+  @@map("users") // configuração do model || troca o nome da tabela que vai ser salva para "users"
+}
