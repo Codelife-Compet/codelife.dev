@@ -5,18 +5,18 @@ import { z } from 'zod';
 export const createUserBodySchema = z.object({
     name: z.string(),
     email: z.string(),
-    linkedin_token: z.string().optional(),
-    github_token: z.string().optional(),
+	token: z.string(),
+	token_type: z.enum(["google", "facebook", "github"])
 });
 
 export async function create(request: FastifyRequest, reply: FastifyReply) {
 
-	const { email, name, github_token, linkedin_token } = createUserBodySchema.parse(request.body);
+	const { email, name, token, token_type } = createUserBodySchema.parse(request.body);
 
 	const createUserUseCase = makeCreateUserUseCase();
 
 	const user = await createUserUseCase.execute({
-		email, name, github_token, linkedin_token
+		email, name, token, token_type
 	});
 
 	if(user.isLeft()) {

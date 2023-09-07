@@ -26,7 +26,7 @@ const {POSTGRESQL_USERNAME, POSTGRESQL_PASSWORD, POSTGRESQL_DATABASE, DATABASE_U
 if (POSTGRESQL_USERNAME && POSTGRESQL_PASSWORD && POSTGRESQL_DATABASE)
 	process.env.DATABASE_URL=`postgresql://${process.env.POSTGRESQL_USERNAME}:${process.env.POSTGRESQL_PASSWORD}@localhost:5432/${process.env.POSTGRESQL_DATABASE}?schema=public`
 
-if (!DATABASE_URL)
+if (!process.env.DATABASE_URL)
 	throw new Error('Invalid environment variables'); 
 
 console.log("Environment Variables: valid")

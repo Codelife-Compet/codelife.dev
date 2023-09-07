@@ -13,13 +13,17 @@ enum Role {
 }
 
 model User {
-  id             String   @id @default(uuid())
-  name           String
-  email          String   @unique
-  role           String   @default("USER")
-  created_at     DateTime @default(now())
-  github_token   String?  @unique
-  linkedin_token String?  @unique
+  id              String    @id @default(uuid())
+  name            String
+  profile_picture String?   
+  email           String    @unique
+  password        String?   
+  role            String    @default("USER")
+  github_token    String?   @unique
+  google_token    String?   @unique
+  facebook_token  String?   @unique
+  created_at      DateTime  @default(now())
+  updated_at      DateTime? @updatedAt
 
   // checkIns CheckIn[] // usuario pode ter varios checkins || camelCase
 

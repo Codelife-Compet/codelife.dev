@@ -3,24 +3,25 @@ import { Either, left, right } from "@/core/types/either"
 import { UsersRepository } from "@/domain/repositories/interface/users-repository"
 import { User } from "@/domain/entities/user"
 
-interface FindUserByGithubTokenUseCaseRequest {
-    github_token: string
+interface FindUserByTokenUseCaseRequest {
+    token: string,
+    type: string
 }
 
-type FindUserByGithubTokenUseCaseResponse = Either<
+export type FindUserUseCaseResponse = Either<
     ResourceNotFoundError,
     { user: User }
 >
 
-export class FindUserByGithubTokenUseCase {
+export class FindUserByTokenUseCase {
 
     constructor(private usersRepository: UsersRepository) { }
 
-    async execute({ github_token }: FindUserByGithubTokenUseCaseRequest): Promise<FindUserByGithubTokenUseCaseResponse> {
+    async execute({ token, type }: FindUserByTokenUseCaseRequest): Promise<FindUserUseCaseResponse> {
 
-        const user = await this.usersRepository.findByGithubToken( github_token )
+        const user = await this.usersRepository.findByToken(token, type)
 
-        if(!user) 
+        if (!user)
             return left(new ResourceNotFoundError("User"))
 
         return right({ user })

@@ -3,13 +3,15 @@ import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 
 export type UserProps = {
     name: string,
+    profile_picture?: string | null,
     email: string,
+    password?: string | null,
     role: string,
-    profile_picture?: string,
-    linkedin_token?: string | null,
+    google_token?: string | null,
+    facebook_token?: string | null,
     github_token?: string | null,
     created_at?: Date
-    updated_at?: Date
+    updated_at?: Date | null
 };
 
 export class User extends Entity<UserProps> {
@@ -19,10 +21,13 @@ export class User extends Entity<UserProps> {
     }
 
     get name() { return this.props.name }
-    get email() { return this.props.email }
     get profile_picture() { return this.props.profile_picture }
-    get linkedin_token() { return this.props.linkedin_token }
+    get email() { return this.props.email }
+    get password() { return this.props.password }
+    get role() { return this.props.role }
+    get google_token() { return this.props.google_token }
+    get facebook_token() { return this.props.facebook_token }
     get github_token() { return this.props.github_token }
     get created_at() { return this.props.created_at }
-    get role() { return this.props.role }
+    get updated_at() { return this.props.updated_at }
 }
