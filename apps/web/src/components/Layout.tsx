@@ -3,7 +3,8 @@ import Footer from '@/components/Footer';
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
-import Loader from './Loader';
+import Loader from './Loader/Loader';
+
 interface LayoutProps {}
 const Layout: React.FC<React.PropsWithChildren<LayoutProps>> = ({
   children,
@@ -39,7 +40,7 @@ const Layout: React.FC<React.PropsWithChildren<LayoutProps>> = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {!isPageLoaded ? (
-        <Loader />
+        <Loader size="xl" containerStyle={{ width: '100%', height: '100vh' }} />
       ) : (
         <>
           <main className="mb-20">{children}</main>

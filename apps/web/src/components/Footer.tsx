@@ -206,7 +206,7 @@ function Footer() {
         </Socials.IconContainer>
       </Socials.Root>
     </footer>
-  );
+  ): null
 }
 
 export default Footer;
