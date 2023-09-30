@@ -1,0 +1,7 @@
+import{j as e}from"./jsx-runtime-9f80c8b8.js";import{S as l,B as u,T as g,d as S,c as x}from"./index-124bcc87.js";import{r as w}from"./index-cb9ba028.js";import{d as f}from"./index-d129fdf4.js";import"./extends-98964cd2.js";import"./_commonjsHelpers-725317a4.js";import"./index-ba406ffb.js";const C={title:"Form/Switch",component:l,args:{size:"md",variant:"primary"},argTypes:{size:{options:["sm","md","lg"],control:{type:"inline-radio"}},variant:{options:["primary","secondary","tertiary"],control:{type:"inline-radio"}}},tags:["autodocs"],decorators:[(d,p)=>{const[o,h]=w.useState();return e.jsx(e.Fragment,{children:e.jsxs(u,{css:{display:"flex",flexDirection:"column",gap:2,marginBlock:"$4"},className:o?f:"",children:[e.jsx(g,{as:"label",size:"sm",htmlFor:"switchTheme",children:"Switch"}),d({args:{isActive:o,onCheckedChange:()=>h(!o),id:"switchTheme",...p.args}})]})})}]},r={},s={args:{UncheckedIcon:S,CheckedIcon:x}};var t,a,c;r.parameters={...r.parameters,docs:{...(t=r.parameters)==null?void 0:t.docs,source:{originalSource:"{}",...(c=(a=r.parameters)==null?void 0:a.docs)==null?void 0:c.source}}};var i,n,m;s.parameters={...s.parameters,docs:{...(i=s.parameters)==null?void 0:i.docs,source:{originalSource:`{
+  args: {
+    UncheckedIcon: FaSun,
+    CheckedIcon: FaMoon
+  }
+}`,...(m=(n=s.parameters)==null?void 0:n.docs)==null?void 0:m.source}}};const z=["DefaultSwitch","SwitchWithIcons"];export{r as DefaultSwitch,s as SwitchWithIcons,z as __namedExportsOrder,C as default};
+//# sourceMappingURL=Switch.stories-dfc1f2d9.js.map
