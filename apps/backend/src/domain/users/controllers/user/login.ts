@@ -1,7 +1,7 @@
 import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error';
-import { makeLoginUserUseCase } from '@/domain/usecases/factories/make-login-use-case';
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { z } from 'zod';
+import { makeLoginUserUseCase } from '../../usecases/factories/make-login-use-case';
 
 export const loginUserBodySchema = z.object({
     type: z.enum(['email', 'github', 'google', 'facebook']),

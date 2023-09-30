@@ -1,5 +1,5 @@
-import { User } from "@/domain/entities/user";
-import { CreateUserUseCase } from "@/domain/usecases/source/create-user";
+import { User } from "@/domain/users/entities/user";
+import { CreateUserUseCase } from "@/domain/users/usecases/source/create-user";
 import { InMemoryUsersRepository } from "@/tests/repositories/in-memory-users-repository";
 
 let inMemoryUsersRepository: InMemoryUsersRepository;

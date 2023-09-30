@@ -1,7 +1,7 @@
 import { ResourceNotFoundError } from "@/core/errors/resource-not-found-error"
 import { Either, left, right } from "@/core/types/either"
-import { UsersRepository } from "@/domain/repositories/interface/users-repository"
-import { User } from "@/domain/entities/user"
+import { UsersRepository } from "@/domain/users/repositories/interface/users-repository"
+import { User } from "@/domain/users/entities/user"
 
 interface FindUserByTokenUseCaseRequest {
     token: string,

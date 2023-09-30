@@ -1,4 +1,4 @@
-import { PrismaUsersRepository } from "@/domain/repositories/prisma/prisma-users-repository"
+import { PrismaUsersRepository } from "@/domain/users/repositories/prisma/prisma-users-repository"
 import { FindUserByEmailPasswordUseCase } from "../source/find-user-by-email-password"
 
 export function makeFindUserByEmailPasswordUseCase() {

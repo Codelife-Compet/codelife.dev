@@ -1,4 +1,4 @@
-import { LoginUserUseCase } from "@/domain/usecases/source/login-user";
+import { LoginUserUseCase } from "@/domain/users/usecases/source/login-user";
 import { makeUser } from "@/tests/factories/make-user";
 import { InMemoryUsersRepository } from "@/tests/repositories/in-memory-users-repository";
 

@@ -1,6 +1,6 @@
-import { makeCreateUserUseCase } from '@/domain/usecases/factories/make-create-user-use-case';
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { z } from 'zod';
+import { makeCreateUserUseCase } from '../../usecases/factories/make-create-user-use-case';
 
 export const createUserBodySchema = z.object({
     name: z.string(),

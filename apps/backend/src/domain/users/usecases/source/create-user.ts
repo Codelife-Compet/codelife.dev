@@ -1,7 +1,7 @@
 import { Either, left, right } from "@/core/types/either"
-import { UsersRepository } from "@/domain/repositories/interface/users-repository"
+import { UsersRepository } from "@/domain/users/repositories/interface/users-repository"
 import { ResourceAlreadyExistsError } from "@/core/errors/resource-already-exists-error"
-import { User } from "@/domain/entities/user"
+import { User } from "@/domain/users/entities/user"
 import { makeFindUserByTokenUseCase } from "../factories/make-find-user-by-token"
 import { makeFindUserByEmailUseCase } from "../factories/make-find-user-by-email"
 

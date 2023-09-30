@@ -1,4 +1,4 @@
-import { PrismaUsersRepository } from "@/domain/repositories/prisma/prisma-users-repository"
+import { PrismaUsersRepository } from "@/domain/users/repositories/prisma/prisma-users-repository"
 import { FindUserByTokenUseCase } from "../source/find-user-by-token"
 
 export function makeFindUserByTokenUseCase() {
