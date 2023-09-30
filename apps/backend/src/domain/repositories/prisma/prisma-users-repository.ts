@@ -3,13 +3,15 @@
 import { prisma } from "@/core/db/prisma";
 import { UsersRepository } from "../interface/users-repository";
 import { UserProps, User } from "@/domain/entities/user";
+import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 
 export class PrismaUsersRepository implements UsersRepository {
 
     async create(data: UserProps): Promise<User> {
+
         const user = await prisma.user.create({ data });
 
-        return new User(user)
+        return new User(user, new UniqueEntityID(user.id))
     }
 
     async findByToken(token: string, type: string): Promise<User | null> {
@@ -33,7 +35,7 @@ export class PrismaUsersRepository implements UsersRepository {
 
         }
 
-        return (user ? new User(user) : null)
+        return (user ? new User(user, new UniqueEntityID(user.id)) : null)
     }
 
     async findByEmailPassword(email: string, password: string): Promise<User | null> {
@@ -56,6 +58,15 @@ export class PrismaUsersRepository implements UsersRepository {
             where: { email }
         })
 
-        return (user ? new User(user) : null)
+        return (user ? new User(user, new UniqueEntityID(user.id)) : null)
+    }
+
+    async findById(id: string): Promise<User | null> {
+        const user = await prisma.user.findUnique({
+            where: { id, }
+        });
+
+        return (user ? new User(user, new UniqueEntityID(user.id)) : null);
     }
 }
+
