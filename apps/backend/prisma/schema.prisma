@@ -15,9 +15,9 @@ enum Role {
 model User {
   id              String    @id @default(uuid())
   name            String
-  profile_picture String?   
+  profile_picture String?
   email           String    @unique
-  password        String?   
+  password        String?
   role            String    @default("USER")
   github_token    String?   @unique
   google_token    String?   @unique
@@ -25,7 +25,56 @@ model User {
   created_at      DateTime  @default(now())
   updated_at      DateTime? @updatedAt
 
-  // checkIns CheckIn[] // usuario pode ter varios checkins || camelCase
-
   @@map("users") // configuração do model || troca o nome da tabela que vai ser salva para "users"
+}
+
+model UserCode {
+  id       String  @id @default(uuid())
+  userName String
+  code     String? @default("")
+  Slide    Slide   @relation(fields: [slideId], references: [id])
+  slideId  String  @unique
+
+  @@map("userCodes")
+}
+
+model Slide {
+  id          String @id @default(uuid())
+  name        String
+  description String
+  theme       String
+  baseCode    String
+  // video       String
+
+  userCodes UserCode[]
+
+  Level   Level  @relation(fields: [levelId], references: [id])
+  levelId String @unique
+
+  @@map("slides")
+}
+
+model Level {
+  id          String @id @default(uuid())
+  name        String
+  description String
+  theme       String
+
+  slides Slide[]
+
+  Island   Island @relation(fields: [islandId], references: [id])
+  islandId String @unique
+
+  @@map("levels")
+}
+
+model Island {
+  id          String @id @default(uuid())
+  name        String
+  description String
+  theme       String
+
+  levels Level[]
+
+  @@map("islands")
 }
