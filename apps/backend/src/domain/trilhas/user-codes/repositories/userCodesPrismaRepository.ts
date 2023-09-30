@@ -1,6 +1,6 @@
 import { prisma } from "@/core/db/prisma";
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
-import { UserCodeProps, UserCode } from "../entities/userCode";
+import { UserCodeProps, UserCode } from "../../@entities/userCode";
 import { UserCodesRepository } from "./userCodesInterfaceRepository";
 
 export class UserCodesPrismaRepository implements UserCodesRepository {
@@ -32,9 +32,9 @@ export class UserCodesPrismaRepository implements UserCodesRepository {
         const userCode = await prisma.userCode.findFirst({
             where: { userName }
         });
-    
+
         return (userCode ? new UserCode(userCode, new UniqueEntityID(userCode.id)) : null);
     }
-    
+
 }
 

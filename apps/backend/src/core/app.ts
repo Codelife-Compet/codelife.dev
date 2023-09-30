@@ -1,4 +1,4 @@
-import { userRoutes } from '@/domain/controllers/user/routes'
+import { userRoutes } from '@/domain/users/controllers/user/routes'
 import fastifyJwt from '@fastify/jwt'
 import fastify from 'fastify'
 import { env } from './env';

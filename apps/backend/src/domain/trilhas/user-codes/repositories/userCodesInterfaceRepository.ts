@@ -1,4 +1,4 @@
-import { UserCode, UserCodeProps } from "../entities/userCode"
+import { UserCode, UserCodeProps } from "../../@entities/userCode"
 
 export interface UserCodesRepository { // define quais metodos vao existir na comunicação entre repositorio e casos de uso
     create(data: UserCodeProps): Promise<UserCode>

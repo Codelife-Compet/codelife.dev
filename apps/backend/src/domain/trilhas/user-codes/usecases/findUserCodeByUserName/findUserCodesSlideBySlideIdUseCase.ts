@@ -1,7 +1,7 @@
 import { ResourceNotFoundError } from "@/core/errors/resource-not-found-error"
 import { Either, left, right } from "@/core/types/either"
 import { UserCodesRepository } from "../../repositories/userCodesInterfaceRepository"
-import { UserCode } from "../../entities/userCode"
+import { UserCode } from "../../../@entities/userCode"
 
 interface FindUserCodesSlideBySlideIdRequest {
     slideId: string,

@@ -1,6 +1,6 @@
 import { Either, left, right } from "@/core/types/either"
 import { ResourceAlreadyExistsError } from "@/core/errors/resource-already-exists-error"
-import { UserCode } from "../../entities/userCode"
+import { UserCode } from "../../../@entities/userCode"
 import { UserCodesRepository } from "../../repositories/userCodesInterfaceRepository"
 import { FindUserCodeByUserNameUseCase } from "../findUserCodeByUserName/findUserCodeByUserNameUseCase"
 
