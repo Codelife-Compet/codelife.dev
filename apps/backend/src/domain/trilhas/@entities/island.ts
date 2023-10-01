@@ -6,7 +6,7 @@ export type IslandProps = {
     name: string
     description: string
     theme: string
-    levels: Level[]
+    levels?: Level[]
 };
 
 export class Island extends Entity<IslandProps> {

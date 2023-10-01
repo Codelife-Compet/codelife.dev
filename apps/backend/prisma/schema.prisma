@@ -70,7 +70,7 @@ model Level {
 
 model Island {
   id          String @id @default(uuid())
-  name        String
+  name        String @unique
   description String
   theme       String
 
