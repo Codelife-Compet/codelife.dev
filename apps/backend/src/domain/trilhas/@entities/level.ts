@@ -6,7 +6,7 @@ export type LevelProps = {
     name: string
     description: string
     theme: string
-    slides: Slide[]
+    slides?: Slide[]
     islandId: string
 };
 
