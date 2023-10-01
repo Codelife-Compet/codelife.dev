@@ -30,8 +30,6 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  },
-  "dependencies": {
-    "@codelife-ui/react": "^0.1.0"
   }
+ 
 }
