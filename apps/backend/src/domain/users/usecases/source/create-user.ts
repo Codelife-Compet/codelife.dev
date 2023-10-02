@@ -2,8 +2,9 @@ import { Either, left, right } from "@/core/types/either"
 import { UsersRepository } from "@/domain/users/repositories/interface/users-repository"
 import { ResourceAlreadyExistsError } from "@/core/errors/resource-already-exists-error"
 import { User } from "@/domain/users/entities/user"
-import { makeFindUserByTokenUseCase } from "../factories/make-find-user-by-token"
 import { makeFindUserByEmailUseCase } from "../factories/make-find-user-by-email"
+import { FindUserByTokenUseCase } from "./find-user-by-token"
+import { FindUserByEmailUseCase } from "./find-user-by-email"
 
 interface CreateUserUseCaseRequest {
     name: string,
@@ -23,7 +24,7 @@ export class CreateUserUseCase {
 
     async execute({ email, name, token, token_type }: CreateUserUseCaseRequest): Promise<CreateUserUseCaseResponse> {
 
-        const findUserByTokenUseCase = makeFindUserByTokenUseCase()
+        const findUserByTokenUseCase = new FindUserByTokenUseCase(this.usersRepository)
 
         const possibleUser = await findUserByTokenUseCase.execute({ token, type: token_type })
 
@@ -31,7 +32,7 @@ export class CreateUserUseCase {
             return left(new ResourceAlreadyExistsError(`User's ${token_type} token`))
         }
 
-        const findUserByEmailUseCase = makeFindUserByEmailUseCase()
+        const findUserByEmailUseCase = new FindUserByEmailUseCase(this.usersRepository)
 
         const possibleUser2 = await findUserByEmailUseCase.execute({ email })
 
