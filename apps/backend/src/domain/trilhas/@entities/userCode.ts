@@ -15,4 +15,5 @@ export class UserCode extends Entity<UserCodeProps> {
 
     get userName() { return this.props.userName }
     get code() { return this.props.code }
+    get slideId() { return this.props.slideId }
 }

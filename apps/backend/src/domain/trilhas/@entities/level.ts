@@ -20,4 +20,5 @@ export class Level extends Entity<LevelProps> {
     get description() { return this.props.description }
     get theme() { return this.props.theme }
     get slides() { return this.props.slides }
+    get islandId() { return this.props.islandId }
 }

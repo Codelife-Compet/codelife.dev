@@ -23,5 +23,6 @@ export class Slide extends Entity<SlideProps> {
     get theme() { return this.props.theme }
     get baseCode() { return this.props.baseCode }
     get userCodes() { return this.props.userCodes }
+    get levelId() { return this.props.levelId }
     // get video() { return this.props.video }
 }
