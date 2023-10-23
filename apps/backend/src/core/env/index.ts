@@ -8,6 +8,10 @@ const envSchema = z.object({
 	POSTGRESQL_PASSWORD: z.string(),
 	POSTGRESQL_DATABASE: z.string(),
 	DATABASE_URL: z.string().optional(),
+	GITHUB_CLIENT_ID : z.string().optional(),
+	GITHUB_CLIENT_SECRET : z.string().optional(),
+	GOOGLE_CLIENT_ID : z.string().optional(),
+	GOOGLE_CLIENT_SECRET : z.string().optional(),
 	PORT: z.coerce.number().default(3333), 
 	JWT_SECRET: z.string(),
 });
