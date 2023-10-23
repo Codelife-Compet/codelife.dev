@@ -9,7 +9,6 @@ export const createSlideBodySchema = z.object({
 	theme: z.string(),
 	baseCode: z.string(), // linhas de código base para aquela atividade
 	userCodes: z.array(createUserCodeBodySchema).optional(), // código previamente digitado pelo usuário
-	// video: z.string(),
 	levelId: z.string()
 });
 
