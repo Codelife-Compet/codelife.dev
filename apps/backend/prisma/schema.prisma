@@ -38,18 +38,30 @@ model UserCode {
   @@map("userCodes")
 }
 
+model Video {
+  id               String @id @default(uuid())
+  videoKey         String
+  distributionName String
+
+  slideId String @unique
+  Slide   Slide  @relation(fields: [slideId], references: [id])
+
+  @@map("videos")
+}
+
 model Slide {
   id          String @id @default(uuid())
   name        String
   description String
   theme       String
   baseCode    String
-  // video       String
 
   userCodes UserCode[]
+  video     Video?
 
-  Level   Level  @relation(fields: [levelId], references: [id])
-  levelId String @unique
+  Level   Level   @relation(fields: [levelId], references: [id])
+  levelId String  @unique
+  videoId String?
 
   @@map("slides")
 }
