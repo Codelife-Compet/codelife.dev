@@ -3,6 +3,7 @@ import { create } from './create';
 import { login } from './login';
 import { profile } from './profile';
 import { refresh } from './refresh';
+//import { gitHubAtuh } from './github';
 import { verifyJWT } from '../../middlewares/verify-jwt';
 
 export async function userRoutes(app: FastifyInstance) {
@@ -13,4 +14,5 @@ export async function userRoutes(app: FastifyInstance) {
         // chamada pelo back quando o usuario perder sua autenticaçao (token invalido)
 
     app.get('/me', { onRequest: [verifyJWT] }, profile); // passa request e reply pro verify, e test  a
+    //app.get('/github', gitHubAtuh)
 }
