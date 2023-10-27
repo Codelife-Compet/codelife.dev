@@ -19,6 +19,6 @@
     }
   },
   "extends":"@codelife-ui/ts-config/base.json",
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "../backend/src/domain/users/controllers/user/github.ts", "src/pages/profile.tsx"],
   "exclude": ["node_modules"]
 }

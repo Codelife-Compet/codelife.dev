@@ -8,10 +8,9 @@ const envSchema = z.object({
 	POSTGRESQL_PASSWORD: z.string(),
 	POSTGRESQL_DATABASE: z.string(),
 	DATABASE_URL: z.string().optional(),
-	GITHUB_CLIENT_ID : z.string().optional(),
-	GITHUB_CLIENT_SECRET : z.string().optional(),
-	GOOGLE_CLIENT_ID : z.string().optional(),
-	GOOGLE_CLIENT_SECRET : z.string().optional(),
+	GITHUB_ID: z.string(),
+	GITHUB_SECRET: z.string(),
+	//REDIRECT_URL: z.string().optional(),
 	PORT: z.coerce.number().default(3333), 
 	JWT_SECRET: z.string(),
 });
@@ -25,7 +24,7 @@ if (_env.success === false) {
 	throw new Error('Invalid environment variables'); 
 }
 
-const {POSTGRESQL_USERNAME, POSTGRESQL_PASSWORD, POSTGRESQL_DATABASE, DATABASE_URL} = process.env
+const {POSTGRESQL_USERNAME, POSTGRESQL_PASSWORD, POSTGRESQL_DATABASE, DATABASE_URL, GITHUB_URL, GITHUB_ID, GITHUB_SECRET} = process.env
 
 if (POSTGRESQL_USERNAME && POSTGRESQL_PASSWORD && POSTGRESQL_DATABASE)
 	process.env.DATABASE_URL=`postgresql://${process.env.POSTGRESQL_USERNAME}:${process.env.POSTGRESQL_PASSWORD}@localhost:5432/${process.env.POSTGRESQL_DATABASE}?schema=public`
