@@ -9,33 +9,43 @@ export class PrismaUsersRepository implements UsersRepository {
 
     async create(data: UserProps): Promise<User> {
 
-        const user = await prisma.user.create({ data });
+        const { accounts, ...user } = data
 
-        return new User(user, new UniqueEntityID(user.id))
-    }
+        const createdUser = await prisma.user.create({ data: user });
 
-    async findByToken(token: string, type: string): Promise<User | null> {
+        if (accounts.length !== 0) {
+            const account = accounts[0];
 
-        let user;
-
-        switch (type) {
-            case "github":
-                user = await prisma.user.findUnique({ where: { github_token: token } })
-                break;
-
-            case "facebook":
-                user = await prisma.user.findUnique({ where: { facebook_token: token } })
-                break;
-
-            case "google":
-                user = await prisma.user.findUnique({ where: { google_token: token } })
-                break;
-            default:
-                throw new Error("Token invalido.")
-
+            await prisma.account.create({
+                data: {
+                    ...account,
+                    userId: createdUser.id
+                }
+            })
         }
 
-        return (user ? new User(user, new UniqueEntityID(user.id)) : null)
+        return new User(data, new UniqueEntityID(user.id))
+    }
+
+    async findByToken(token: string, provider: string): Promise<User | null> {
+        
+        console.dir({ token, provider })
+
+        const user = await prisma.user.findFirst({
+            where: {
+                accounts: {
+                    some: {
+                        userId: token,
+                        provider: provider
+                    }
+                }
+            }
+        });
+        if (!user) return null;
+
+        const accounts = await prisma.account.findMany({ where: { userId: token } })
+
+        return new User({ ...user, accounts }, new UniqueEntityID(user.id));
     }
 
     async findByEmailPassword(email: string, password: string): Promise<User | null> {
@@ -45,11 +55,11 @@ export class PrismaUsersRepository implements UsersRepository {
 
         if (!user) return null
 
+        const accounts = await prisma.account.findMany({ where: { userId: user.id } })
+
         if (user.password === password)
-            return new User(user)
-
+            return new User({ ...user, accounts }, new UniqueEntityID(user.id));
         return null
-
     }
 
 
@@ -58,7 +68,11 @@ export class PrismaUsersRepository implements UsersRepository {
             where: { email }
         })
 
-        return (user ? new User(user, new UniqueEntityID(user.id)) : null)
+        if (!user) return null;
+
+        const accounts = await prisma.account.findMany({ where: { userId: user.id } })
+
+        return new User({ ...user, accounts }, new UniqueEntityID(user.id));
     }
 
     async findById(id: string): Promise<User | null> {
@@ -66,7 +80,11 @@ export class PrismaUsersRepository implements UsersRepository {
             where: { id, }
         });
 
-        return (user ? new User(user, new UniqueEntityID(user.id)) : null);
+        if (!user) return null;
+
+        const accounts = await prisma.account.findMany({ where: { userId: user.id } })
+
+        return new User({ ...user, accounts }, new UniqueEntityID(user.id));
     }
 }
 
