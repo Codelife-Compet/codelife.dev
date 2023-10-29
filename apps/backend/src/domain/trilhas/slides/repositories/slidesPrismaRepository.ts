@@ -7,7 +7,7 @@ export class SlidesPrismaRepository implements SlidesRepository {
 
     async create(data: SlideProps): Promise<Slide> {
 
-        const { userCodes, ...restData } = data;
+        const { userCodes, video, ...restData } = data;
 
         const slide = await prisma.slide.create({ data: restData });
 

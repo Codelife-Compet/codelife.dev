@@ -32,6 +32,7 @@
     }
   },
   "dependencies": {
-    "@codelife-ui/react": "^0.1.0"
+    "@codelife-ui/react": "^0.1.0",
+    "@next-auth/prisma-adapter": "^1.0.7"
   }
 }

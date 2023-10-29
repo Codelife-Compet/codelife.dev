@@ -2,15 +2,24 @@ import { Either, left, right } from "@/core/types/either"
 import { UsersRepository } from "@/domain/users/repositories/interface/users-repository"
 import { ResourceAlreadyExistsError } from "@/core/errors/resource-already-exists-error"
 import { User } from "@/domain/users/entities/user"
-import { makeFindUserByEmailUseCase } from "../factories/make-find-user-by-email"
 import { FindUserByTokenUseCase } from "./find-user-by-token"
 import { FindUserByEmailUseCase } from "./find-user-by-email"
+import { randomUUID } from 'node:crypto'
+
 
 interface CreateUserUseCaseRequest {
-    name: string,
-    email: string,
-    token: string,
-    token_type: string
+    user: {
+        id: string
+        name?: string | null
+        email?: string | null
+        image?: string | null
+    }
+    account: {
+        providerAccountId: string
+        userId?: string
+        provider: string
+        type: "oauth" | "email" | "credentials"
+    }
 }
 
 type CreateUserUseCaseResponse = Either<
@@ -22,37 +31,40 @@ export class CreateUserUseCase {
 
     constructor(private usersRepository: UsersRepository) { }
 
-    async execute({ email, name, token, token_type }: CreateUserUseCaseRequest): Promise<CreateUserUseCaseResponse> {
+    async execute({ account, user }: CreateUserUseCaseRequest): Promise<CreateUserUseCaseResponse> {
 
         const findUserByTokenUseCase = new FindUserByTokenUseCase(this.usersRepository)
 
-        const possibleUser = await findUserByTokenUseCase.execute({ token, type: token_type })
+        const possibleUser = await findUserByTokenUseCase.execute({ token: user.id, type: account.provider })
 
         if (possibleUser.isRight()) {
-            return left(new ResourceAlreadyExistsError(`User's ${token_type} token`))
+            return left(new ResourceAlreadyExistsError(`User's ${account.provider} token`))
         }
 
         const findUserByEmailUseCase = new FindUserByEmailUseCase(this.usersRepository)
 
-        const possibleUser2 = await findUserByEmailUseCase.execute({ email })
+        if (user.email) {
+            const possibleUser2 = await findUserByEmailUseCase.execute({ email: user.email })
 
-        if (possibleUser2.isRight()) {
-            return left(new ResourceAlreadyExistsError(`User's email`))
+            if (possibleUser2.isRight()) {
+                return left(new ResourceAlreadyExistsError(`User's email`))
+            }
         }
 
-        let user: User;
+        const createdUser = await this.usersRepository.create({
+            id: user.id,
+            name: user.name ?? undefined,
+            email: user.email ?? undefined,
+            image: user.image ?? undefined,
+            accounts: [{
+                id: randomUUID(),
+                providerAccountId: account.providerAccountId,
+                userId: account.userId as string,
+                provider: account.provider,
+                type: account.type
+            }]
+        })
 
-        switch (token_type) {
-            case "google": user = await this.usersRepository.create({ email, name, role: "USER", google_token: token })
-                break;
-
-            case "github": user = await this.usersRepository.create({ email, name, role: "USER", github_token: token })
-                break;
-
-            default: user = await this.usersRepository.create({ email, name, role: "USER", facebook_token: token })
-                break;
-        }
-
-        return right({ user })
+        return right({ user: createdUser })
     }
 }

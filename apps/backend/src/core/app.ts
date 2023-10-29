@@ -7,6 +7,7 @@ import { islandRoutes } from '@/domain/trilhas/@routes/island.routes';
 import { levelRoutes } from '@/domain/trilhas/@routes/level.routes';
 import { slideRoutes } from '@/domain/trilhas/@routes/slide.routes';
 import { userCodeRoutes } from '@/domain/trilhas/@routes/userCode.routes';
+import { videoRoutes } from '@/domain/trilhas/@routes/video.routes';
 
 export const app = fastify()
 
@@ -29,3 +30,4 @@ app.register(islandRoutes, { prefix: 'island' })
 app.register(levelRoutes, { prefix: 'level' })
 app.register(slideRoutes, { prefix: 'slide' })
 app.register(userCodeRoutes, { prefix: 'usercode' })
+app.register(videoRoutes, { prefix: 'video' })

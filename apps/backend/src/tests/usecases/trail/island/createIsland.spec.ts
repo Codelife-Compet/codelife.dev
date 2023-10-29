@@ -1,4 +1,4 @@
-import { CreateIslandUseCase } from "@/domain/trilhas/island/usecases/createSlide/createIslandUseCase";
+import { CreateIslandUseCase } from "@/domain/trilhas/island/usecases/createIsland/createIslandUseCase";
 import { InMemoryIslandsRepository } from "@/tests/repositories/in-memory-island-repository";
 
 let inMemoryIslandsRepository: InMemoryIslandsRepository;

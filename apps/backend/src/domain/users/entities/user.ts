@@ -1,17 +1,30 @@
 import { Entity } from "@/core/entities/entity";
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 
+export type Account = {
+    id: string  
+    userId: string
+    type: string
+    provider: string
+    providerAccountId: string 
+    refresh_token?: string | null 
+    access_token?: string | null 
+    expires_at?: number | null
+    token_type?: string | null
+    scope?: string | null
+    id_token?: string | null 
+    session_state?: string | null
+}
+
 export type UserProps = {
-    name: string,
-    profile_picture?: string | null,
-    email: string,
+    id: string,
+    role: "USER" | "ADMIN",
+    name?: string | null,
+    email?: string | null,
+    emailVerified?: Date | null,
+    image?: string | null,
     password?: string | null,
-    role: string,
-    google_token?: string | null,
-    facebook_token?: string | null,
-    github_token?: string | null,
-    created_at?: Date
-    updated_at?: Date | null
+    accounts: Account[],
 };
 
 export class User extends Entity<UserProps> {
@@ -21,13 +34,11 @@ export class User extends Entity<UserProps> {
     }
 
     get name() { return this.props.name }
-    get profile_picture() { return this.props.profile_picture }
-    get email() { return this.props.email }
-    get password() { return this.props.password }
     get role() { return this.props.role }
-    get google_token() { return this.props.google_token }
-    get facebook_token() { return this.props.facebook_token }
-    get github_token() { return this.props.github_token }
-    get created_at() { return this.props.created_at }
-    get updated_at() { return this.props.updated_at }
+    get email() { return this.props.email }
+    get emailVerified() { return this.props.emailVerified }
+    get image() { return this.props.image }
+    get accounts() { return this.props.accounts }
+    get password() { return this.props.password }
+
 }
