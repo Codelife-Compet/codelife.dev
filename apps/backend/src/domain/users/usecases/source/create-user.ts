@@ -62,7 +62,7 @@ export class CreateUserUseCase {
                 userId: account.userId as string,
                 provider: account.provider,
                 type: account.type
-            }]
+            }],
         })
 
         return right({ user: createdUser })
