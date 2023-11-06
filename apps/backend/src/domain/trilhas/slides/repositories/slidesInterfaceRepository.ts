@@ -4,4 +4,5 @@ export interface SlidesRepository { // define quais metodos vao existir na comun
     create(data: SlideProps): Promise<Slide>
     findById(id: string): Promise<Slide | null>
     findSlideBySlideName_LevelId(slideName: string, levelId: string): Promise<Slide | null>
+    getVideoLink(slideId: string): Promise<string | null>
 }

@@ -40,5 +40,15 @@ export class SlidesPrismaRepository implements SlidesRepository {
 
         return (slide ? new Slide(slide, new UniqueEntityID(slide.id)) : null);
     }
+
+    async getVideoLink(slideId: string): Promise<string | null> {
+        const video = await prisma.slide.findUnique({
+            where: { id: slideId }
+        }).video();
+
+        if(!video) return null;
+
+        return `https://${video.distributionName}/${video.videoKey}`
+    }
 }
 
