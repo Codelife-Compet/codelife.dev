@@ -26,7 +26,7 @@ export class CreateVideoUseCase {
         const possibleVideo = await findVideoByVideoKey_SlideId.execute({ slideId, videoKey })
 
         if (possibleVideo.isRight()) {
-            return left({ error: new ResourceAlreadyExistsError(`Slides's ${name} video`) })
+            return left({ error: new ResourceAlreadyExistsError(`Slides's ${slideId} video`) })
         }
 
         const video = await this.videosRepository.create({ distributionName, slideId, videoKey })
