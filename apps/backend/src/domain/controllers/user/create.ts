@@ -4,7 +4,7 @@ import { z } from 'zod';
 
 export const createUserBodySchema = z.object({
     name: z.string(),
-    email: z.string(),
+    email: z.string().email(),
 	token: z.string(),
 	token_type: z.enum(["google", "facebook", "github"])
 });

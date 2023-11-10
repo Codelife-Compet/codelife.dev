@@ -8,8 +8,8 @@ const envSchema = z.object({
 	POSTGRESQL_PASSWORD: z.string(),
 	POSTGRESQL_DATABASE: z.string(),
 	DATABASE_URL: z.string().optional(),
-	PORT: z.coerce.number().default(3333) 
-	// JWT_SECRET: z.string(),
+	PORT: z.coerce.number().default(3333), 
+	JWT_SECRET: z.string(),
 });
 
 const _env = envSchema.safeParse(process.env); // tenta validar process.env para ver se tem as exatas informações dentro

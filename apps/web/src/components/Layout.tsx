@@ -5,6 +5,7 @@ import Clouds from "./Clouds/Clouds";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
+
 interface LayoutProps {}
 const Layout: React.FC<React.PropsWithChildren<LayoutProps>> = ({
   children,
@@ -24,6 +25,7 @@ const Layout: React.FC<React.PropsWithChildren<LayoutProps>> = ({
   return (
     <>
       {hydrated && (
+
         <>
           <main className="mb-20">{children}</main>
           <Footer />

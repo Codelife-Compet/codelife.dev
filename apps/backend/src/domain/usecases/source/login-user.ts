@@ -14,7 +14,7 @@ interface LoginUserUseCaseRequest {
 }
 
 export type LoginUserUseCaseResponse = Either<
-    null | ResourceNotFoundError,
+    ResourceNotFoundError,
     { user: User, valid_token: string }
 >
 
@@ -31,21 +31,22 @@ export class LoginUserUseCase {
         if (type === "email") {
             const findUserByEmailUseCase = new FindUserByEmailUseCase(this.usersRepository)
             possibleUser = await findUserByEmailUseCase.execute({ email: email as string })
-        
-            if (possibleUser.isRight() && possibleUser.value.user.password === password) {
-                return right({ user: possibleUser.value.user, valid_token: token as string })
-            }
-            return left(new ResourceNotFoundError("User Email"))
 
+            if (possibleUser.isLeft())
+                return left(new ResourceNotFoundError("User Email or password"))
+
+            if (possibleUser.value.user.password !== password)
+                return left(new InvalidInputError("User Email or password"))
 
         } else {
             const findUserByTokenUseCase = new FindUserByTokenUseCase(this.usersRepository)
 
             possibleUser = await findUserByTokenUseCase.execute({ token: token as string, type })
 
-            if (possibleUser.isRight())
-                return right({ user: possibleUser.value.user, valid_token: token as string })
-            return left(new ResourceNotFoundError("User Token"))
+            if (possibleUser.isLeft())
+                return left(new ResourceNotFoundError("User Token"))
         }
+
+        return right({ user: possibleUser.value.user, valid_token: token as string })
     }
 }
