@@ -2,6 +2,7 @@ import NextAuth from 'next-auth'
 
 import GithubProvider from 'next-auth/providers/github'
 import GoogleProvider from 'next-auth/providers/google'
+import FacebookProvider from 'next-auth/providers/facebook'
 import googleAPIAuth from '@/../../jsons/googleAPIAuth.json'
 
 export default NextAuth({
@@ -13,6 +14,10 @@ export default NextAuth({
     GoogleProvider({
       clientId: googleAPIAuth.web.client_id,
       clientSecret: googleAPIAuth.web.client_secret,
+    }),
+    FacebookProvider({
+      clientId: '1041677837160433',
+      clientSecret: '36fd5ea12c70a2662fe8ee3ca8867266',
     }),
   ],
   callbacks: {
