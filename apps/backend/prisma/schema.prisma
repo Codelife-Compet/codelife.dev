@@ -108,7 +108,21 @@ model Island {
   description String
   theme       String
 
-  levels Level[]
+  slides Level[]
+
+  Trail   Trail  @relation(fields: [trailId], references: [id])
+  trailId String @unique
 
   @@map("islands")
+}
+
+model Trail {
+  id          String @id @default(uuid())
+  name        String @unique
+  description String
+  theme       String
+
+  levels Island[]
+
+  @@map("trails")
 }

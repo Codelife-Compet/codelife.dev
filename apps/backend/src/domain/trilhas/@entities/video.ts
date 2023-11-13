@@ -4,6 +4,7 @@ import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 export type VideoProps = {
     videoKey: string
     distributionName: string
+    youtubeId: string
     slideId: string
 };
 
