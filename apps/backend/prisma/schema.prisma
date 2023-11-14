@@ -39,7 +39,12 @@ model User {
   emailVerified DateTime?
   image         String?
   password      String?
-  accounts      Account[]
+  score         Int       @default(0)
+
+  accounts Account[]
+
+  Team   Team?   @relation(fields: [teamId], references: [id])
+  teamId String?
 }
 
 model VerificationToken {
@@ -99,7 +104,20 @@ model Level {
   Island   Island @relation(fields: [islandId], references: [id])
   islandId String @unique
 
+  Ponctuation Ponctuation[]
+
   @@map("levels")
+}
+
+model Ponctuation {
+  id       String @id @default(uuid())
+  score    Int
+  userName String
+
+  level   Level  @relation(fields: [levelId], references: [id])
+  levelId String
+
+  @@map("ponctuations")
 }
 
 model Island {
@@ -125,4 +143,14 @@ model Trail {
   levels Island[]
 
   @@map("trails")
+}
+
+model Team {
+  id                 String  @id @default(uuid())
+  name               String  @unique
+  institutionName    String?
+  institutionPicture String?
+  users              User[]
+
+  @@map("teams")
 }

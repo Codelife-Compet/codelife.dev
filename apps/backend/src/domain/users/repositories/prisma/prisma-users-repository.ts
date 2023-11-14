@@ -7,6 +7,28 @@ import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 
 export class PrismaUsersRepository implements UsersRepository {
 
+    async findByName(name: string): Promise<User | null> {
+        
+        const user = await prisma.user.findFirst({
+            where: { name: { equals: name } }
+        })
+
+        if (!user) return null;
+
+        return new User({ ...user, accounts: [] }, new UniqueEntityID(user.id));
+    }
+    
+    async list(): Promise<User[]> {
+
+        const users = await prisma.user.findMany({
+            include: { accounts: true }
+        });
+
+        return users.map(user => {
+            return new User(user, new UniqueEntityID(user.id))
+        })
+    }
+
     async create(data: UserProps): Promise<User> {
 
         const { accounts, ...user } = data

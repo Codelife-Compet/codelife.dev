@@ -1,5 +1,6 @@
 import { Entity } from "@/core/entities/entity";
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
+import { Team } from "@/domain/ranking/@entities/team";
 
 export type Account = {
     id: string  
@@ -24,6 +25,8 @@ export type UserProps = {
     emailVerified?: Date | null,
     image?: string | null,
     password?: string | null,
+    team?: Team | null,
+    score: number,
     accounts: Account[],
 };
 
@@ -40,5 +43,6 @@ export class User extends Entity<UserProps> {
     get image() { return this.props.image }
     get accounts() { return this.props.accounts }
     get password() { return this.props.password }
-
+    get team() { return this.props.team }
+    get score() { return this.props.score }
 }
