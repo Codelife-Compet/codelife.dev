@@ -7,7 +7,7 @@ export class LevelsPrismaRepository implements LevelsRepository {
 
     async create(data: LevelProps): Promise<Level> {
 
-        const { slides, ...restData } = data;
+        const { slides, ponctuations, ...restData } = data;
 
         const level = await prisma.level.create({ data: restData });
 

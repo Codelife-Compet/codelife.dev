@@ -30,7 +30,7 @@ export class CreateLevelUseCase {
             return left({ error: new ResourceAlreadyExistsError(`Island's ${name} level`) })
         }
 
-        const level = await this.levelsRepository.create({ description, islandId, name, theme })
+        const level = await this.levelsRepository.create({ description, islandId, name, theme, ponctuations: [] })
 
         return right({ level })
     }

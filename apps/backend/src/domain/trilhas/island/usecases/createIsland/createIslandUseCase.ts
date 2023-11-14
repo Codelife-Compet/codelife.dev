@@ -10,6 +10,7 @@ interface CreateIslandUseCaseRequest {
     description: string
     theme: string
     levels?: Level[]
+    trailId: string
 }
 
 type CreateIslandUseCaseResponse = Either<
@@ -21,7 +22,7 @@ export class CreateIslandUseCase {
 
     constructor(private islandsRepository: IslandsRepository) { }
 
-    async execute({ description, name, theme, levels }: CreateIslandUseCaseRequest): Promise<CreateIslandUseCaseResponse> {
+    async execute({ description, name, theme, levels, trailId }: CreateIslandUseCaseRequest): Promise<CreateIslandUseCaseResponse> {
 
         const findIslandByNameUseCase = new FindIslandByNameUseCase(this.islandsRepository)
 
@@ -31,7 +32,7 @@ export class CreateIslandUseCase {
             return left({ error: new ResourceAlreadyExistsError(`Island's ${name} island`) })
         }
 
-        const island = await this.islandsRepository.create({ description, levels, name, theme })
+        const island = await this.islandsRepository.create({ description, levels, name, theme, trailId })
 
         return right({ island })
     }

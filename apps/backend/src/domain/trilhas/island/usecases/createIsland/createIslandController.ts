@@ -7,16 +7,17 @@ export const createIslandBodySchema = z.object({
 	name: z.string(),
 	description: z.string(),
 	theme: z.string(),
+	trailId: z.string(),
 	levels: z.array(createLevelBodySchema).optional()
 });
 
 export async function createController(request: FastifyRequest, reply: FastifyReply) {
 
-	const { description, levels, name, theme } = createIslandBodySchema.parse(request.body);
+	const { description, levels, name, theme, trailId } = createIslandBodySchema.parse(request.body);
 
 	const createIslandUseCase = makeCreateIslandUseCase();
 
-	const island = await createIslandUseCase.execute({ description, name, theme });
+	const island = await createIslandUseCase.execute({ description, name, theme, trailId });
 
 	if (island.isLeft()) {
 		return reply
