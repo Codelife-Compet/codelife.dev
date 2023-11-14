@@ -1,6 +1,6 @@
 import { ResourceNotFoundError } from "@/core/errors/resource-not-found-error";
-import { CreateUserUseCase } from "@/domain/usecases/source/create-user";
-import { FindUserByTokenUseCase } from "@/domain/usecases/source/find-user-by-token";
+import { CreateUserUseCase } from "@/domain/users/usecases/source/create-user";
+import { FindUserByTokenUseCase } from "@/domain/users/usecases/source/find-user-by-token";
 import { InMemoryUsersRepository } from "@/tests/repositories/in-memory-users-repository";
 
 let inMemoryUsersRepository: InMemoryUsersRepository;

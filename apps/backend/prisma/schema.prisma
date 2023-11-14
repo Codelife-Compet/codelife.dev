@@ -12,20 +12,145 @@ enum Role {
   USER
 }
 
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
 model User {
-  id              String    @id @default(uuid())
-  name            String
-  profile_picture String?   
-  email           String    @unique
-  password        String?   
-  role            String    @default("USER")
-  github_token    String?   @unique
-  google_token    String?   @unique
-  facebook_token  String?   @unique
-  created_at      DateTime  @default(now())
-  updated_at      DateTime? @updatedAt
+  id            String    @id @default(cuid())
+  role          Role      @default(USER)
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?
+  score         Int       @default(0)
 
-  // checkIns CheckIn[] // usuario pode ter varios checkins || camelCase
+  accounts Account[]
 
-  @@map("users") // configuração do model || troca o nome da tabela que vai ser salva para "users"
+  Team   Team?   @relation(fields: [teamId], references: [id])
+  teamId String?
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model UserCode {
+  id       String  @id @default(uuid())
+  userName String
+  code     String? @default("")
+  Slide    Slide   @relation(fields: [slideId], references: [id])
+  slideId  String  @unique
+
+  @@map("userCodes")
+}
+
+model Video {
+  id               String @id @default(uuid())
+  videoKey         String
+  distributionName String
+
+  slideId String @unique
+  Slide   Slide  @relation(fields: [slideId], references: [id])
+
+  @@map("videos")
+}
+
+model Slide {
+  id          String @id @default(uuid())
+  name        String
+  description String
+  theme       String
+  baseCode    String
+
+  userCodes UserCode[]
+  video     Video?
+
+  Level   Level   @relation(fields: [levelId], references: [id])
+  levelId String  @unique
+  videoId String?
+
+  @@map("slides")
+}
+
+model Level {
+  id          String @id @default(uuid())
+  name        String
+  description String
+  theme       String
+
+  slides Slide[]
+
+  Island   Island @relation(fields: [islandId], references: [id])
+  islandId String @unique
+
+  Ponctuation Ponctuation[]
+
+  @@map("levels")
+}
+
+model Ponctuation {
+  id       String @id @default(uuid())
+  score    Int
+  userName String
+
+  level   Level  @relation(fields: [levelId], references: [id])
+  levelId String
+
+  @@map("ponctuations")
+}
+
+model Island {
+  id          String @id @default(uuid())
+  name        String @unique
+  description String
+  theme       String
+
+  slides Level[]
+
+  Trail   Trail  @relation(fields: [trailId], references: [id])
+  trailId String @unique
+
+  @@map("islands")
+}
+
+model Trail {
+  id          String @id @default(uuid())
+  name        String @unique
+  description String
+  theme       String
+
+  levels Island[]
+
+  @@map("trails")
+}
+
+model Team {
+  id                 String  @id @default(uuid())
+  name               String  @unique
+  institutionName    String?
+  institutionPicture String?
+  users              User[]
+
+  @@map("teams")
 }

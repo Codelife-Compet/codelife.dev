@@ -25,8 +25,10 @@
     "@codelife-ui/eslint-config": "*",
     "@codelife-ui/ts-config": "*",
     "@faker-js/faker": "^8.0.2",
+    "@types/glob": "^8.1.0",
     "@vitest/coverage-v8": "^0.34.1",
     "@vitest/ui": "^0.34.1",
+    "husky": "^8.0.3",
     "prisma": "^5.1.0",
     "tsup": "^7.1.0",
     "tsx": "^3.12.7",
@@ -38,8 +40,10 @@
     "@fastify/cookie": "^9.1.0",
     "@fastify/jwt": "^7.2.1",
     "@prisma/client": "^5.1.0",
+    "aws-sdk": "^2.1483.0",
     "dotenv": "^16.3.1",
     "fastify": "^4.21.0",
+    "glob": "^10.3.10",
     "zod": "^3.21.4"
   }
 }

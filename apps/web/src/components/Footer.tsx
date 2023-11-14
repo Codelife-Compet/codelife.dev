@@ -1,125 +1,124 @@
-import Link from "next/link";
-import CompetIcon from "./CompetIcon";
-import styles from "@/styles/Footer.module.css";
-import { useTranslation } from "react-i18next";
-import { UserPermissions } from "@/@types/user";
-import { useAuth } from "@/context/auth/AuthContext";
-import { useEffect, useState } from "react";
-import { Socials, Text } from "@codelife-ui/react";
-import Image from "next/image";
-import { FaFacebookSquare, FaYoutube } from "react-icons/fa";
-import { InstagramSVGIcon } from "./InstagramSVGIcon";
+import Link from 'next/link'
+import CompetIcon from './CompetIcon'
+import styles from '@/styles/Footer.module.css'
+import { useTranslation } from 'react-i18next'
+import { UserPermissions } from '@/@types/user'
+import { useAuth } from '@/context/auth/AuthContext'
+import { useEffect, useState } from 'react'
+import { Socials, Text } from '@codelife-ui/react'
+import Image from 'next/image'
+import { FaFacebookSquare, FaYoutube } from 'react-icons/fa'
+import { InstagramSVGIcon } from './InstagramSVGIcon'
 function Footer() {
-  const [hydrated, setHydrated] = useState(false);
-  const { user } = useAuth();
+  const [hydrated, setHydrated] = useState(false)
+  const { user } = useAuth()
   useEffect(() => {
-    setHydrated(true);
-  }, []);
-  const {
-    t,
-    i18n: { changeLanguage, language },
-  } = useTranslation();
+    setHydrated(true)
+  }, [])
+  const { t, 
+    i18n: {changeLanguage, language}, 
+    } = useTranslation()
 
-  const [currentLanguage, setCurrentLanguage] = useState("language");
+  const  [currentLanguage, setCurrentLanguage] = useState("language")
 
   const handleChangeLanguage = () => {
-    const newLanguage = currentLanguage === "en" ? "pt" : "en";
-    changeLanguage(newLanguage);
-    setCurrentLanguage(newLanguage);
-  };
+    const newLanguage = currentLanguage === 'en' ? 'pt' : 'en'
+    changeLanguage (newLanguage)
+    setCurrentLanguage(newLanguage)
+  }
   return hydrated ? (
     <footer className={styles.footer}>
-      <div className={styles["inner-footer"]}>
+      <div className={styles['inner-footer']}>
         <nav
-          role={"navigation"}
+          role={'navigation'}
           className={
-            user ? styles["nav-4-links-footer"] : styles["nav-3-links-footer"]
+            user ? styles['nav-4-links-footer'] : styles['nav-3-links-footer']
           }
         >
-          <div className={styles["nav-footer-section"]}>
-            <h3>{t("About ")}</h3>
+          <div className={styles['nav-footer-section']}>
+            <h3>{t('About ')}</h3>
             <ul>
               <li>
-                <Link href="/about">{t("About")}</Link>
+                <Link href="/about">{t('About')}</Link>
               </li>
               <li>
-                <Link href="/privacy">{t("Privacy Policy")}</Link>
+                <Link href="">{t('Privacy Policy')}</Link>
               </li>
               <li>
-                <Link href="">{t("Partners")}</Link>
+                <Link href="">{t('Partners')}</Link>
               </li>
               <li>
-                <Link href="/contact">{t("Contact")}</Link>
+                <Link href="">{t('Contact')}</Link>
               </li>
             </ul>
           </div>
-          <div className={styles["nav-footer-section"]}>
-            <h3>{t("Explore")}</h3>
+          <div className={styles['nav-footer-section']}>
+            <h3>{t('Explore')}</h3>
             <ul>
               <li>
-                <Link href="">{t("Lesson plan")}</Link>
+                <Link href="">{t('Lesson plan')}</Link>
               </li>
               <li>
-                <Link href="">{t("Glossary")}</Link>
+                <Link href="">{t('Glossary')}</Link>
               </li>
               {user?.permission !== UserPermissions.regular && (
                 <li>
-                  <Link href="">{t("Leaderboard")}</Link>
+                  <Link href="">{t('Leaderboard')}</Link>
                 </li>
               )}
             </ul>
           </div>
           {user && (
-            <div className={styles["nav-footer-section"]}>
-              <h3>{t("Account")}</h3>
+            <div className={styles['nav-footer-section']}>
+              <h3>{t('Account')}</h3>
               <ul>
                 <li>
-                  <Link href="">{t("My Profile")}</Link>
+                  <Link href="">{t('My Profile')}</Link>
                 </li>
                 <li>
-                  <Link href="">{t("My Projects")}</Link>
+                  <Link href="">{t('My Projects')}</Link>
                 </li>
                 {user?.permission !== UserPermissions.regular && (
                   <li>
                     <Link href="" onClick={() => /* logout() */ null}>
-                      {t("Admin")}
+                      {t('Admin')}
                     </Link>
                   </li>
                 )}
                 <li>
                   <Link href="" onClick={() => /* logout() */ null}>
-                    {t("Log out")}
+                    {t('Log out')}
                   </Link>
                 </li>
               </ul>
             </div>
           )}
-          <div className={styles["nav-footer-section"]}>
-            <h3>{t("Language")}</h3>
+          <div className={styles['nav-footer-section']}>
+            <h3>{t('Language')}</h3>
             <ul>
               <li onClick={handleChangeLanguage}>
                 <Link href="" locale="en">
-                  {t("English")}
+                  {t('English')}
                 </Link>
               </li>
               <li onClick={handleChangeLanguage}>
                 <Link href="" locale="pt-BR">
-                  {t("Portuguese")}
+                  {t('Portuguese')}
                 </Link>
               </li>
             </ul>
           </div>
         </nav>
-        <div className={styles["footer-partners-section"]}>
-          <div className={styles["footer-partners-container"]}>
-            <div className={styles["footer-partners-datawheel"]}>
-              <Link href={"https://www.datawheel.us/"} target="_blank">
+        <div className={styles['footer-partners-section']}>
+          <div className={styles['footer-partners-container']}>
+            <div className={styles['footer-partners-datawheel']}>
+              <Link href={'https://www.datawheel.us/'} target="_blank">
                 <Text
                   as="span"
-                  css={{ color: "$codelife-black-100" }}
+                  css={{ color: '$codelife-black-100' }}
                   className=" flex justify-center text-lg font-medium "
                 >
-                  {t("developed by")}
+                  {t('developed by')}
                 </Text>
                 <Image
                   src="/datawheel.svg"
@@ -130,22 +129,19 @@ function Footer() {
                 />
               </Link>
             </div>
-            <div className={styles["footer-partners-helpfull-container"]}>
-              <div className={styles["footer-partners-item"]}>
+            <div className={styles['footer-partners-helpfull-container']}>
+              <div className={styles['footer-partners-item']}>
                 <Link href="https://www.mg.gov.br">
                   <Text
-                    as={"span"}
-                    size={"xs"}
-                    css={{
-                      color: "$codelife-black-100",
-                      fontWeight: "$thin",
-                    }}
+                    as={'span'}
+                    size={'xs'}
+                    css={{ color: '$codelife-black-100', fontWeight: '$thin' }}
                   >
                     Governo do Estado de Minas Gerais
                   </Text>
                 </Link>
               </div>
-              <div className={styles["footer-partners-item"]}>
+              <div className={styles['footer-partners-item']}>
                 <Link
                   href="http://www.fapemig.br/"
                   target="_blank"
@@ -160,9 +156,9 @@ function Footer() {
                   />
                 </Link>
               </div>
-              <div className={styles["footer-partners-item"]}>
+              <div className={styles['footer-partners-item']}>
                 <Link
-                  href={"http://www.fapemig.br/"}
+                  href={'http://www.fapemig.br/'}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -175,7 +171,7 @@ function Footer() {
                   />
                 </Link>
               </div>
-              <div className={styles["footer-partners-item"]}>
+              <div className={styles['footer-partners-item']}>
                 <Link
                   href="https://compet.vercel.app/"
                   target="_blank"
@@ -184,9 +180,9 @@ function Footer() {
                 >
                   <CompetIcon className="col-span-1 w-10 sm:w-[30]" />
                   <Text
-                    as={"span"}
-                    size={"sm"}
-                    css={{ color: "$codelife-black-100" }}
+                    as={'span'}
+                    size={'sm'}
+                    css={{ color: '$codelife-black-100' }}
                     className="col-start-2 col-end-4 pl-2 text-sm"
                   >
                     Compet | CEFET - MG
@@ -211,9 +207,10 @@ function Footer() {
       </Socials.Root>
     </footer>
   ) : (
-    <></>
-  );
-
+    <>
+      <p>Loading</p>
+    </>
+  )
 }
 
-export default Footer;
+export default Footer

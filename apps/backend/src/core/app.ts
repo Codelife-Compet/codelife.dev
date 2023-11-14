@@ -1,8 +1,20 @@
-import { userRoutes } from '@/domain/controllers/user/routes'
+import { userRoutes } from '@/domain/users/controllers/user/routes'
 import fastifyJwt from '@fastify/jwt'
 import fastify from 'fastify'
 import { env } from './env';
 import fastifyCookie from '@fastify/cookie';
+import { islandRoutes } from '@/domain/trilhas/@routes/island.routes';
+import { levelRoutes } from '@/domain/trilhas/@routes/level.routes';
+import { slideRoutes } from '@/domain/trilhas/@routes/slide.routes';
+import { userCodeRoutes } from '@/domain/trilhas/@routes/userCode.routes';
+<<<<<<< HEAD
+import { videoRoutes } from '@/domain/trilhas/@routes/video.routes';
+import { teamRoutes } from '@/domain/ranking/@routes/team.routes';
+import { trailRoutes } from '@/domain/trilhas/@routes/trail.routes';
+import { rankingRoutes } from '@/domain/ranking/@routes/ranking.routes';
+=======
+//import { videoRoutes } from '@/domain/trilhas/@routes/video.routes';
+>>>>>>> bb02362778799f7ea4b8b2f12510113252473a50
 
 export const app = fastify()
 
@@ -20,3 +32,17 @@ app.register(fastifyJwt, {
 app.register(fastifyCookie)
 
 app.register(userRoutes, { prefix: 'user' })
+
+app.register(trailRoutes, { prefix: 'trail' })
+app.register(islandRoutes, { prefix: 'island' })
+app.register(levelRoutes, { prefix: 'level' })
+app.register(slideRoutes, { prefix: 'slide' })
+app.register(userCodeRoutes, { prefix: 'usercode' })
+<<<<<<< HEAD
+app.register(videoRoutes, { prefix: 'video' })
+
+app.register(rankingRoutes, { prefix: 'ranking' })
+app.register(teamRoutes, { prefix: 'team' })
+=======
+//app.register(videoRoutes, { prefix: 'video' })
+>>>>>>> bb02362778799f7ea4b8b2f12510113252473a50

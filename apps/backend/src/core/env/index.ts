@@ -10,15 +10,18 @@ const envSchema = z.object({
 	DATABASE_URL: z.string().optional(),
 	PORT: z.coerce.number().default(3333), 
 	JWT_SECRET: z.string(),
+	//AWS_ACCESS_KEY_ID: z.string(),
+	//AWS_SECRET_ACCESS_KEY: z.string(),
+	//AWS_BUCKET_NAME: z.string(),
 });
 
 const _env = envSchema.safeParse(process.env); // tenta validar process.env para ver se tem as exatas informações dentro
 
 if (_env.success === false) {
-	console.error('Invalid environment variables',
+	console.error('Invalid enviroment variables',
 		_env.error.format()); // formata todos os erros ali
 
-	throw new Error('Invalid environment variables'); 
+	throw new Error('Invalid enviroment variables'); 
 }
 
 const {POSTGRESQL_USERNAME, POSTGRESQL_PASSWORD, POSTGRESQL_DATABASE, DATABASE_URL} = process.env

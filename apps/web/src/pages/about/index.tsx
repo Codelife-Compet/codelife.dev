@@ -13,11 +13,11 @@ export default function About() {
 
   return (
     hydrated && (
-      <Box className="bg-white rounded-md my-13 max-w-4xl md:mx-auto mx-3 md:p-13 px-6 shadow-2xl">
+      <Box className="bg-white rounded-md mx-auto my-13 max-w-4xl p-13 w-full">
         <Heading
           size={"xl"}
           style={{ lineHeight: "1.1" }}
-          className="mt-2 mb-6 text-[#233233] md:text-4xl text-3xl font-bold"
+          className="font-heading mb-7 text-[#233233] font-bold"
         >
           {t("About")}
         </Heading>
