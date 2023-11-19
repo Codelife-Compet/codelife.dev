@@ -16,8 +16,8 @@ export default NextAuth({
       clientSecret: googleAPIAuth.web.client_secret,
     }),
     FacebookProvider({
-      clientId: '1041677837160433',
-      clientSecret: '36fd5ea12c70a2662fe8ee3ca8867266',
+      clientId: '1048671349607426',
+      clientSecret: 'a016386b91afbdba78f14f0028ec87b5',
     }),
   ],
   callbacks: {

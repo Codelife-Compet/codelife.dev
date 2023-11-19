@@ -33,10 +33,51 @@ export class PrismaUsersRepository implements UsersRepository {
 
         const { accounts, ...user } = data
 
+        const possibleUser = await prisma.user.findUnique({
+            where: { email: user.email as string }
+        })
+        if (possibleUser) {
+            const userAccounts = await prisma.account.findMany({
+                where: { userId: possibleUser.id }
+            })
+
+            const newAccount = await prisma.account.create({
+                data: {
+                    id: accounts[accounts.length - 1].id,
+                    providerAccountId: accounts[accounts.length - 1].providerAccountId,
+                    userId: possibleUser.id,
+                    provider: accounts[accounts.length - 1].provider,
+                    type: accounts[accounts.length - 1].type,
+                    refresh_token: null,
+                    access_token: null,
+                    expires_at: null,
+                    token_type: null,
+                    scope: null,
+                    id_token: null,
+                    session_state: null
+                }
+            })
+
+            userAccounts.push(newAccount)
+
+            console.dir(userAccounts, { depth: null })
+
+            await prisma.user.update({
+                where: { id: possibleUser.id },
+                data: {
+                    accounts: {
+                        set: userAccounts
+                    }
+                }
+            })
+
+            return new User({ ...possibleUser, accounts }, new UniqueEntityID(possibleUser.id))
+        }
+
         const createdUser = await prisma.user.create({ data: user });
 
         if (accounts.length !== 0) {
-            const account = accounts[0];
+            const account = accounts[accounts.length - 1];
 
             await prisma.account.create({
                 data: {
