@@ -3,16 +3,16 @@ import { makeTeamRankingUseCase } from './makeTeamRankingUseCase';
 import { z } from 'zod';
 
 const teamRankingParamsSchema = z.object({
-	teamName: z.string()
+	teamId: z.string()
 });
 
 export async function teamRankingController(request: FastifyRequest, reply: FastifyReply) {
 
-	const { teamName } = teamRankingParamsSchema.parse(request.params);
+	const { teamId } = teamRankingParamsSchema.parse(request.params);
 
 	const teamRankingUseCase = makeTeamRankingUseCase();
 
-	const ranking = await teamRankingUseCase.execute({ teamName });
+	const ranking = await teamRankingUseCase.execute({ teamId });
 
 	if (ranking.isLeft()) {
 		return reply
