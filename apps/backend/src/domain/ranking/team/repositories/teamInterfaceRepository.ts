@@ -7,4 +7,5 @@ export interface TeamsRepository { // define quais metodos vao existir na comuni
     findById(id: string): Promise<Team | null>
     findByName(name: string): Promise<Team | null>
     addUser(userId: string, teamName: string): Promise<User[]>
+    removeUser(userId: string, teamName: string): Promise<User[]>
 }

@@ -67,5 +67,29 @@ export class TeamsPrismaRepository implements TeamsRepository {
 
         return newUSers;
     }
+
+    async removeUser(userId: string, teamName: string): Promise<User[]> {
+
+        const team = await prisma.team.update({
+            where: { name: teamName },
+            data: {
+                users: {
+                    disconnect: {
+                        id: userId
+                    }
+                }
+            }
+        });
+
+        const users = await prisma.user.findMany({
+            where: {
+                teamId: team.id
+            }
+        });
+
+        const newUSers = users.map(user => new User({ ...user, accounts: [] }, new UniqueEntityID(user.id)));
+
+        return newUSers;
+    }
 }
 
