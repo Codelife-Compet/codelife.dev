@@ -22,6 +22,7 @@ export class GlobalRankingUseCase {
             return left({ error: listUsers.value })
 
         const { users } = listUsers.value
+
         const usersPonctuation: PonctuationProps[] = users.
             map(user => {
 

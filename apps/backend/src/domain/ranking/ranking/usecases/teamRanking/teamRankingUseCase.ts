@@ -2,7 +2,7 @@ import { Either, left, right } from "@/core/types/either"
 import { ResourceAlreadyExistsError } from "@/core/errors/resource-already-exists-error"
 import { UsersRepository } from "@/domain/users/repositories/interface/users-repository"
 import { PonctuationProps } from "@/domain/trilhas/@entities/ponctuation"
-import { GlobalRankingUseCase } from "../globalRanking/globalRankingUseCase"
+import { ListUserUseCase } from "@/domain/users/usecases/source/list-users"
 
 type TeamRankingUseCaseResponse = Either<
     { error: ResourceAlreadyExistsError },
@@ -10,24 +10,33 @@ type TeamRankingUseCaseResponse = Either<
 >
 
 interface TeamRankingUseCaseRequest {
-    teamName: string
+    teamId: string
 }
 
 export class TeamRankingUseCase {
 
     constructor(private usersRepository: UsersRepository) { }
 
-    async execute({ teamName }: TeamRankingUseCaseRequest): Promise<TeamRankingUseCaseResponse> {
-
-        const globalRankingUseCase = new GlobalRankingUseCase(this.usersRepository)
-        const globalRanking = await globalRankingUseCase.execute()
-        if (globalRanking.isLeft())
-            return left({ error: globalRanking.value.error })
-
-        const { usersPonctuation } = globalRanking.value
-
-        const teamsPonctuation = usersPonctuation.filter(user => user.userName === teamName)
+    async execute({ teamId }: TeamRankingUseCaseRequest): Promise<TeamRankingUseCaseResponse> {
         
+        const listUsersUseCase = new ListUserUseCase(this.usersRepository)
+        const listUsers = await listUsersUseCase.execute()
+        if (listUsers.isLeft())
+            return left({ error: listUsers.value })
+
+        const { users } = listUsers.value
+
+        const teamsPonctuation: PonctuationProps[] = users
+            .filter(user => user.teamId === teamId)
+            .map(user => {
+                return {
+                    levelId: "",
+                    score: user.score,
+                    userName: user.name || "Unnamed"
+                }
+            })
+            .sort((a, b) => b.score - a.score)
+
         return right({ teamsPonctuation })
     }
 }

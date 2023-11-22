@@ -15,6 +15,17 @@ export class TeamsPrismaRepository implements TeamsRepository {
         return new Team(team, new UniqueEntityID(team.id))
     }
 
+    async fetchUsers(teamId: string): Promise<User[]> {
+
+        const users = await prisma.user.findMany({
+            where: {
+                teamId
+            }
+        });
+
+        return users.map(user => new User({ ...user, accounts: [] }, new UniqueEntityID(user.id)));
+    }
+
     async findById(id: string): Promise<Team | null> {
         const team = await prisma.team.findUnique({
             where: { id }
@@ -33,40 +44,52 @@ export class TeamsPrismaRepository implements TeamsRepository {
         return (team ? new Team(team, new UniqueEntityID(team.id)) : null);
     }
 
-    async addUser(user: UserProps, teamName: string): Promise<Team> {
+    async addUser(userId: string, teamName: string): Promise<User[]> {
 
-        const team = await prisma.team.findUnique({
+        const team = await prisma.team.update({
             where: { name: teamName },
-            include: { users: true },
-        });
-
-        if (!team) {
-            throw new Error(`Team with name ${teamName} not found`);
-        }
-
-        const updatedTeam = await prisma.team.update({
-            where: { id: team.id },
             data: {
                 users: {
                     connect: {
-                        id: user.id.toString(),
-                    },
-                },
-            },
-            include: { users: true },
+                        id: userId
+                    }
+                }
+            }
         });
 
-        const { id, users, ...newTeam } = updatedTeam
+        const users = await prisma.user.findMany({
+            where: {
+                teamId: team.id
+            }
+        });
 
-        const newUsers = users.map(user => {
+        const newUSers = users.map(user => new User({ ...user, accounts: [] }, new UniqueEntityID(user.id)));
 
-            const {id, ...userData} = user
+        return newUSers;
+    }
 
-            new User(userData, new UniqueEntityID(user.id))
-        }
-        )
+    async removeUser(userId: string, teamName: string): Promise<User[]> {
 
-        return new Team(newTeam, new UniqueEntityID(id));
+        const team = await prisma.team.update({
+            where: { name: teamName },
+            data: {
+                users: {
+                    disconnect: {
+                        id: userId
+                    }
+                }
+            }
+        });
+
+        const users = await prisma.user.findMany({
+            where: {
+                teamId: team.id
+            }
+        });
+
+        const newUSers = users.map(user => new User({ ...user, accounts: [] }, new UniqueEntityID(user.id)));
+
+        return newUSers;
     }
 }
 

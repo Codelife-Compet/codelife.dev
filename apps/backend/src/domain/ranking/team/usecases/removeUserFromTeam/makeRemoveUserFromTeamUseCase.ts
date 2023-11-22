@@ -1,11 +1,11 @@
 import { PrismaUsersRepository } from "@/domain/users/repositories/prisma/prisma-users-repository"
 import { TeamsPrismaRepository } from "../../repositories/teamPrismaRepository"
-import { AddUserToTeamUseCase } from "./addUserToTeamUseCase"
+import { RemoveUserFromTeamUseCase } from "./removeUserFromTeamUseCase"
 
-export function makeAddUserToTeamUseCase() {
+export function makeRemoveUserFromTeamUseCase() {
     const teamsRepository = new TeamsPrismaRepository()
     const usersRepository = new PrismaUsersRepository()
-    const useCase = new AddUserToTeamUseCase(teamsRepository, usersRepository)
+    const useCase = new RemoveUserFromTeamUseCase(teamsRepository, usersRepository)
 
     return useCase
 }

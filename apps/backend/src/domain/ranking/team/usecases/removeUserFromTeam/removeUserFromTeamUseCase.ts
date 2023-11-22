@@ -1,6 +1,4 @@
 import { Either, left, right } from "@/core/types/either"
-import { ResourceAlreadyExistsError } from "@/core/errors/resource-already-exists-error"
-import { Team } from "../../../@entities/team"
 import { TeamsRepository } from "../../repositories/teamInterfaceRepository"
 import { FindTeamByNameUseCase } from "../findIslandByName/findIslandByNameUseCase"
 import { ResourceNotFoundError } from "@/core/errors/resource-not-found-error"
@@ -8,22 +6,22 @@ import { FindUserByIdUseCase } from "@/domain/users/usecases/source/find-user-by
 import { UsersRepository } from "@/domain/users/repositories/interface/users-repository"
 import { User } from "@/domain/users/entities/user"
 
-interface AddUserToTeamUseCaseRequest {
+interface RemoveUserFromTeamUseCaseRequest {
     userId: string
     teamName: string
 }
 
-type AddUserToTeamUseCaseResponse = Either<
-    { error: ResourceAlreadyExistsError },
+type RemoveUserFromTeamUseCaseResponse = Either<
+    { error: ResourceNotFoundError },
     { users: User[] }
 >
 
-export class AddUserToTeamUseCase {
+export class RemoveUserFromTeamUseCase {
 
     constructor(private teamsRepository: TeamsRepository,
                 private usersRepository: UsersRepository) { }
 
-    async execute({ teamName, userId }: AddUserToTeamUseCaseRequest): Promise<AddUserToTeamUseCaseResponse> {
+    async execute({ teamName, userId }: RemoveUserFromTeamUseCaseRequest): Promise<RemoveUserFromTeamUseCaseResponse> {
 
         const findTeamByNameUseCase = new FindTeamByNameUseCase(this.teamsRepository)
         const possibleTeam = await findTeamByNameUseCase.execute({ name: teamName })
@@ -37,10 +35,10 @@ export class AddUserToTeamUseCase {
 
         const currentUsers = await this.teamsRepository.fetchUsers(possibleTeam.value.team.id.toString())
         const userAlreadyInTeam = currentUsers.find(user => user.id.toString() === userId)
-        if (userAlreadyInTeam)
-            return left({ error: new ResourceAlreadyExistsError(`User '${userId}' in team '${teamName}'`) })
+        if (!userAlreadyInTeam)
+            return left({ error: new ResourceNotFoundError(`User '${userId}' in team '${teamName}'`) })
             
-        const users = await this.teamsRepository.addUser(userId, teamName)
+        const users = await this.teamsRepository.removeUser(userId, teamName)
 
         return right({ users })
     }

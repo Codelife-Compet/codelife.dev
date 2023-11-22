@@ -1,12 +1,13 @@
 import { Either, left, right } from "@/core/types/either"
 import { ResourceAlreadyExistsError } from "@/core/errors/resource-already-exists-error"
 import { UsersRepository } from "@/domain/users/repositories/interface/users-repository"
-import { GlobalRankingUseCase } from "../globalRanking/globalRankingUseCase"
+import { ListUserUseCase } from "@/domain/users/usecases/source/list-users"
+import { TeamsRepository } from "@/domain/ranking/team/repositories/teamInterfaceRepository"
 
 type TeamsRankingUseCaseResponse = Either<
     { error: ResourceAlreadyExistsError },
     {
-        ponctuationPerTeam: {
+        ponctuationPerTeamName: {
             teamName: string;
             score: number;
         }[]
@@ -15,31 +16,44 @@ type TeamsRankingUseCaseResponse = Either<
 
 export class TeamsRankingUseCase {
 
-    constructor(private usersRepository: UsersRepository) { }
+    constructor(private usersRepository: UsersRepository, private teamsRepository: TeamsRepository) { }
 
     async execute(): Promise<TeamsRankingUseCaseResponse> {
 
-        const globalRankingUseCase = new GlobalRankingUseCase(this.usersRepository)
-        const globalRanking = await globalRankingUseCase.execute()
-        if (globalRanking.isLeft())
-            return left({ error: globalRanking.value.error })
+        const listUsersUseCase = new ListUserUseCase(this.usersRepository)
+        const listUsers = await listUsersUseCase.execute()
+        if (listUsers.isLeft())
+            return left({ error: listUsers.value })
 
-        const { usersPonctuation } = globalRanking.value
+        const { users } = listUsers.value
 
-        const ponctuationPerTeam: { teamName: string, score: number }[] = []
+        const ponctuationPerTeamId: { teamId: string, score: number }[] = []
 
-        for (const user of usersPonctuation) {
+        for (const user of users) {
 
-            const userData = await this.usersRepository.findByName(user.userName)
-
-            const index = ponctuationPerTeam.findIndex(team => team.teamName === userData?.team?.name)
-            if (index === -1) {
-                ponctuationPerTeam.push({ teamName: userData?.team?.name as string, score: user.score })
-            } else {
-                ponctuationPerTeam[index].score += user.score
+            const userData = await this.usersRepository.findByName(user.name as string)
+            if (userData && userData.teamId) {
+                const index = ponctuationPerTeamId.findIndex(team => team.teamId === userData.teamId)
+                if (index === -1) {
+                    ponctuationPerTeamId.push({ teamId: userData.teamId as string, score: user.score })
+                } else {
+                    ponctuationPerTeamId[index].score += user.score
+                }
             }
         }
 
-        return right({ ponctuationPerTeam })
+        const ponctuationPerTeamName: { teamName: string; score: number; }[] =
+            await Promise.all(ponctuationPerTeamId
+                .map(async team => {
+                    const teamData = await this.teamsRepository.findById(team.teamId)
+                    if (teamData?.name)
+                        return { teamName: teamData.name, score: team.score }
+
+                    return { teamName: "", score: 0 }
+                }))
+
+        ponctuationPerTeamName.sort((a, b) => b.score - a.score)
+
+        return right({ ponctuationPerTeamName })
     }
 }

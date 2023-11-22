@@ -10,8 +10,8 @@ export async function rankingRoutes(app: FastifyInstance) {
     app.addHook('onRequest', verifyJWT) 
 
     app.get('/', globalRankingController) // rankeamento global (todos contra todos)
-    app.get('/team/:teamName', teamRankingController) // rankeamento intertno dentro do time)
+    app.get('/team/:teamId', teamRankingController) // rankeamento intertno dentro do time)
     app.get('/teams', teamsRankingController) // rankeamento entre times
-    app.get('/team/:levelId/:teamName', teamlevelRankingController) // rankemento interno dentro do time por nível
+    app.get('/team/:levelId/:teamId', teamlevelRankingController) // rankemento interno dentro do time por nível
     app.get('/teams/:levelId', teamslevelRankingController) // rankeamento entre times por nível
 }

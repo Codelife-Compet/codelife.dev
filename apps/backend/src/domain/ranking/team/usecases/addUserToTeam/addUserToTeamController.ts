@@ -15,11 +15,12 @@ export async function addUserToTeamController(request: FastifyRequest, reply: Fa
 
 	const team = await addusertoTeamUseCase.execute({ teamName, userId });
 
-	if (team.isLeft()) {
+	if (team.isLeft()) 
 		return reply
 			.status(400)
 			.send({ error_message: team.value.error.message })
-	}
 
-	return reply.status(201).send({ addusertod_user: team.value });
+	return reply
+		.status(201)
+		.send(team.value.users);
 }
