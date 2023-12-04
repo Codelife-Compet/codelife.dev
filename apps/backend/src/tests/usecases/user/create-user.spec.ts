@@ -1,3 +1,4 @@
+import { Account } from "@/domain/users/entities/acccount";
 import { CreateUserUseCase } from "@/domain/users/usecases/source/create-user";
 import { makeUser } from "@/tests/factories/make-user";
 import { makeAccount } from "@/tests/factories/makeAccount";
@@ -50,6 +51,8 @@ describe("Create User", () => {
         });
 
         expect(result.isLeft()).toBe(true);
+        if(result.isRight())
+            expect(inMemoryAccountsRepository.items[0]).toEqual((result.value.user?.accounts as Account[])[0])
     });
 
     it("should not be able to create a user with the same account", async () => {

@@ -1,17 +1,32 @@
 import { IslandProps, Island } from "@/domain/trilhas/@entities/island";
 import { IslandsRepository } from "@/domain/trilhas/island/repositories/islandInterfaceRepository";
-import { InMemoryLevelsRepository } from "./in-memory-level-repository ";
+import { InMemoryTrailsRepository } from "./in-memory-trail-repository";
 
 export class InMemoryIslandsRepository implements IslandsRepository {
 
     public items: Island[] = []
 
-    async create(data: IslandProps): Promise<Island> {
+    constructor(private inMemoryTrailsRepository: InMemoryTrailsRepository) { }
 
-        const island = new Island(data);
-        this.items.push(island);
+    async create(data: Island): Promise<Island> {
 
-        return island;
+        this.items.push(data);
+
+        const trail = await this.inMemoryTrailsRepository.findById(data.trailId.toString())
+        if (trail) {
+            trail.islands?.push(data)
+            this.inMemoryTrailsRepository.save(trail)
+        }
+        return data;
+    }
+
+    async save(island: Island): Promise<Island> {
+
+        const index = this.items.findIndex(item => item.id === island.id)
+
+        this.items[index] = island
+
+        return island
     }
 
     async findById(id: string): Promise<Island | null> {

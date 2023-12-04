@@ -34,8 +34,6 @@ export class CreateUserUseCase {
         const findUserByEmailUseCase = new FindUserByEmailUseCase(this.usersRepository)
         const findUserByEmailUseCaseResponse = await findUserByEmailUseCase.execute({ email: user.email as string })
 
-        console.log(1111111111111)
-
         let userId = "";
         if (findUserByEmailUseCaseResponse.isRight()) {
             userId = findUserByEmailUseCaseResponse.value.user.id.toString()
@@ -47,16 +45,12 @@ export class CreateUserUseCase {
             }))
             userId = createdUser.id.toString()
         }
-        console.log(2222222222222)
 
         const possibleAccount = await this.accountsRepository.findAccountByProvider_UserId(account.provider, userId)
         if (possibleAccount)
             return left(new ResourceAlreadyExistsError(`User ${userId} with ${account.provider} account`))
 
         const { provider, providerAccountId, type } = account
-
-        console.log("asd")
-
         await this.accountsRepository.create({ userId, provider, providerAccountId, type })
 
         const newUser = await this.usersRepository.findById(userId)
