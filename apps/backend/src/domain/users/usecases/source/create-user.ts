@@ -2,23 +2,20 @@ import { Either, left, right } from "@/core/types/either"
 import { UsersRepository } from "@/domain/users/repositories/interface/users-repository"
 import { ResourceAlreadyExistsError } from "@/core/errors/resource-already-exists-error"
 import { User } from "@/domain/users/entities/user"
-import { FindUserByTokenUseCase } from "./find-user-by-token"
+import { AccountsRepository } from "../../repositories/interface/accountsRepository"
+import { ResourceNotFoundError } from "@/core/errors/resource-not-found-error"
 import { FindUserByEmailUseCase } from "./find-user-by-email"
-import { randomUUID } from 'node:crypto'
-
 
 interface CreateUserUseCaseRequest {
     user: {
-        id: string
         name?: string | null
         email?: string | null
         image?: string | null
-    }
+    },
     account: {
-        providerAccountId: string
-        userId?: string
         provider: string
-        type: "oauth" | "email" | "credentials"
+        type: string
+        providerAccountId: string
     }
 }
 
@@ -29,64 +26,43 @@ type CreateUserUseCaseResponse = Either<
 
 export class CreateUserUseCase {
 
-    constructor(private usersRepository: UsersRepository) { }
+    constructor(private usersRepository: UsersRepository,
+        private accountsRepository: AccountsRepository) { }
 
     async execute({ account, user }: CreateUserUseCaseRequest): Promise<CreateUserUseCaseResponse> {
 
-        const findUserByTokenUseCase = new FindUserByTokenUseCase(this.usersRepository)
-
-        const possibleUser = await findUserByTokenUseCase.execute({ token: user.id, type: account.provider })
-
-        if (possibleUser.isRight()) {
-            console.log("Deu caca")
-            return left(new ResourceAlreadyExistsError(`User's ${account.provider} token`))
-        }
-
         const findUserByEmailUseCase = new FindUserByEmailUseCase(this.usersRepository)
+        const findUserByEmailUseCaseResponse = await findUserByEmailUseCase.execute({ email: user.email as string })
 
-        if (user.email) {
-            const possibleUser2 = await findUserByEmailUseCase.execute({ email: user.email })
+        console.log(1111111111111)
 
-            if (possibleUser2.isRight()) {
-                
-                possibleUser2.value.user.accounts.push({
-                    id: randomUUID(),
-                    providerAccountId: account.providerAccountId,
-                    userId: account.userId as string,
-                    provider: account.provider,
-                    type: account.type
-                })
-
-                const createdUser = await this.usersRepository.create({
-                    id: user.id,
-                    name: user.name ?? undefined,
-                    email: user.email ?? undefined,
-                    image: user.image ?? undefined,
-                    role: 'USER', // add default value for role
-                    score: 0, // add default value for score
-                    accounts: possibleUser2.value.user.accounts,
-                })
-
-                return right({ user: createdUser })
-            }
+        let userId = "";
+        if (findUserByEmailUseCaseResponse.isRight()) {
+            userId = findUserByEmailUseCaseResponse.value.user.id.toString()
+        } else {
+            const createdUser = await this.usersRepository.create(new User({
+                name: user.name,
+                email: user.email,
+                image: user.image,
+            }))
+            userId = createdUser.id.toString()
         }
+        console.log(2222222222222)
 
-        const createdUser = await this.usersRepository.create({
-            id: user.id,
-            name: user.name ?? undefined,
-            email: user.email ?? undefined,
-            image: user.image ?? undefined,
-            role: 'USER', // add default value for role
-            score: 0, // add default value for score
-            accounts: [{
-                id: randomUUID(),
-                providerAccountId: account.providerAccountId,
-                userId: account.userId as string,
-                provider: account.provider,
-                type: account.type
-            }],
-        })
+        const possibleAccount = await this.accountsRepository.findAccountByProvider_UserId(account.provider, userId)
+        if (possibleAccount)
+            return left(new ResourceAlreadyExistsError(`User ${userId} with ${account.provider} account`))
 
-        return right({ user: createdUser })
+        const { provider, providerAccountId, type } = account
+
+        console.log("asd")
+
+        await this.accountsRepository.create({ userId, provider, providerAccountId, type })
+
+        const newUser = await this.usersRepository.findById(userId)
+        if (!newUser)
+            return left(new ResourceNotFoundError(`New User ${userId}`))
+
+        return right({ user: newUser })
     }
 }

@@ -66,10 +66,6 @@ export class VideosPrismaRepository implements VideosRepository {
 
         full.forEach((filePath) => {
 
-            console.dir({
-                filePath
-            })
-
             fs.readFile(filePath, (err, data) => {
                 if (err) {
                     console.error(err);

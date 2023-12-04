@@ -1,6 +1,7 @@
 import { Island } from "@/domain/trilhas/@entities/island";
 import { Level } from "@/domain/trilhas/@entities/level";
 import { CreateSlideUseCase } from "@/domain/trilhas/slides/usecases/createSlide/createSlideUseCase";
+import { makeIsland } from "@/tests/factories/makeIsland";
 import { InMemoryIslandsRepository } from "@/tests/repositories/in-memory-island-repository";
 import { InMemoryLevelsRepository } from "@/tests/repositories/in-memory-level-repository ";
 import { InMemorySlidesRepository } from "@/tests/repositories/in-memory-slides-repository ";
@@ -20,11 +21,7 @@ describe("Create Slide", () => {
         inMemorySlidesRepository = new InMemorySlidesRepository(inMemoryLevelsRepository);
         sut = new CreateSlideUseCase(inMemorySlidesRepository);
 
-        island = await inMemoryIslandsRepository.create({
-            description: "island description",
-            name: "Island name",
-            theme: "island theme",
-        })
+        island = makeIsland()
 
         level = await inMemoryLevelsRepository.create({
             description: "level description",

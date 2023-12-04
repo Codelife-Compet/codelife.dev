@@ -2,6 +2,7 @@ import { Island } from "@/domain/trilhas/@entities/island";
 import { Level } from "@/domain/trilhas/@entities/level";
 import { Slide } from "@/domain/trilhas/@entities/slide";
 import { CreateUserCodeUseCase } from "@/domain/trilhas/user-codes/usecases/createUserCodes/createUserCodeUseCase";
+import { makeIsland } from "@/tests/factories/makeIsland";
 import { InMemoryIslandsRepository } from "@/tests/repositories/in-memory-island-repository";
 import { InMemoryLevelsRepository } from "@/tests/repositories/in-memory-level-repository ";
 import { InMemorySlidesRepository } from "@/tests/repositories/in-memory-slides-repository ";
@@ -25,11 +26,7 @@ describe("Create UserCode", () => {
         inMemoryUserCodesRepository = new InMemoryUserCodesRepository(inMemorySlidesRepository);
         sut = new CreateUserCodeUseCase(inMemoryUserCodesRepository);
 
-        island = await inMemoryIslandsRepository.create({
-            description: "island description",
-            name: "Island name",
-            theme: "island theme",
-        })
+        island = makeIsland()
 
         level = await inMemoryLevelsRepository.create({
             description: "level description",

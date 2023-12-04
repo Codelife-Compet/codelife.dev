@@ -1,24 +1,26 @@
-import { LoginUserUseCase } from "@/domain/users/usecases/source/login-user";
+import { CreateUserUseCase } from "@/domain/users/usecases/source/create-user";
 import { makeUser } from "@/tests/factories/make-user";
+import { InMemoryAccountsRepository } from "@/tests/repositories/in-memory-accounts-repository";
 import { InMemoryUsersRepository } from "@/tests/repositories/in-memory-users-repository";
 
 let inMemoryUsersRepository: InMemoryUsersRepository;
-let sut: LoginUserUseCase;
+let inMemoryAccountsRepository: InMemoryAccountsRepository;
+let sut: CreateUserUseCase;
 
-describe("Find User by Linkedin token", () => {
+describe("Find User by token", () => {
     beforeEach(() => {
-        inMemoryUsersRepository = new InMemoryUsersRepository()
-        sut = new LoginUserUseCase(inMemoryUsersRepository);
+        inMemoryUsersRepository = new InMemoryUsersRepository();
+        inMemoryAccountsRepository = new InMemoryAccountsRepository(inMemoryUsersRepository);
+
+        sut = new CreateUserUseCase(inMemoryUsersRepository, inMemoryAccountsRepository);
     });
 
     it("should be able to log in using a valid token", async () => {
-        const test_user = makeUser({ github_token: "token" })
+        const test_user = makeUser()
 
         await inMemoryUsersRepository.create(test_user)
 
-        const result = await sut.execute({
-            type: "github", token: "token"
-        });
+        const result = await sut.execute({  });
 
         expect(result.isRight()).toBe(true);
         if (result.isRight()) {

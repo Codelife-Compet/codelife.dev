@@ -9,8 +9,19 @@ export class InMemorySlidesRepository implements SlidesRepository {
 
     constructor(private levelsRepository: InMemoryLevelsRepository) {}
     
+    async getVideoLink(slideId: string): Promise<string | null> {
+        
+        const slide = await this.findById(slideId);
+        if(!slide) return null;
+
+        const video = slide.video
+        if(!video) return null;
+
+        return `https://${video.distributionName}/${video.videoKey}`
+    }
+    
     async create(data: SlideProps): Promise<Slide> {
-''
+
         const slide = new Slide(data);
         this.items.push(slide);
 

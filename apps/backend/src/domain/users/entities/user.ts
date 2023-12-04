@@ -1,39 +1,29 @@
 import { Entity } from "@/core/entities/entity";
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
-import { Team } from "@/domain/ranking/@entities/team";
-
-export type Account = {
-    id: string  
-    userId: string
-    type: string
-    provider: string
-    providerAccountId: string 
-    refresh_token?: string | null 
-    access_token?: string | null 
-    expires_at?: number | null
-    token_type?: string | null
-    scope?: string | null
-    id_token?: string | null 
-    session_state?: string | null
-}
+import { Account } from "./acccount";
+import { Optional } from "@/core/types/optional";
 
 export type UserProps = {
-    id: string,
     role: "USER" | "ADMIN",
+    score: number,
     name?: string | null,
     email?: string | null,
     emailVerified?: Date | null,
     image?: string | null,
     password?: string | null,
     teamId?: string | null,
-    score: number,
-    accounts: Account[],
+    accounts?: Account[],
 };
 
 export class User extends Entity<UserProps> {
 
-    constructor(props: UserProps, id?: UniqueEntityID) {
-        super(props, id)
+    constructor(props: Optional<UserProps, 'score' | 'role' | 'accounts'>, id?: UniqueEntityID) {
+        super({
+            ...props,
+            score: props.score ?? 0,
+            role: props.role ?? "USER",
+            accounts: props.accounts ?? [],
+        }, id)
     }
 
     get name() { return this.props.name }

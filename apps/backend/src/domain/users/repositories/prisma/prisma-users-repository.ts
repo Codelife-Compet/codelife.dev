@@ -1,14 +1,13 @@
-// todas as operações dentro do banco de dados vão passar pelo repositorio
-
 import { prisma } from "@/core/db/prisma";
 import { UsersRepository } from "../interface/users-repository";
-import { UserProps, User } from "@/domain/users/entities/user";
+import { User } from "@/domain/users/entities/user";
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
+import { Account } from "../../entities/acccount";
 
 export class PrismaUsersRepository implements UsersRepository {
 
     async findByName(name: string): Promise<User | null> {
-        
+
         const user = await prisma.user.findFirst({
             where: { name: { equals: name } }
         })
@@ -17,7 +16,7 @@ export class PrismaUsersRepository implements UsersRepository {
 
         return new User({ ...user, accounts: [] }, new UniqueEntityID(user.id));
     }
-    
+
     async list(): Promise<User[]> {
 
         const users = await prisma.user.findMany({
@@ -25,74 +24,26 @@ export class PrismaUsersRepository implements UsersRepository {
         });
 
         return users.map(user => {
-            return new User(user, new UniqueEntityID(user.id))
+
+            const { accounts, ...rest } = user
+
+            const newAccounts = accounts.map(account => {
+                return new Account(account, new UniqueEntityID(account.id))
+            })
+
+            return new User({ ...rest, accounts: newAccounts }, new UniqueEntityID(user.id))
         })
     }
 
-    async create(data: UserProps): Promise<User> {
+    async create(data: User): Promise<User> {
 
-        const { accounts, ...user } = data
+        const { accounts, ...restData } = data.data
 
-        const possibleUser = await prisma.user.findUnique({
-            where: { email: user.email as string }
-        })
-        if (possibleUser) {
-            const userAccounts = await prisma.account.findMany({
-                where: { userId: possibleUser.id }
-            })
-
-            const newAccount = await prisma.account.create({
-                data: {
-                    id: accounts[accounts.length - 1].id,
-                    providerAccountId: accounts[accounts.length - 1].providerAccountId,
-                    userId: possibleUser.id,
-                    provider: accounts[accounts.length - 1].provider,
-                    type: accounts[accounts.length - 1].type,
-                    refresh_token: null,
-                    access_token: null,
-                    expires_at: null,
-                    token_type: null,
-                    scope: null,
-                    id_token: null,
-                    session_state: null
-                }
-            })
-
-            userAccounts.push(newAccount)
-
-            console.dir(userAccounts, { depth: null })
-
-            await prisma.user.update({
-                where: { id: possibleUser.id },
-                data: {
-                    accounts: {
-                        set: userAccounts
-                    }
-                }
-            })
-
-            return new User({ ...possibleUser, accounts }, new UniqueEntityID(possibleUser.id))
-        }
-
-        const createdUser = await prisma.user.create({ data: user });
-
-        if (accounts.length !== 0) {
-            const account = accounts[accounts.length - 1];
-
-            await prisma.account.create({
-                data: {
-                    ...account,
-                    userId: createdUser.id
-                }
-            })
-        }
-
-        return new User(data, new UniqueEntityID(user.id))
+        const user = await prisma.user.create({ data: restData });
+        return new User(data.data, new UniqueEntityID(user.id))
     }
 
     async findByToken(token: string, provider: string): Promise<User | null> {
-        
-        console.dir({ token, provider })
 
         const user = await prisma.user.findFirst({
             where: {
@@ -106,19 +57,26 @@ export class PrismaUsersRepository implements UsersRepository {
         });
         if (!user) return null;
 
-        const accounts = await prisma.account.findMany({ where: { userId: token } })
+        const accountsPrisma = await prisma.account.findMany({ where: { userId: token } })
+        const accounts = accountsPrisma.map(account => {
+            return new Account(account, new UniqueEntityID(account.id))
+        })
 
         return new User({ ...user, accounts }, new UniqueEntityID(user.id));
     }
 
     async findByEmailPassword(email: string, password: string): Promise<User | null> {
+
         const user = await prisma.user.findUnique({
             where: { email }
         })
 
         if (!user) return null
 
-        const accounts = await prisma.account.findMany({ where: { userId: user.id } })
+        const accountsPrisma = await prisma.account.findMany({ where: { userId: user.id } })
+        const accounts = accountsPrisma.map(account => {
+            return new Account(account, new UniqueEntityID(account.id))
+        })
 
         if (user.password === password)
             return new User({ ...user, accounts }, new UniqueEntityID(user.id));
@@ -133,7 +91,10 @@ export class PrismaUsersRepository implements UsersRepository {
 
         if (!user) return null;
 
-        const accounts = await prisma.account.findMany({ where: { userId: user.id } })
+        const accountsPrisma = await prisma.account.findMany({ where: { userId: user.id } })
+        const accounts = accountsPrisma.map(account => {
+            return new Account(account, new UniqueEntityID(account.id))
+        })
 
         return new User({ ...user, accounts }, new UniqueEntityID(user.id));
     }
@@ -146,8 +107,10 @@ export class PrismaUsersRepository implements UsersRepository {
 
         if (!user) return null;
 
-        const accounts = await prisma.account.findMany({ where: { userId: user.id } })
-
+        const accountsPrisma = await prisma.account.findMany({ where: { userId: user.id } })
+        const accounts = accountsPrisma.map(account => {
+            return new Account(account, new UniqueEntityID(account.id))
+        })
         return new User({ ...user, accounts }, new UniqueEntityID(user.id));
     }
 }

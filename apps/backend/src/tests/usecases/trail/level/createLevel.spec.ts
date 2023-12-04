@@ -1,5 +1,6 @@
 import { Island } from "@/domain/trilhas/@entities/island";
 import { CreateLevelUseCase } from "@/domain/trilhas/level/usecases/createSlide/createLevelUseCase";
+import { makeIsland } from "@/tests/factories/makeIsland";
 import { InMemoryIslandsRepository } from "@/tests/repositories/in-memory-island-repository";
 import { InMemoryLevelsRepository } from "@/tests/repositories/in-memory-level-repository ";
 
@@ -14,12 +15,7 @@ describe("Create Level", () => {
         inMemoryIslandsRepository = new InMemoryIslandsRepository()
         inMemoryLevelsRepository = new InMemoryLevelsRepository(inMemoryIslandsRepository);
         sut = new CreateLevelUseCase(inMemoryLevelsRepository);
-
-        island = await inMemoryIslandsRepository.create({
-            description: "island description",
-            name: "Island name",
-            theme: "island theme",
-        })
+        island = makeIsland()
     });
 
     it("should be able to create a level ", async () => {
