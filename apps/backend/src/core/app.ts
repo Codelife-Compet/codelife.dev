@@ -1,6 +1,6 @@
 import { userRoutes } from '@/domain/users/controllers/user/routes'
 import fastifyJwt from '@fastify/jwt'
-import fastify from 'fastify'
+import fastify, { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify'
 import { env } from './env';
 import fastifyCookie from '@fastify/cookie';
 import { islandRoutes } from '@/domain/trilhas/@routes/island.routes';
@@ -38,3 +38,26 @@ app.register(videoRoutes, { prefix: 'video' })
 
 app.register(rankingRoutes, { prefix: 'ranking' })
 app.register(teamRoutes, { prefix: 'team' })
+
+app.register(authRoutes)
+
+
+export async function authRoutes(app: FastifyInstance) {
+
+    app.get('/oauth2callback', authController)
+}
+export async function authController(request: FastifyRequest, reply: FastifyReply) {
+
+	console.log("entrei")
+
+	const authorizationCode = (request.query as Record<string, string>).code;
+	if (!authorizationCode) {
+		reply.code(400).send({ error: 'No authorization code provided' });
+		return;
+	}
+
+	console.log('Received authorization code', authorizationCode);
+
+	reply.send({ status: 'Received authorization code' });
+
+}

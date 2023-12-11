@@ -1,8 +1,7 @@
 import { Either, left, right } from "@/core/types/either"
 import { ResourceAlreadyExistsError } from "@/core/errors/resource-already-exists-error"
-import { Video } from "../../../@entities/video"
 import { VideosRepository } from "../../repositories/videosInterfaceRepository"
-import { FindVideoByVideoKey_SlideId } from "../findSlideBySlideName&LevelId/findVideoByVideoName&SlideIdUseCase"
+import { EexecutePythonScript } from "@/core/python/executePythonScript"
 
 interface UploadVideoUseCaseRequest {
     directory: string
@@ -10,7 +9,7 @@ interface UploadVideoUseCaseRequest {
 
 type UploadVideoUseCaseResponse = Either<
     { error: ResourceAlreadyExistsError },
-    { success: boolean }
+    { videoID: string }
 >
 
 export class UploadVideoUseCase {
@@ -19,8 +18,36 @@ export class UploadVideoUseCase {
 
     async execute({ directory }: UploadVideoUseCaseRequest): Promise<UploadVideoUseCaseResponse> {
 
-        const success = await this.videosRepository.upload(directory)
+        const file = "video.mp4";
+        const title = "Video Teste";
+        const description = "Video Teste Description";
+        const privacyStatus = "private"
 
-        return right({ success })
+        const executePythonScriptResponse = await EexecutePythonScript({
+            pathRequest: {
+                dirname: __dirname,
+                partialPath: "upload.py"
+            },
+            args: ["--file", file, "--title", title, "--description", description, "--privacyStatus", privacyStatus]
+        })
+
+/*
+        args = [
+            "--file",
+            "video.mp4",
+            "--title",
+            "teste",
+            "--description",
+            "joao",
+        ]
+        */
+
+        if (executePythonScriptResponse.isLeft()) {
+            return left({ error: executePythonScriptResponse.value.error })
+        }
+
+        //const success = await this.videosRepository.upload(directory)
+
+        return right({ videoID: executePythonScriptResponse.value.response[0] })
     }
 }
