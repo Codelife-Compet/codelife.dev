@@ -66,9 +66,8 @@ model UserCode {
 }
 
 model Video {
-  id               String @id @default(uuid())
-  videoKey         String
-  distributionName String
+  id        String @id @default(uuid())
+  youtubeId String
 
   slideId String @unique
   Slide   Slide  @relation(fields: [slideId], references: [id])

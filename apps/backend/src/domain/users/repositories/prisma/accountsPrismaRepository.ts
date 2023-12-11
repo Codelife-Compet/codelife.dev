@@ -16,8 +16,6 @@ export class AccountsPrismaRepository implements AccountsRepository {
     
     async create(data: AccountProps): Promise<Account> {
 
-        console.dir({data: data}, {depth: null})
-
         const account = await prisma.account.create({ data });
 
         return new Account(account, new UniqueEntityID(account.id))

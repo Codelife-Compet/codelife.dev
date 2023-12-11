@@ -35,4 +35,19 @@ export class User extends Entity<UserProps> {
     get password() { return this.props.password }
     get teamId() { return this.props.teamId }
     get score() { return this.props.score }
+
+    toJSON() {
+        return {
+            ...super.toJSON(),
+            name: this.name,
+            role: this.role,
+            email: this.email,
+            emailVerified: this.emailVerified,
+            image: this.image,
+            accounts: this.accounts,
+            password: this.password,
+            teamId: this.teamId,
+            score: this.score,
+        };
+    }
 }

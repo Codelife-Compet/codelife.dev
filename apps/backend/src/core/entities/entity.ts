@@ -11,6 +11,13 @@ export abstract class Entity<Props> {
     this.props = props
     this._id = id ?? new UniqueEntityID()
   }
+
+  toJSON() {
+    return {
+      id: this.id,
+      data: this.data,
+    };
+  }
 }
 //   public equals(entity: Entity<any>) {
 //     if(entity === this) {

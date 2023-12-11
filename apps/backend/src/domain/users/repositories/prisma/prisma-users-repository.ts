@@ -1,6 +1,6 @@
 import { prisma } from "@/core/db/prisma";
 import { UsersRepository } from "../interface/users-repository";
-import { User } from "@/domain/users/entities/user";
+import { User, UserProps } from "@/domain/users/entities/user";
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 import { Account } from "../../entities/acccount";
 
@@ -41,6 +41,12 @@ export class PrismaUsersRepository implements UsersRepository {
 
         const user = await prisma.user.create({ data: restData });
         return new User(data.data, new UniqueEntityID(user.id))
+    }
+
+    async delete(id: string): Promise<User | null> {
+
+        const user = await prisma.user.delete({ where: { id } })
+        return new User(user, new UniqueEntityID(user.id))
     }
 
     async findByToken(token: string, provider: string): Promise<User | null> {
@@ -99,10 +105,10 @@ export class PrismaUsersRepository implements UsersRepository {
         return new User({ ...user, accounts }, new UniqueEntityID(user.id));
     }
 
-    async findById(id: string): Promise<User | null> {
+    async findById(userId: string): Promise<User | null> {
 
         const user = await prisma.user.findUnique({
-            where: { id, }
+            where: { id: userId, }
         });
 
         if (!user) return null;
@@ -111,7 +117,12 @@ export class PrismaUsersRepository implements UsersRepository {
         const accounts = accountsPrisma.map(account => {
             return new Account(account, new UniqueEntityID(account.id))
         })
-        return new User({ ...user, accounts }, new UniqueEntityID(user.id));
+
+        const userBody = Object.assign({}, user, { accounts })
+
+        const { id, ...userData } = userBody
+
+        return new User(userData, new UniqueEntityID(id));
     }
 }
 

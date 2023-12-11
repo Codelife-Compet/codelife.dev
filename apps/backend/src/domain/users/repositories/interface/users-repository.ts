@@ -8,4 +8,5 @@ export interface UsersRepository { // define quais metodos vao existir na comuni
     findByEmailPassword(email: string, password: string): Promise<User | null>
     findByEmail(email: string): Promise<User | null>
     findByName(name: string): Promise<User | null>
+    delete(id: string): Promise<User | null>
 }

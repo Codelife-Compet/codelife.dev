@@ -6,7 +6,7 @@ const accountBodySchema = z.object({
 	provider: z.string(),
 	type: z.enum(["oauth", "email", "credentials"]),
 	providerAccountId: z.string()
-}) 
+})
 
 const userBodySchema = z.object({
 	name: z.string().optional(),
@@ -25,14 +25,14 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
 
 	const createUserUseCase = makeCreateUserUseCase();
 
-	console.log({ account, user });
-
 	const createdUser = await createUserUseCase.execute({ user, account });
 
 	if (createdUser.isLeft())
 		return reply
 			.status(400)
-			.send({ error_message: createdUser.value.message })
+			.send(createdUser.value)
 
-	return reply.status(201).send({ created_user: createdUser.value.user });
+	return reply
+		.status(201)
+		.send(createdUser.value.user);
 }
