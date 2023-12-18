@@ -1,6 +1,5 @@
 import httplib2
 import os
-import random
 import sys
 import time
 
@@ -14,18 +13,14 @@ from oauth2client.tools import argparser, run_flow
 httplib2.RETRIES = 1
 
 MAX_RETRIES = 10
-
 RETRIABLE_EXCEPTIONS = (
     httplib2.HttpLib2Error, IOError, httplib2.ServerNotFoundError
 )
 RETRIABLE_STATUS_CODES = [500, 502, 503, 504]
-
-CLIENT_SECRETS_FILE = "client.oauth2.json"
-
+CLIENT_SECRETS_FILE = "client-oauth2.json"
 YOUTUBE_UPLOAD_SCOPE = "https://www.googleapis.com/auth/youtube.upload"
 YOUTUBE_API_SERVICE_NAME = "youtube"
 YOUTUBE_API_VERSION = "v3"
-
 MISSING_CLIENT_SECRETS_MESSAGE = """
 WARNING: Please configure OAuth 2.0
 
@@ -40,7 +35,6 @@ https://console.cloud.google.com/
 For more information about the client_secrets.json file format, please visit:
 https://developers.google.com/api-client-library/python/guide/aaa_client_secrets
 """ % os.path.abspath(os.path.join(os.path.dirname(__file__), CLIENT_SECRETS_FILE))
-
 VALID_PRIVACY_STATUSES = ("public", "private", "unlisted")
 
 def get_authenticated_service(args):
@@ -92,11 +86,10 @@ def resumable_upload(insert_request):
     retry = 0
     while response is None:
         try:
-            # print("Uploading file...")
             status, response = insert_request.next_chunk()
             if response is not None:
                 if 'id' in response:
-                    print(f"ID: {response['id']}")
+                    print(f"VideoId: {response['id']}")
                 else:
                     sys.exit("The upload failed with an unexpected response: %s" % response)
         except HttpError as e:
@@ -104,20 +97,9 @@ def resumable_upload(insert_request):
                 error = "A retriable HTTP error %d occurred:\n%s" % (e.resp.status, e.content)
             else:
                 error = "An HTTP error %d occurred:\n%s" % (e.resp.status, e.content)
-                print(error)  # Print the error message
+            sys.exit(error)  # Print the error message
         except RETRIABLE_EXCEPTIONS as e:
-            error = "A retriable error occurred: %s" % e
-
-        if error is not None:
-            print(error)
-            retry += 1
-            if retry > MAX_RETRIES:
-                sys.exit("No longer attempting to retry.")
-
-            max_sleep = 2 ** retry
-            sleep_seconds = random.random() * max_sleep
-            print("Sleeping %f seconds and then retrying..." % sleep_seconds)
-            time.sleep(sleep_seconds)
+            sys.exit("A retriable error occurred: %s" % e)
 
 
 if __name__ == '__main__':
@@ -133,9 +115,6 @@ if __name__ == '__main__':
     argparser.add_argument("--privacyStatus", choices=VALID_PRIVACY_STATUSES,
                            default=VALID_PRIVACY_STATUSES[0], help="Video privacy status.")
     args = argparser.parse_args()
-
-    # if not os.path.exists(args.file):
-    #     sys.exit("Please specify a valid file using the --file= parameter.")
 
     youtube = get_authenticated_service(args)
     try:

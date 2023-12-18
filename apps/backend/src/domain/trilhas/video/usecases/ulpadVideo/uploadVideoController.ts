@@ -1,38 +1,38 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { z } from 'zod';
-import { UploadVideoUseCase } from './uploadVideoUseCase';
-import { VideosPrismaRepository } from '../../repositories/videosPrismaRepository';
 import { makeUploadVideoUseCase } from './makeUploadVideoUseCase';
 
+const videoBodySchema = z.object({
+	vtitle: z.string(),
+	vdescription: z.string(),
+	vprivacyStatus: z.string(),
+	file: z.string()
+});
+
+const playlistBodySchema = z.object({
+	ptitle: z.string(),
+	pdescription: z.string(),
+	pprivacyStatus: z.string()
+});
+
 export const uploadVideoBodySchema = z.object({
-	directory: z.string()
+	video: videoBodySchema,
+	playlist: playlistBodySchema,
+    slideId: z.string()
 });
 
 export async function uploadController(request: FastifyRequest, reply: FastifyReply) {
 
-	// const { directory } = uploadVideoBodySchema.parse(request.body);
-
-	// const uploadVideoUseCase = makeUploadVideoUseCase();
+	const { playlist, slideId, video } = uploadVideoBodySchema.parse(request.body);
 
 	const uploadVideoUseCase = makeUploadVideoUseCase()
-
-	const response = await uploadVideoUseCase.execute({ directory: "teste" });
-	if (response.isLeft()) {
+	const response = await uploadVideoUseCase.execute({ playlist, slideId, video });
+	if (response.isLeft()) 
 		return reply
 			.status(400)
 			.send(response.value.error)
-	}
 
-	return reply.status(201).send(response.value.videoID);
-
-	
-	//const video = await uploadVideoUseCase.execute({ directory });
-//
-	//if (video.isLeft()) {
-	//	return reply
-	//		.status(400)
-	//		.send(video.value.error)
-	//}
-//
-	//return reply.status(201).send(video.value.success);
+	return reply
+		.status(201)
+		.send(response.value.video);
 }

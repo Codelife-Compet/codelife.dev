@@ -2,52 +2,65 @@ import { Either, left, right } from "@/core/types/either"
 import { ResourceAlreadyExistsError } from "@/core/errors/resource-already-exists-error"
 import { VideosRepository } from "../../repositories/videosInterfaceRepository"
 import { EexecutePythonScript } from "@/core/python/executePythonScript"
+import { PythonShellError } from "python-shell"
+import { Video } from "@/domain/trilhas/@entities/video"
 
 interface UploadVideoUseCaseRequest {
-    directory: string
+    video: {
+        vtitle: string
+        vdescription: string
+        vprivacyStatus: string
+        file: string
+    }, playlist: {
+        ptitle: string
+        pdescription: string
+        pprivacyStatus: string
+    },
+    slideId: string
 }
 
 type UploadVideoUseCaseResponse = Either<
     { error: ResourceAlreadyExistsError },
-    { videoID: string }
+    { video: Video }
 >
 
 export class UploadVideoUseCase {
 
     constructor(private videosRepository: VideosRepository) { }
 
-    async execute({ directory }: UploadVideoUseCaseRequest): Promise<UploadVideoUseCaseResponse> {
+    async execute({ video, playlist, slideId }: UploadVideoUseCaseRequest): Promise<UploadVideoUseCaseResponse> {
 
-        const file = "video.mp4";
-        const title = "Video Teste";
-        const description = "Video Teste Description";
-        const privacyStatus = "private"
+        const { vdescription, file, vprivacyStatus, vtitle } = video
 
-        const executePythonScriptResponse = await EexecutePythonScript({
+        const uploadVideoResponse = await EexecutePythonScript({
             pathRequest: {
                 dirname: __dirname,
                 partialPath: "upload.py"
             },
-            args: ["--file", file, "--title", title, "--description", description, "--privacyStatus", privacyStatus]
+            args: ["--file", file, "--title", vtitle, "--description", vdescription, "--privacyStatus", vprivacyStatus]
         })
+        if (uploadVideoResponse.isLeft())
+            return left({ error: uploadVideoResponse.value.error })
 
-/*
-        args = [
-            "--file",
-            "video.mp4",
-            "--title",
-            "teste",
-            "--description",
-            "joao",
-        ]
-        */
+        const response = uploadVideoResponse.value.response[uploadVideoResponse.value.response.length - 1];
+        const match = response.match(/^VideoId:\s*(\S+)/);
+        const videoId = match ? match[1] : null;
+        if (!videoId)
+            return left({ error: new PythonShellError("Erro ao extrair o VideoId.") })
 
-        if (executePythonScriptResponse.isLeft()) {
-            return left({ error: executePythonScriptResponse.value.error })
-        }
+        const { pdescription, pprivacyStatus, ptitle } = playlist
+        const addVideoToPlaylistResponse = await EexecutePythonScript({
+            pathRequest: {
+                dirname: __dirname,
+                partialPath: "addToPlaylist.py"
+            },
+            args: ["--title", ptitle, "--description", pdescription, "--privacyStatus", pprivacyStatus, "--videoId", videoId]
+        })
+        if (addVideoToPlaylistResponse.isLeft())
+            return left({ error: addVideoToPlaylistResponse.value.error })
 
-        //const success = await this.videosRepository.upload(directory)
+        const createdVideo = await this.videosRepository.create(new Video({ slideId, youtubeId: videoId }))
 
-        return right({ videoID: executePythonScriptResponse.value.response[0] })
+        return right({ video: createdVideo })
     }
 }
