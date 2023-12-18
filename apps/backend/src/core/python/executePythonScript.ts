@@ -35,7 +35,6 @@ export async function EexecutePythonScript({ args, pathRequest }: ExecutePythonS
     console.log("Script path:", scriptPath);
     console.log("Options:", options);
 
-
     try {
         const response = await PythonShell.run(scriptPath, options);
         if (!response)

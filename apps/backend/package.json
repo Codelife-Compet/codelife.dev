@@ -56,8 +56,11 @@
     "dotenv": "^16.3.1",
     "fastify": "^4.21.0",
     "glob": "^10.3.10",
+    "google-auth-library": "^9.4.1",
     "googleapis": "^129.0.0",
+    "httplib2": "^0.0.1",
     "python-shell": "^5.0.0",
+    "random": "^4.1.0",
     "zod": "^3.21.4"
   }
 }

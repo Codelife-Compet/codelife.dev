@@ -7,9 +7,9 @@ import { glob } from "glob";
 
 export class VideosPrismaRepository implements VideosRepository {
 
-    async create(data: VideoProps): Promise<Video> {
+    async create(data: Video): Promise<Video> {
 
-        const video = await prisma.video.create({ data });
+        const video = await prisma.video.create({ data: data.data });
 
         return new Video(video, new UniqueEntityID(video.id))
     }
@@ -45,11 +45,6 @@ export class VideosPrismaRepository implements VideosRepository {
         const dirFiles = await glob(pattern, { cwd: directory });
 
         return { dirFiles, directory }
-    }
-
-    async upload(filePath: string): Promise<boolean> {
-
-        return true;
     }
 
     async delete(filePath: string): Promise<boolean> {
