@@ -1,6 +1,6 @@
 import { prisma } from "@/core/db/prisma";
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
-import { VideoProps, Video } from "../../@entities/video";
+import { Video } from "../../@entities/video";
 import { VideosRepository } from "./videosInterfaceRepository";
 import path from "path"
 import { glob } from "glob";
