@@ -39,25 +39,3 @@ app.register(videoRoutes, { prefix: 'video' })
 app.register(rankingRoutes, { prefix: 'ranking' })
 app.register(teamRoutes, { prefix: 'team' })
 
-app.register(authRoutes)
-
-
-export async function authRoutes(app: FastifyInstance) {
-
-    app.get('/oauth2callback', authController)
-}
-export async function authController(request: FastifyRequest, reply: FastifyReply) {
-
-	console.log("entrei")
-
-	const authorizationCode = (request.query as Record<string, string>).code;
-	if (!authorizationCode) {
-		reply.code(400).send({ error: 'No authorization code provided' });
-		return;
-	}
-
-	console.log('Received authorization code', authorizationCode);
-
-	reply.send({ status: 'Received authorization code' });
-
-}
