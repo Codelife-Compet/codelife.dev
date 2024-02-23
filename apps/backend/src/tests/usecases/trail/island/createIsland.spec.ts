@@ -1,20 +1,30 @@
+import { Trail } from "@/domain/trilhas/@entities/trail";
 import { CreateIslandUseCase } from "@/domain/trilhas/island/usecases/createIsland/createIslandUseCase";
+import { makeTrail } from "@/tests/factories/makeTrail";
 import { InMemoryIslandsRepository } from "@/tests/repositories/in-memory-island-repository";
+import { InMemoryTrailsRepository } from "@/tests/repositories/in-memory-trail-repository";
 
 let inMemoryIslandsRepository: InMemoryIslandsRepository;
+let inMemoryTrailsRepository: InMemoryTrailsRepository;
 let sut: CreateIslandUseCase;
+let trail: Trail
 
 describe("Create Island", () => {
+
     beforeEach(() => {
-        inMemoryIslandsRepository = new InMemoryIslandsRepository();
+        inMemoryTrailsRepository = new InMemoryTrailsRepository();
+        inMemoryIslandsRepository = new InMemoryIslandsRepository(inMemoryTrailsRepository);
         sut = new CreateIslandUseCase(inMemoryIslandsRepository);
+        trail = makeTrail()
     });
 
     it("should be able to create a island ", async () => {
+        
         const result = await sut.execute({
             name: "test_island",
             description: "test_description",
             theme: "test_theme",
+            trailId: trail.id.toString()
         });
 
         expect(result.isRight()).toBe(true);
@@ -23,17 +33,26 @@ describe("Create Island", () => {
     });
 
     it("should not be able to create two islands with same name", async () => {
-        await sut.execute({
+
+        const island = await sut.execute({
             name: "test_island",
             description: "test_description",
             theme: "test_theme",
+            trailId: trail.id.toString()
         });
+
+        expect(island.isRight()).toBe(true);
+        
         const result = await sut.execute({
             name: "test_island",
             description: "test_description2",
             theme: "test_theme2",
+            trailId: trail.id.toString()
         });
 
         expect(result.isLeft());
+
+        if(island.isRight())
+            expect(inMemoryIslandsRepository.items.length).toEqual(1)
     });
 });

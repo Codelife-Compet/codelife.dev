@@ -1,0 +1,9 @@
+{
+  "name": "vitest-environment-web",
+  "version": "1.0.0",
+  "description": "",
+  "main": "web-test-environment.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

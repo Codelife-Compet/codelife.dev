@@ -1,26 +1,29 @@
 import { ResourceNotFoundError } from "@/core/errors/resource-not-found-error";
-import { CreateUserUseCase } from "@/domain/users/usecases/source/create-user";
 import { FindUserByTokenUseCase } from "@/domain/users/usecases/source/find-user-by-token";
+import { makeUser } from "@/tests/factories/make-user";
+import { makeAccount } from "@/tests/factories/makeAccount";
+import { InMemoryAccountsRepository } from "@/tests/repositories/in-memory-accounts-repository";
 import { InMemoryUsersRepository } from "@/tests/repositories/in-memory-users-repository";
 
+let inMemoryAccountsRepository: InMemoryAccountsRepository;
 let inMemoryUsersRepository: InMemoryUsersRepository;
 let sut: FindUserByTokenUseCase;
-let createUserUseCase: CreateUserUseCase;
 
 describe("Find User by Linkedin token", () => {
     beforeEach(() => {
         inMemoryUsersRepository = new InMemoryUsersRepository();
+        inMemoryAccountsRepository = new InMemoryAccountsRepository(inMemoryUsersRepository);
         sut = new FindUserByTokenUseCase(inMemoryUsersRepository);
-        createUserUseCase = new CreateUserUseCase(inMemoryUsersRepository);
     });
 
     it("should be able to find user with a valid token", async () => {
-        await createUserUseCase.execute({
-            email: "test_email",
-            name: "test_name",
-            token: "token",
-            token_type: "github"
-        });
+
+        const user = makeUser();
+        const account = makeAccount({provider: "github", access_token: "token"});
+        user.accounts?.push(account);
+
+        inMemoryUsersRepository.items.push(user);
+        inMemoryAccountsRepository.items.push(account);
 
         const result = await sut.execute({
             token: "token", type: "github"
@@ -31,13 +34,14 @@ describe("Find User by Linkedin token", () => {
             expect(inMemoryUsersRepository.items[0]).toEqual(result.value.user);
     });
 
-    it("should not be able to find user with an invalid linkedin token", async () => {
-        await createUserUseCase.execute({
-            email: "test_email",
-            name: "test_name",
-            token: "token",
-            token_type: "github"
-        });
+    it("should not be able to find user with an invalid token", async () => {
+        
+        const user = makeUser();
+        const account = makeAccount({provider: "github", access_token: "token"});
+        user.accounts?.push(account);
+
+        inMemoryUsersRepository.items.push(user);
+        inMemoryAccountsRepository.items.push(account);
 
         const result = await sut.execute({
             token: "token2", type: "github"

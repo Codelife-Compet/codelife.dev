@@ -1,2 +1,4 @@
 .env
 aws
+venv
+*-oauth2.json

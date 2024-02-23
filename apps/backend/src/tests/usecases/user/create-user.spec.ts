@@ -1,66 +1,74 @@
-import { User } from "@/domain/users/entities/user";
+import { Account } from "@/domain/users/entities/acccount";
 import { CreateUserUseCase } from "@/domain/users/usecases/source/create-user";
+import { makeUser } from "@/tests/factories/make-user";
+import { makeAccount } from "@/tests/factories/makeAccount";
+import { InMemoryAccountsRepository } from "@/tests/repositories/in-memory-accounts-repository";
 import { InMemoryUsersRepository } from "@/tests/repositories/in-memory-users-repository";
 
 let inMemoryUsersRepository: InMemoryUsersRepository;
+let inMemoryAccountsRepository: InMemoryAccountsRepository;
 let sut: CreateUserUseCase;
 
 describe("Create User", () => {
+
     beforeEach(() => {
         inMemoryUsersRepository = new InMemoryUsersRepository();
-        sut = new CreateUserUseCase(inMemoryUsersRepository);
+        inMemoryAccountsRepository = new InMemoryAccountsRepository(inMemoryUsersRepository);
+
+        sut = new CreateUserUseCase(inMemoryUsersRepository, inMemoryAccountsRepository);
     });
 
-    it("should be able to create a user ", async () => {
+    it("should be able to create a user", async () => {
+
         const result = await sut.execute({
-            email: "test_email",
-            name: "test_name",
-            token: "test_token",
-            token_type: "facebook",
-        });
+            user: {
+                name: "test_name",
+                email: "test_email",
+                image: "test_image"
+            }, account: makeAccount()
+        })
 
         expect(result.isRight()).toBe(true);
-        if (result.isRight())
+
+        if (result.isRight()) {
+            inMemoryUsersRepository.items.push(result.value.user);
             expect(inMemoryUsersRepository.items[0]).toEqual(result.value.user);
+        }
     });
 
-    it("should not be able to create two users with same token", async () => {
-        await sut.execute({
-            email: "test_email",
-            name: "test_name",
-            token: "facebook",
-            token_type: "facebook"
+    it("should be able to create more than one different account per user", async () => {
+
+        const user = await sut.execute({
+            user: makeUser({ email: 'email1' }),
+            account: makeAccount({ provider: "github" })
         });
+
+        expect(user.isRight()).toBe(true);
 
         const result = await sut.execute({
-            email: "test_email2",
-            name: "test_name2",
-            token: "facebook",
-            token_type: "facebook"
+            user: makeUser({ email: 'email1' }),
+            account: makeAccount({ provider: "github" })
         });
 
-        expect(result.isLeft());
+        expect(result.isLeft()).toBe(true);
+        if(result.isRight())
+            expect(inMemoryAccountsRepository.items[0]).toEqual((result.value.user?.accounts as Account[])[0])
     });
 
-    it("should not be able to create two users with same email", async () => {
-        
-        const user = new User({
-            email: "test_email",
-            name: "test_name",
-            github_token: "test_token",
-            role: "USER"
+    it("should not be able to create a user with the same account", async () => {
+
+        const user = await sut.execute({
+            user: makeUser({ email: 'email1' }),
+            account: makeAccount({ provider: "github" })
         });
 
-        inMemoryUsersRepository.items.push(user);
-        
+        expect(user.isRight()).toBe(true);
+
         const result = await sut.execute({
-            email: "test_email",
-            name: "test_name2",
-            token: "test_token",
-            token_type: "facebook"
+            user: makeUser({ email: 'email1' }),
+            account: makeAccount({ provider: "google" })
         });
 
-        expect(result.isLeft());
+        expect(result.isLeft()).toBe(false);
     });
-
 });

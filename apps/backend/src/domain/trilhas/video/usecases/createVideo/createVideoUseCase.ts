@@ -5,8 +5,8 @@ import { VideosRepository } from "../../repositories/videosInterfaceRepository"
 import { FindVideoByVideoKey_SlideId } from "../findSlideBySlideName&LevelId/findVideoByVideoName&SlideIdUseCase"
 
 interface CreateVideoUseCaseRequest {
-    distributionName: string,
-    videoKey: string
+    youtubeId: string,
+    youtubePlaylistId: string | null
     slideId: string,
 }
 
@@ -19,17 +19,17 @@ export class CreateVideoUseCase {
 
     constructor(private videosRepository: VideosRepository) { }
 
-    async execute({ distributionName, slideId, videoKey }: CreateVideoUseCaseRequest): Promise<CreateVideoUseCaseResponse> {
+    async execute({ slideId, youtubeId, youtubePlaylistId }: CreateVideoUseCaseRequest): Promise<CreateVideoUseCaseResponse> {
 
         const findVideoByVideoKey_SlideId = new FindVideoByVideoKey_SlideId(this.videosRepository)
 
-        const possibleVideo = await findVideoByVideoKey_SlideId.execute({ slideId, videoKey })
+        const possibleVideo = await findVideoByVideoKey_SlideId.execute({ slideId, videoKey: youtubeId })
 
         if (possibleVideo.isRight()) {
             return left({ error: new ResourceAlreadyExistsError(`Slides's ${slideId} video`) })
         }
 
-        const video = await this.videosRepository.create({ distributionName, slideId, videoKey })
+        const video = await this.videosRepository.create(new Video({slideId, youtubeId, youtubePlaylistId }))
 
         return right({ video })
     }
