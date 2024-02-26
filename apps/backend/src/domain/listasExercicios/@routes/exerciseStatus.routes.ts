@@ -11,7 +11,7 @@ export async function exerciseStatusRoutes(app: FastifyInstance) {
     app.addHook('onRequest', verifyJWT)
 
     app.get('/:id', { onRequest: [verifyUserRole('ADMIN')] }, findExerciseStatusByIdController)
-    app.get('/:username', { onRequest: [verifyUserRole('ADMIN')] }, findExerciseStatusByUserNameController)
+    app.get('/username/:username', { onRequest: [verifyUserRole('ADMIN')] }, findExerciseStatusByUserNameController)
     app.post('/', { onRequest: [verifyUserRole('ADMIN')] }, createExerciseStatusController)
     app.delete('/', { onRequest: [verifyUserRole('ADMIN')] }, deleteExerciseStatusController)
     app.put('/', { onRequest: [verifyUserRole('ADMIN')] }, updateExerciseStatusController)

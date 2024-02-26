@@ -10,11 +10,11 @@ import { fetchExercisesController } from '../exercisesLists/usecases/fetchExerci
 import { findExercisesListByIdController } from '../exercisesLists/usecases/findExerciseListById/findExerciseListByIdController';
 import { findExercisesListByTopicController } from '../exercisesLists/usecases/findExerciseListByTopic/findExerciseListByTopicController';
 
-export async function exerciseslistsListRoutes(app: FastifyInstance) {
+export async function exercisesListRoutes(app: FastifyInstance) {
     app.addHook('onRequest', verifyJWT)
 
     app.get('/:id', { onRequest: [verifyUserRole('ADMIN')] }, findExercisesListByIdController)
-    app.get('/:topic', { onRequest: [verifyUserRole('ADMIN')] }, findExercisesListByTopicController)
+    app.get('/topic/:topic', { onRequest: [verifyUserRole('ADMIN')] }, findExercisesListByTopicController)
     app.post('/', { onRequest: [verifyUserRole('ADMIN')] }, createExerciseListController)
     app.delete('/', { onRequest: [verifyUserRole('ADMIN')] }, deleteExerciseController)
     app.put('/', { onRequest: [verifyUserRole('ADMIN')] }, updateExerciseController)

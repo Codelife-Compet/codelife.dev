@@ -12,9 +12,9 @@ import { teamRoutes } from '@/domain/ranking/@routes/team.routes';
 import { trailRoutes } from '@/domain/trilhas/@routes/trail.routes';
 import { rankingRoutes } from '@/domain/ranking/@routes/ranking.routes';
 import { exerciseRoutes } from '@/domain/listasExercicios/@routes/exercicies.routes';
-import { exercisesListRoutes } from '@/domain/listasExercicios/@routes/exerciciesLists.routes';
 import { exerciseStatusRoutes } from '@/domain/listasExercicios/@routes/exerciseStatus.routes';
 import { languageExercisesListRoutes } from '@/domain/listasExercicios/@routes/languageExercisesLists.routes';
+import { exercisesListRoutes } from '@/domain/listasExercicios/@routes/exerciciesLists.routes';
 
 export const app = fastify()
 
