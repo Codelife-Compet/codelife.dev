@@ -1,6 +1,6 @@
 import { userRoutes } from '@/domain/users/controllers/user/routes'
 import fastifyJwt from '@fastify/jwt'
-import fastify, { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify'
+import fastify from 'fastify'
 import { env } from './env';
 import fastifyCookie from '@fastify/cookie';
 import { islandRoutes } from '@/domain/trilhas/@routes/island.routes';
@@ -11,6 +11,10 @@ import { videoRoutes } from '@/domain/trilhas/@routes/video.routes';
 import { teamRoutes } from '@/domain/ranking/@routes/team.routes';
 import { trailRoutes } from '@/domain/trilhas/@routes/trail.routes';
 import { rankingRoutes } from '@/domain/ranking/@routes/ranking.routes';
+import { exerciseRoutes } from '@/domain/listasExercicios/@routes/exercicies.routes';
+import { exercisesListRoutes } from '@/domain/listasExercicios/@routes/exerciciesLists.routes';
+import { exerciseStatusRoutes } from '@/domain/listasExercicios/@routes/exerciseStatus.routes';
+import { languageExercisesListRoutes } from '@/domain/listasExercicios/@routes/languageExercisesLists.routes';
 
 export const app = fastify()
 
@@ -38,4 +42,9 @@ app.register(videoRoutes, { prefix: 'video' })
 
 app.register(rankingRoutes, { prefix: 'ranking' })
 app.register(teamRoutes, { prefix: 'team' })
+
+app.register(exerciseRoutes, { prefix: 'exercises' })
+app.register(exercisesListRoutes, { prefix: 'exercises-list' })
+app.register(exerciseStatusRoutes, { prefix: 'exercise-status' })
+app.register(languageExercisesListRoutes, { prefix: 'language-exercises-list' })
 
