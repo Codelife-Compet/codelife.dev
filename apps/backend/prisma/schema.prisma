@@ -165,3 +165,49 @@ model Team {
 
   @@map("teams")
 }
+
+model LanguageExercisesLists {
+  id       String @id @default(uuid())
+  language String @unique
+
+  exercisesLists ExercisesLists[]
+
+  @@map("languageExercisesLists")
+}
+
+model ExercisesLists {
+  id    String @id @default(uuid())
+  topic String @unique
+
+  exercises Exercise[]
+
+  languageExercisesLists  LanguageExercisesLists @relation(fields: [languageExercisesListId], references: [id])
+  languageExercisesListId String                 @unique
+
+  @@map("exercisesLists")
+}
+
+model Exercise {
+  id         String @id @default(uuid())
+  link       String
+  name       String @unique
+  difficulty String
+
+  exerciseStatus ExerciseStatus[]
+
+  exercisesList   ExercisesLists @relation(fields: [exercisesListId], references: [id])
+  exercisesListId String         @unique
+
+  @@map("exercises")
+}
+
+model ExerciseStatus {
+  id       String @id @default(uuid())
+  userName String
+  status   String
+
+  exercise   Exercise @relation(fields: [exerciseId], references: [id])
+  exerciseId String
+
+  @@map("exerciseStatus")
+}
