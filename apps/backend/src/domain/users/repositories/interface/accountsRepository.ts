@@ -1,6 +1,6 @@
 import { Account, AccountProps } from "@/domain/users/entities/acccount"
 
-export interface AccountsRepository { // define quais metodos vao existir na comunicação entre repositorio e casos de uso
+export interface AccountsRepository { 
     list(): Promise<Account[]>
     create(data: AccountProps): Promise<Account>
     findById(id: string): Promise<Account | null>

@@ -4,7 +4,7 @@ import { createController } from '../slides/usecases/createSlide/createSlideCont
 import { getvideolinkController } from '../slides/usecases/getVideoLink/getVideoLinkController';
 
 export async function slideRoutes(app: FastifyInstance) {
-    app.addHook('onRequest', verifyJWT) // todas as rotas aqui presentes chamam a verificação 
+    app.addHook('onRequest', verifyJWT)
 
     app.post('/create', createController)
     app.get('/video/:slideId', getvideolinkController)

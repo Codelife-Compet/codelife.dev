@@ -1,7 +1,7 @@
 import { User } from "@/domain/users/entities/user"
 import { Team, TeamProps } from "../../@entities/team"
 
-export interface TeamsRepository { // define quais metodos vao existir na comunicação entre repositorio e casos de uso
+export interface TeamsRepository { 
     create(data: TeamProps): Promise<Team>
     fetchUsers(teamId: string): Promise<User[]>
     findById(id: string): Promise<Team | null>

@@ -1,6 +1,6 @@
 import { User, UserProps } from "@/domain/users/entities/user"
 
-export interface UsersRepository { // define quais metodos vao existir na comunicação entre repositorio e casos de uso
+export interface UsersRepository { 
     list(): Promise<User[]>
     create(data: User): Promise<User>
     findById(id: string): Promise<User | null>
