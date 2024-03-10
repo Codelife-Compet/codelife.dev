@@ -1,4 +1,3 @@
-import { Slide } from "@/domain/trilhas/@entities/slide";
 import { UserCodesRepository } from "@/domain/trilhas/user-codes/repositories/userCodesInterfaceRepository";
 import { UserCode, UserCodeProps } from "@/domain/trilhas/@entities/userCode";
 import { InMemorySlidesRepository } from "./in-memory-slides-repository ";
@@ -7,17 +6,29 @@ export class InMemoryUserCodesRepository implements UserCodesRepository {
 
     public items: UserCode[] = []
 
-    constructor(private slidesRepository: InMemorySlidesRepository) {}
+    constructor(private inMemorySlidesRepository: InMemorySlidesRepository) {}
     
-    async create(data: UserCodeProps): Promise<UserCode> {
+    async create(data: UserCode): Promise<UserCode> {
 
         const usercode = new UserCode(data);
         this.items.push(usercode);
 
-        const slide = await this.slidesRepository.findById(usercode.slideId)
-        this.slidesRepository.items[this.slidesRepository.items.indexOf(slide as Slide)].userCodes?.push(usercode) 
+        const slides = await this.inMemorySlidesRepository.findById(data.slideId.toString())
+        if (slides) {
+            slides.userCodes?.push(data)
+            this.inMemorySlidesRepository.save(slides)
+        }
 
         return usercode;
+    }
+
+    async save(userCode: UserCode): Promise<UserCode> {
+
+        const index = this.items.findIndex(item => item.id === userCode.id)
+
+        this.items[index] = userCode
+
+        return userCode
     }
 
     async findById(id: string): Promise<UserCode | null> {

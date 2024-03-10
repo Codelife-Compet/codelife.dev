@@ -65,13 +65,24 @@ model UserCode {
   @@map("userCodes")
 }
 
+model YoutubePlaylist {
+  id        String @id @default(uuid())
+  youtubeId String
+
+  videos Video[]
+
+  @@map("playLists")
+}
+
 model Video {
-  id               String @id @default(uuid())
-  videoKey         String
-  distributionName String
+  id        String @id @default(uuid())
+  youtubeId String
 
   slideId String @unique
   Slide   Slide  @relation(fields: [slideId], references: [id])
+
+  youtubePlaylistId String?
+  YoutubePlaylist   YoutubePlaylist? @relation(fields: [youtubePlaylistId], references: [id])
 
   @@map("videos")
 }

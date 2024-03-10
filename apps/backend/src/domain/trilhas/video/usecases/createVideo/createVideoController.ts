@@ -3,18 +3,18 @@ import { z } from 'zod';
 import { makeCreateVideoUseCase } from './makeCreateVideoUseCase';
 
 export const createVideoBodySchema = z.object({
-	distributionName: z.string(),
+	youtubeId: z.string(),
 	slideId: z.string(),
-	videoKey: z.string(),
+	youtubePlaylistId: z.string().nullable(),
 });
 
 export async function createController(request: FastifyRequest, reply: FastifyReply) {
 
-	const { distributionName, slideId, videoKey } = createVideoBodySchema.parse(request.body);
+	const { slideId, youtubeId, youtubePlaylistId } = createVideoBodySchema.parse(request.body);
 
 	const createVideoUseCase = makeCreateVideoUseCase();
 
-	const video = await createVideoUseCase.execute({ distributionName, slideId, videoKey, });
+	const video = await createVideoUseCase.execute({ youtubeId, slideId, youtubePlaylistId });
 
 	if (video.isLeft()) {
 		return reply

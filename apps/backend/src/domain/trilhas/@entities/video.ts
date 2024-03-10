@@ -2,9 +2,8 @@
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 
 export type VideoProps = {
-    videoKey: string
-    distributionName: string
     youtubeId: string
+    youtubePlaylistId: string | null
     slideId: string
 };
 
@@ -14,7 +13,7 @@ export class Video extends Entity<VideoProps> {
         super(props, id)
     }
 
-    get videoKey() { return this.props.videoKey }
-    get distributionName() { return this.props.distributionName }
     get slideId() { return this.props.slideId }
+    get youtubeId() { return this.props.youtubeId }
+    get youtubePlaylistId() { return this.props.youtubePlaylistId }
 }

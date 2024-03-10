@@ -1,6 +1,6 @@
 import { userRoutes } from '@/domain/users/controllers/user/routes'
 import fastifyJwt from '@fastify/jwt'
-import fastify from 'fastify'
+import fastify, { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify'
 import { env } from './env';
 import fastifyCookie from '@fastify/cookie';
 import { islandRoutes } from '@/domain/trilhas/@routes/island.routes';
@@ -38,3 +38,4 @@ app.register(videoRoutes, { prefix: 'video' })
 
 app.register(rankingRoutes, { prefix: 'ranking' })
 app.register(teamRoutes, { prefix: 'team' })
+
