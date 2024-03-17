@@ -9,6 +9,7 @@ interface CreateExerciseUseCaseRequest {
     name: string
     difficulty: string
     exercisesListId: string
+    description: string
 }
 
 type CreateExerciseUseCaseResponse = Either<
@@ -20,14 +21,14 @@ export class CreateExerciseUseCase {
 
     constructor(private exercisesRepository: ExercisesRepository) { }
 
-    async execute({ difficulty, exercisesListId, link, name }: CreateExerciseUseCaseRequest): Promise<CreateExerciseUseCaseResponse> {
+    async execute({ difficulty, exercisesListId, link, name, description }: CreateExerciseUseCaseRequest): Promise<CreateExerciseUseCaseResponse> {
 
         const findExerciseByNameUseCase = new FindExerciseByNameUseCase(this.exercisesRepository)
         const possibleExercise = await findExerciseByNameUseCase.execute({ name })
         if (possibleExercise.isRight()) 
             return left({ error: new ResourceAlreadyExistsError(`Exercise ${name}`) })
 
-        const exercise = await this.exercisesRepository.create({ difficulty, exercisesListId, link, name, exerciseStatus: [] })
+        const exercise = await this.exercisesRepository.create({ difficulty, exercisesListId, link, name, exerciseStatus: [], inouts: [], description})
 
         return right({ exercise })
     }

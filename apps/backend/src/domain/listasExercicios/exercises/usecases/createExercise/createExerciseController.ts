@@ -7,15 +7,16 @@ export const createLanguageExercisesListBodySchema = z.object({
 	name: z.string(),
 	difficulty: z.string(),
 	exercisesListId: z.string(),
+	description: z.string(),
 });
 
 export async function createExerciseController(request: FastifyRequest, reply: FastifyReply) {
 
-	const { difficulty, exercisesListId, link, name } = createLanguageExercisesListBodySchema.parse(request.body);
+	const { difficulty, exercisesListId, link, name, description } = createLanguageExercisesListBodySchema.parse(request.body);
 
 	const createExerciseUseCase = makeCreateExerciseUseCase();
 
-	const exercise = await createExerciseUseCase.execute({ difficulty, exercisesListId, link, name });
+	const exercise = await createExerciseUseCase.execute({ difficulty, exercisesListId, link, name, description });
 
 	if (exercise.isLeft()) 
 		return reply

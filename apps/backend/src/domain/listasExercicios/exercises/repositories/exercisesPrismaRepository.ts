@@ -4,16 +4,18 @@ import { Exercise, ExerciseProps } from "../../@entities/exercise";
 import { ExerciseStatus } from "../../@entities/exerciseStatus";
 import { ExercisesRepository } from "./exercisesRepository";
 import { Optional } from "@/core/types/optional";
+import { Inout } from "../../@entities/inout";
 
 export class ExercisesPrismaRepository implements ExercisesRepository {
 
     async create(data: ExerciseProps): Promise<Exercise> {
 
-        const { exerciseStatus , ...restData } = data;
+        const { exerciseStatus, inouts , ...restData } = data;
 
         const exercise = {
             ...await prisma.exercise.create({ data: restData }),
-            exerciseStatus
+            exerciseStatus,
+            inouts
         }
 
         return new Exercise(exercise, new UniqueEntityID(exercise.id))
@@ -24,13 +26,14 @@ export class ExercisesPrismaRepository implements ExercisesRepository {
         const exercise = await prisma.exercise.delete({ where: { id } });
 
         const exerciseStatus = await this.fetchExerciseStatus(id);
+        const inouts = await this.fetchInouts(id);
 
-        return new Exercise({...exercise, exerciseStatus}, new UniqueEntityID(exercise.id))
+        return new Exercise({...exercise, exerciseStatus, inouts}, new UniqueEntityID(exercise.id))
 
     }
     async update(id: string, data: Optional<ExerciseProps, "difficulty" | "exercisesListId" | "link" | "name">): Promise<Exercise> {
 
-        const { exerciseStatus, ...restData } = data;
+        const { exerciseStatus, inouts , ...restData } = data;
 
         const exercise = await prisma.exercise.update({
             where: { id },
@@ -44,7 +47,7 @@ export class ExercisesPrismaRepository implements ExercisesRepository {
 
         const exerciseStatusPrisma = await this.fetchExerciseStatus(id);
         
-        return new Exercise({...exercise, exerciseStatus: exerciseStatusPrisma}, new UniqueEntityID(exercise.id))
+        return new Exercise({...exercise, exerciseStatus, inouts}, new UniqueEntityID(exercise.id))
     }
 
     async fetchExerciseStatus(exerciseId: string): Promise<ExerciseStatus[]> {
@@ -64,9 +67,10 @@ export class ExercisesPrismaRepository implements ExercisesRepository {
 
         if (!exercise) return null;
 
-        const exerciseStatusPrisma = await this.fetchExerciseStatus(exercise.id);
+        const exerciseStatus = await this.fetchExerciseStatus(exercise.id);
+        const inouts = await this.fetchInouts(exercise.id);
 
-        return new Exercise({...exercise, exerciseStatus: exerciseStatusPrisma }, new UniqueEntityID(exercise.id));
+        return new Exercise({...exercise, exerciseStatus, inouts }, new UniqueEntityID(exercise.id));
     }
 
     async findByName(name: string): Promise<Exercise | null> {
@@ -77,9 +81,10 @@ export class ExercisesPrismaRepository implements ExercisesRepository {
 
         if (!exercise) return null;
 
-        const exerciseStatusPrisma = await this.fetchExerciseStatus(exercise.id);
+        const exerciseStatus = await this.fetchExerciseStatus(exercise.id);
+        const inouts = await this.fetchInouts(exercise.id);
 
-        return new Exercise({...exercise, exerciseStatus: exerciseStatusPrisma }, new UniqueEntityID(exercise.id));
+        return new Exercise({...exercise, exerciseStatus, inouts }, new UniqueEntityID(exercise.id));
     }
 
     async addExerciseStatus(exerciseStatusId: string, exerciseName: string): Promise<ExerciseStatus[]> {
@@ -116,6 +121,51 @@ export class ExercisesPrismaRepository implements ExercisesRepository {
         const exercisestatus = await this.fetchExerciseStatus(exercise.id);
 
         return exercisestatus;
+    }
+
+    async fetchInouts(exerciseId: string): Promise<Inout[]> {
+
+        const inout = await prisma.inout.findMany({
+            where: { id: exerciseId }
+        });
+
+        return inout.map(int => new Inout({ ...int }, new UniqueEntityID(int.id)));
+    }
+
+    async addInout(inoutId: string, exerciseName: string): Promise<Inout[]> {
+        
+        const exercise = await prisma.exercise.update({
+            where: { name: exerciseName },
+            data: {
+                inouts: {
+                    connect: {
+                        id: inoutId
+                    }
+                }
+            }
+        });
+
+        const inouts = await this.fetchInouts(exercise.id);
+
+        return inouts;
+    }
+    
+    async removeInout(inoutId: string, exerciseName: string): Promise<Inout[]> {
+        
+        const exercise = await prisma.exercise.update({
+            where: { name: exerciseName },
+            data: {
+                inouts: {
+                    disconnect: {
+                        id: inoutId
+                    }
+                }
+            }
+        });
+
+        const inouts = await this.fetchInouts(exercise.id);
+
+        return inouts;
     }
 }
 

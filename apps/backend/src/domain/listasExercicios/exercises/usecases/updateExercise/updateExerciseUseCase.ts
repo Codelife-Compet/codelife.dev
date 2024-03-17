@@ -9,6 +9,7 @@ interface UpdateExerciseUseCaseRequest {
     name?: string
     difficulty?: string
     exercisesListId?: string
+    description?: string
     id: string
 }
 

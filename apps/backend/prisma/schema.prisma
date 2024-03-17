@@ -188,10 +188,12 @@ model ExercisesLists {
 }
 
 model Exercise {
-  id         String @id @default(uuid())
-  link       String
-  name       String @unique
-  difficulty String
+  id          String  @id @default(uuid())
+  link        String
+  name        String  @unique
+  difficulty  String
+  description String
+  inouts      Inout[]
 
   exerciseStatus ExerciseStatus[]
 
@@ -199,6 +201,16 @@ model Exercise {
   exercisesListId String         @unique
 
   @@map("exercises")
+}
+
+model Inout {
+  id         String   @id @default(uuid())
+  input      String
+  output     String
+  exercise   Exercise @relation(fields: [exerciseId], references: [id])
+  exerciseId String
+
+  @@map("inouts")
 }
 
 model ExerciseStatus {

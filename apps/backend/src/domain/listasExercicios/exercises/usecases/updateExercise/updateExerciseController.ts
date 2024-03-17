@@ -8,15 +8,16 @@ export const updateLanguageExercisesListBodySchema = z.object({
 	name: z.string().optional(),
 	difficulty: z.string().optional(),
 	exercisesListId: z.string().optional(),
+	description: z.string().optional(),
 });
 
 export async function updateExerciseController(request: FastifyRequest, reply: FastifyReply) {
 
-	const { difficulty, exercisesListId, link, name, id } = updateLanguageExercisesListBodySchema.parse(request.body);
+	const { difficulty, exercisesListId, link, name, id, description } = updateLanguageExercisesListBodySchema.parse(request.body);
 
 	const updateExerciseUseCase = makeUpdateExerciseUseCase();
 
-	const exercise = await updateExerciseUseCase.execute({ difficulty, exercisesListId, link, name, id });
+	const exercise = await updateExerciseUseCase.execute({ difficulty, exercisesListId, link, name, id, description });
 
 	if (exercise.isLeft()) 
 		return reply
