@@ -3,18 +3,19 @@ import { IslandsPrismaRepository } from '../../repositories/islandPrismaReposito
 import { FindIslandByNameUseCase } from './findIslandByNameUseCase';
 import { z } from 'zod';
 
-export const createIslandBodySchema = z.object({
-	name: z.string(),
+export const findIslandBodySchema = z.object({
+	islandName: z.string(),
+	trailId: z.string(),
 });
 
 export async function findIslandByNameController(request: FastifyRequest, reply: FastifyReply) {
 
-    const { name } = createIslandBodySchema.parse(request.params);
+    const { islandName, trailId } = findIslandBodySchema.parse(request.body);
 
 	const islandsRepository = new IslandsPrismaRepository()
     const findIslandByNameUseCase = new FindIslandByNameUseCase(islandsRepository)
 
-	const island = await findIslandByNameUseCase.execute({ name });
+	const island = await findIslandByNameUseCase.execute({ islandName, trailId });
 
 	if (island.isLeft())
 		return reply
