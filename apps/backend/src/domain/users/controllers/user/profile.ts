@@ -1,6 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { z } from 'zod';
 import { makeGetUserProfileUseCase } from '../../usecases/factories/make-get-user-profile-use-case';
+import { User } from '../../entities/user';
 
 export const createUserBodySchema = z.object({
     name: z.string(),
@@ -13,22 +14,17 @@ export async function profile(request: FastifyRequest, reply: FastifyReply) {
 
 	const getUserProfile = makeGetUserProfileUseCase();
 
-	const user = await getUserProfile.execute({
-		userId: request.user.sub
-	});
+	const user = await getUserProfile.execute({ userId: request.user.sub });
     if (user.isLeft()) {
         return reply
             .status(400)
-            .send({ error_message: user.value.message })
+            .send(user.value)
     }
 
+	const userData = user.value.user.data;
+	userData.password = undefined;
 
 	return reply
 		.status(200)
-		.send({
-			user: {
-				...user.value.user,
-				password_hash: undefined // para segurança 
-			}
-		}); 
+		.send(new User(userData, user.value.user.id)); 
 }

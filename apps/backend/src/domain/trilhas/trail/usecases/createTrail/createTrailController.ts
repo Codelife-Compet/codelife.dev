@@ -18,11 +18,12 @@ export async function createController(request: FastifyRequest, reply: FastifyRe
 
 	const trail = await createTrailUseCase.execute({ description, name, theme });
 
-	if (trail.isLeft()) {
+	if (trail.isLeft())
 		return reply
 			.status(400)
-			.send({ error_message: trail.value.error.message })
-	}
+			.send(trail.value.error)
 
-	return reply.status(201).send(trail.value.trail);
+	return reply
+		.status(201)
+		.send(trail.value.trail);
 }

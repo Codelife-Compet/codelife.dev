@@ -1,9 +1,19 @@
 import { FastifyInstance } from 'fastify';
 import { verifyJWT } from '@/domain/users/middlewares/verify-jwt';
-import { createController } from '../trail/usecases/createIsland/createTrailController';
+import { createController } from '../trail/usecases/createTrail/createTrailController';
+import { listTrailsController } from '../trail/usecases/listTrails/listTrailsController';
+import { findTrailByNameController } from '../trail/usecases/findTrailByName/findTrailByNameController';
+import { findTrailByIdController } from '../trail/usecases/findTrailById/findTrailByIdController';
+import { deleteTrailController } from '../trail/usecases/deleteTrail/deleteTrailController';
+import { updateTrailController } from '../trail/usecases/updateTrail/updateTrailController';
 
 export async function trailRoutes(app: FastifyInstance) {
     app.addHook('onRequest', verifyJWT) // todas as rotas aqui presentes chamam a verificação 
 
-    app.post('/create', createController)
+    app.post('/', createController)
+    app.get('/list', listTrailsController)
+    app.get('/id/:id', findTrailByIdController)
+    app.get('/name/:name', findTrailByNameController)
+    app.delete('/:id', deleteTrailController)
+    app.put('/:id', updateTrailController)
 }

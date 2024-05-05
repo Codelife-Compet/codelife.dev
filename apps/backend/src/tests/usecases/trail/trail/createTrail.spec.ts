@@ -1,4 +1,4 @@
-import { CreateTrailUseCase } from "@/domain/trilhas/trail/usecases/createIsland/createTrailUseCase";
+import { CreateTrailUseCase } from "@/domain/trilhas/trail/usecases/createTrail/createTrailUseCase";
 import { InMemoryTrailsRepository } from "@/tests/repositories/in-memory-trail-repository";
 
 let inMemoryTrailsRepository: InMemoryTrailsRepository;
