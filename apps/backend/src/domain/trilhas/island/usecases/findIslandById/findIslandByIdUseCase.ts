@@ -3,24 +3,24 @@ import { Either, left, right } from "@/core/types/either"
 import { Island } from "@/domain/trilhas/@entities/island"
 import { IslandsRepository } from "../../repositories/islandInterfaceRepository"
 
-interface FindIslandByNameUseCaseRequest {
-    name: string
+interface FindIslandByIdUseCaseRequest {
+    id: string
 }
 
-type FindIslandByNameUseCaseResponse = Either<
+type FindIslandByIdUseCaseResponse = Either<
     { error: ResourceNotFoundError },
     { island: Island }
 >
 
-export class FindIslandByNameUseCase {
+export class FindIslandByIdUseCase {
 
     constructor(private islandsRepository: IslandsRepository) { }
 
-    async execute({ name }: FindIslandByNameUseCaseRequest): Promise<FindIslandByNameUseCaseResponse> {
+    async execute({ id }: FindIslandByIdUseCaseRequest): Promise<FindIslandByIdUseCaseResponse> {
 
-        const island = await this.islandsRepository.findByName(name)
+        const island = await this.islandsRepository.findById(id)
         if (!island)
-            return left({ error: new ResourceNotFoundError(`Island ${name}`) })
+            return left({ error: new ResourceNotFoundError(`Island ${id}`) })
 
         return right({ island })
     }

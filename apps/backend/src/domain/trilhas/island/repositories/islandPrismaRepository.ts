@@ -1,9 +1,15 @@
 import { prisma } from "@/core/db/prisma";
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
-import { IslandProps, Island } from "../../@entities/island";
+import { IslandProps, Island, UpdateIslandProps } from "../../@entities/island";
 import { IslandsRepository } from "./islandInterfaceRepository";
 
 export class IslandsPrismaRepository implements IslandsRepository {
+
+    async list(): Promise<Island[]> {
+        const islands = await prisma.island.findMany();
+
+        return islands.map(island => new Island(island, new UniqueEntityID(island.id)));
+    }
 
     async create(data: IslandProps): Promise<Island> {
 
@@ -25,6 +31,24 @@ export class IslandsPrismaRepository implements IslandsRepository {
     async findByName(name: string): Promise<Island | null> {
         const island = await prisma.island.findFirst({
             where: { name }
+        });
+
+        return (island ? new Island(island, new UniqueEntityID(island.id)) : null);
+    }
+
+    async delete(id: string): Promise<Island | null> {
+        const island = await prisma.island.delete({
+            where: { id }
+        });
+
+        return (island ? new Island(island, new UniqueEntityID(island.id)) : null);
+    }
+
+    async update(id: string, data: UpdateIslandProps): Promise<Island | null> {
+        
+        const island = await prisma.island.update({
+            where: { id },
+            data
         });
 
         return (island ? new Island(island, new UniqueEntityID(island.id)) : null);
