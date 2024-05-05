@@ -28,9 +28,13 @@ export class IslandsPrismaRepository implements IslandsRepository {
         return (island ? new Island(island, new UniqueEntityID(island.id)) : null);
     }
 
-    async findByName(name: string): Promise<Island | null> {
-        const island = await prisma.island.findFirst({
-            where: { name }
+    async findByIslandName_TrailId(islandName: string, trailId: string): Promise<Island | null> {
+
+        const island = await prisma.island.findUnique({
+            where: {
+                trailId,
+                name: islandName
+            }
         });
 
         return (island ? new Island(island, new UniqueEntityID(island.id)) : null);
