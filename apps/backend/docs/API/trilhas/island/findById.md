@@ -1,4 +1,4 @@
-## /trail/island/id/:id
+## /trail/island/level/id/:id
 
 **Descrição:** retorna a ilha com o id especificado
 

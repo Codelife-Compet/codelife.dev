@@ -1,11 +1,17 @@
-## /trail/island/name/:name
+## /trail/island/level/name
 
 **Descrição:** retorna a ilha com o nome especificado
 
 **Method:** `GET`
 
-**Body**: nao ha
-**Params**: em `:name` deve ser passado o nome da ilha
+**Body**:
+
+```typescript
+{
+    levelName: string, // nome do nível
+    islandId: string,  // id da ilha
+}
+```
 
 **Success Response**: [Island](../../../../src/domain/trilhas/@entities/island.ts)
 - retorna a ilha com o nome especificado
