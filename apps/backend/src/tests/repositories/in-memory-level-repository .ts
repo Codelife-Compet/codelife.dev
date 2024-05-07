@@ -37,7 +37,7 @@ export class InMemoryLevelsRepository implements LevelsRepository {
         return (level ? level : null)
     }
 
-    async findLevelByLevelName_IslandId(levelName: string, islandId: string): Promise<Level | null> {
+    async findByLevelNameIslandId(levelName: string, islandId: string): Promise<Level | null> {
         const level = this.items.find(level => level.name === levelName && level.islandId === islandId)
 
         return (level ? level : null)
