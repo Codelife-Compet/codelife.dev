@@ -13,7 +13,7 @@ export async function islandRoutes(app: FastifyInstance) {
     app.post('/', createController)
     app.get('/list', listIslandsController)
     app.get('/id/:id', findIslandByIdController)
-    app.get('/name/:name', findIslandByNameController)
+    app.get('/name', findIslandByNameController)
     app.delete('/:id', deleteIslandController)
     app.put('/:id', updateIslandController)
 }

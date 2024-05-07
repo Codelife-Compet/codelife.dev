@@ -3,6 +3,12 @@ import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 import { Slide } from "./slide";
 import { Ponctuation } from "./ponctuation";
 
+export type UpdateLevelProps = {
+    name?: string
+    description?: string
+    theme?: string
+};
+
 export type LevelProps = {
     name: string
     description: string
