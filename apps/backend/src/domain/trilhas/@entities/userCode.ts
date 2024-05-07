@@ -1,6 +1,11 @@
 import { Entity } from "@/core/entities/entity";
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 
+export type UpdateUserCodeProps = {
+    userName?: string
+    code?: string
+}
+
 export type UserCodeProps = {
     userName: string
     code?: string | null // pode estar vazio pois usuario pode não ter digitado nada ainda
