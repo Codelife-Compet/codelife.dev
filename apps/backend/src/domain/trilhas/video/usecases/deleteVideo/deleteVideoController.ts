@@ -1,24 +1,27 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { z } from 'zod';
-import { makeDeleteVideoUseCase } from './makeDeleteVideoUseCase';
+import { VideosPrismaRepository } from '../../repositories/videosPrismaRepository';
+import { DeleteVideoUseCase } from './deleteVideoUseCase';
 
 export const deleteVideoBodySchema = z.object({
-	directory: z.string()
+	id: z.string()
 });
 
 export async function deleteController(request: FastifyRequest, reply: FastifyReply) {
 
-	const { directory } = deleteVideoBodySchema.parse(request.body);
+	const { id } = deleteVideoBodySchema.parse(request.body);
 
-	const deleteVideoUseCase = makeDeleteVideoUseCase();
+    const videosRepository = new VideosPrismaRepository()
+    const deleteVideoUseCase = new DeleteVideoUseCase(videosRepository)
 
-	const video = await deleteVideoUseCase.execute({ directory });
+	const video = await deleteVideoUseCase.execute({ id });
 
-	if (video.isLeft()) {
+	if (video.isLeft())
 		return reply
 			.status(400)
 			.send(video.value.error)
-	}
 
-	return reply.status(201).send(video.value.success);
+	return reply
+		.status(201)
+		.send(video.value.video);
 }

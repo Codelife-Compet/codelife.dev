@@ -2,7 +2,7 @@ import { Either, left, right } from "@/core/types/either"
 import { ResourceAlreadyExistsError } from "@/core/errors/resource-already-exists-error"
 import { Video } from "../../../@entities/video"
 import { VideosRepository } from "../../repositories/videosInterfaceRepository"
-import { FindVideoByVideoKey_SlideId } from "../findSlideBySlideName&LevelId/findVideoByVideoName&SlideIdUseCase"
+import { findVideoByYoutubeId } from "../findVideoByName/findVideoByYoutubeIdUseCase"
 
 interface CreateVideoUseCaseRequest {
     youtubeId: string,
@@ -21,9 +21,9 @@ export class CreateVideoUseCase {
 
     async execute({ slideId, youtubeId, youtubePlaylistId }: CreateVideoUseCaseRequest): Promise<CreateVideoUseCaseResponse> {
 
-        const findVideoByVideoKey_SlideId = new FindVideoByVideoKey_SlideId(this.videosRepository)
+        const findVideoByYoutubeId = new findVideoByYoutubeId(this.videosRepository)
 
-        const possibleVideo = await findVideoByVideoKey_SlideId.execute({ slideId, videoKey: youtubeId })
+        const possibleVideo = await findVideoByYoutubeId.execute({ slideId, videoKey: youtubeId })
 
         if (possibleVideo.isRight()) {
             return left({ error: new ResourceAlreadyExistsError(`Slides's ${slideId} video`) })
