@@ -3,6 +3,13 @@ import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 import { UserCode } from "./userCode";
 import { Video } from "./video";
 
+export type UpdateSlideProps = {
+    name?: string
+    description?: string
+    theme?: string
+    baseCode?: string
+};
+
 export type SlideProps = {
     name: string
     description: string

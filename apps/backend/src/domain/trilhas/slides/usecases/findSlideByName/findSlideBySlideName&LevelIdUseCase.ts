@@ -9,11 +9,11 @@ interface FindSlideBySlideName_LevelIdRequest {
 }
 
 type FindSlideBySlideName_LevelIdResponse = Either<
-    ResourceNotFoundError,
+    { error: ResourceNotFoundError },
     { slide: Slide }
 >
 
-export class FindSlideBySlideName_LevelId {
+export class FindSlideByNameUseCase {
 
     constructor(private slidesRepository: SlidesRepository) { }
 
@@ -22,7 +22,7 @@ export class FindSlideBySlideName_LevelId {
         const slide = await this.slidesRepository.findSlideBySlideName_LevelId(slideName, levelId)
 
         if (!slide)
-            return left(new ResourceNotFoundError("User"))
+            return left({ error: new ResourceNotFoundError(`Slide ${slideName} in level ${levelId}`) })
 
         return right({ slide })
     }
