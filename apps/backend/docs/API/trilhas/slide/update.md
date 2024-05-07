@@ -1,4 +1,4 @@
-## /trail/island/level/:id
+## /trail/island/level/slide:id
 
 **Descrição:** atualiza umo nível existente
 
@@ -16,7 +16,7 @@
 
 **Params**: em `:id` deve ser passado o id do nível
 
-**Success Response**: [Level](../../../../src/domain/trilhas/@entities/level.ts)
+**Success Response**: [Slide](../../../../src/domain/trilhas/@entities/slide.ts)
 - retorna o nível atualizado
 - Status: `201`
 

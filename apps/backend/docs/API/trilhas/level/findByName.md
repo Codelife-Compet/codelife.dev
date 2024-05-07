@@ -1,4 +1,4 @@
-## /trail/island/name
+## /trail/island/level/name
 
 **Descrição:** retorna a ilha com o nome especificado
 
@@ -8,12 +8,12 @@
 
 ```typescript
 {
-    islandName: string, // nome da ilha
-    trailId: string,    // id da trilha
+    levelName: string,   // nome da ilha
+    islandId: string,    // id da trilha
 }
 ```
 
-**Success Response**: [Island](../../../../src/domain/trilhas/@entities/island.ts)
+**Success Response**: [Level](../../../../src/domain/trilhas/@entities/level.ts)
 - retorna a ilha com o nome especificado
 - Status: `201`
 

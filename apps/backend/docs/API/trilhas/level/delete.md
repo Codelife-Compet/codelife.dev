@@ -7,7 +7,7 @@
 **Body**: nao ha
 **Params**: em `:id` deve ser passado o id do nível
 
-**Success Response**: [Island](../../../../src/domain/trilhas/@entities/island.ts)
+**Success Response**: [Level](../../../../src/domain/trilhas/@entities/level.ts)
 - retorna o nível removido com o id especificado
 - Status: `201`
 
