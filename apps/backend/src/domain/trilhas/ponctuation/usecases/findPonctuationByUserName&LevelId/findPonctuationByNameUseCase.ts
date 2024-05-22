@@ -3,26 +3,26 @@ import { Either, left, right } from "@/core/types/either"
 import { Ponctuation } from "@/domain/trilhas/@entities/ponctuation"
 import { PonctuationsRepository } from "../../repositories/ponctuationInterfaceRepository"
 
-interface FindPonctuationByPonctuationName_LevelIdRequest {
+interface FindPonctuationByNameUseCaseRequest {
     userName: string,
     levelId: string
 }
 
-type FindPonctuationByPonctuationName_LevelIdResponse = Either<
-    ResourceNotFoundError,
+type FindPonctuationByNameUseCaseResponse = Either<
+    { error: ResourceNotFoundError },
     { ponctuation: Ponctuation }
 >
 
-export class FindPonctuationByPonctuationName_LevelId {
+export class FindPonctuationByNameUseCase {
 
     constructor(private ponctuationsRepository: PonctuationsRepository) { }
 
-    async execute({ levelId, userName }: FindPonctuationByPonctuationName_LevelIdRequest): Promise<FindPonctuationByPonctuationName_LevelIdResponse> {
+    async execute({ levelId, userName }: FindPonctuationByNameUseCaseRequest): Promise<FindPonctuationByNameUseCaseResponse> {
 
         const ponctuation = await this.ponctuationsRepository.findPonctuationByUserName_LevelId(userName, levelId)
 
         if (!ponctuation)
-            return left(new ResourceNotFoundError("User"))
+            return left({ error: new ResourceNotFoundError(`Ponctuation of ${userName} in level ${levelId}`) })
 
         return right({ ponctuation })
     }
