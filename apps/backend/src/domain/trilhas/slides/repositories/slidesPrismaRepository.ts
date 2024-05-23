@@ -11,6 +11,14 @@ export class SlidesPrismaRepository implements SlidesRepository {
         return slides.map(slide => new Slide(slide, new UniqueEntityID(slide.id)));
     }
 
+    async listByLevelId(levelId: string): Promise<Slide[]> {
+        const slides = await prisma.slide.findMany({
+            where: { levelId }
+        });
+
+        return slides.map(slide => new Slide(slide, new UniqueEntityID(slide.id)));
+    }
+
     async create(data: SlideProps): Promise<Slide> {
 
         const { userCodes, video, ...restData } = data;

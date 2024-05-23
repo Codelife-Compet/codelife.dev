@@ -11,6 +11,14 @@ export class IslandsPrismaRepository implements IslandsRepository {
         return islands.map(island => new Island(island, new UniqueEntityID(island.id)));
     }
 
+    async listByTrailId(trailId: string): Promise<Island[]> {
+        const islands = await prisma.island.findMany({
+            where: { trailId }
+        });
+
+        return islands.map(island => new Island(island, new UniqueEntityID(island.id)));
+    }
+
     async create(data: IslandProps): Promise<Island> {
 
         const { levels, ...restData } = data;

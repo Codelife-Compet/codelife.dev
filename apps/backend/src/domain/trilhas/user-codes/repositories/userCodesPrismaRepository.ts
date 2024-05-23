@@ -46,6 +46,14 @@ export class UserCodesPrismaRepository implements UserCodesRepository {
         return userCodes.map(userCode => new UserCode(userCode, new UniqueEntityID(userCode.id)));
     }
 
+    async listBySlideId(slideId: string): Promise<UserCode[]> {
+        const userCodes = await prisma.userCode.findMany({
+            where: { slideId }
+        });
+
+        return userCodes.map(userCode => new UserCode(userCode, new UniqueEntityID(userCode.id)));
+    }
+
     async update(id: string, data: UpdateUserCodeProps): Promise<UserCode | null> {
         const userCode = await prisma.userCode.update({
             where: { id },

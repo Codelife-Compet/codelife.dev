@@ -34,6 +34,14 @@ export class PonctuationsPrismaRepository implements PonctuationsRepository {
         return ponctuations.map(ponctuation => new Ponctuation(ponctuation, new UniqueEntityID(ponctuation.id)));
     }
 
+    async listByLevelId(levelId: string): Promise<Ponctuation[]> {
+        const ponctuations = await prisma.ponctuation.findMany({
+            where: { levelId }
+        });
+
+        return ponctuations.map(ponctuation => new Ponctuation(ponctuation, new UniqueEntityID(ponctuation.id)));
+    }
+
     async delete(id: string): Promise<Ponctuation | null> {
         const ponctuation = await prisma.ponctuation.delete({
             where: { id }

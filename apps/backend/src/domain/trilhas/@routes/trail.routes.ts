@@ -6,14 +6,15 @@ import { findTrailByNameController } from '../trail/usecases/findTrailByName/fin
 import { findTrailByIdController } from '../trail/usecases/findTrailById/findTrailByIdController';
 import { deleteTrailController } from '../trail/usecases/deleteTrail/deleteTrailController';
 import { updateTrailController } from '../trail/usecases/updateTrail/updateTrailController';
+import { verifyUserRole } from '@/domain/users/middlewares/verify-user-role';
 
 export async function trailRoutes(app: FastifyInstance) {
-    app.addHook('onRequest', verifyJWT) // todas as rotas aqui presentes chamam a verificação 
+    app.addHook('onRequest', verifyJWT)
 
-    app.post('/', createController)
+    app.post('/', { onRequest: [verifyUserRole('ADMIN')] }, createController)
     app.get('/list', listTrailsController)
     app.get('/id/:id', findTrailByIdController)
     app.get('/name/:name', findTrailByNameController)
-    app.delete('/:id', deleteTrailController)
-    app.put('/:id', updateTrailController)
+    app.delete('/:id', { onRequest: [verifyUserRole('ADMIN')] }, deleteTrailController)
+    app.put('/:id', { onRequest: [verifyUserRole('ADMIN')] }, updateTrailController)
 }

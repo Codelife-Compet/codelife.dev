@@ -1,14 +1,13 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { z } from 'zod';
 import { VideosPrismaRepository } from '../../repositories/videosPrismaRepository';
-import { FindVideoByYoutubeIdUseCase } from '../findVideoByName/findVideoByYoutubeIdUseCase';
 import { FindVideoByIdUseCase } from './findVideoByIdUseCase';
 
 export const findVideoBodySchema = z.object({
 	id: z.string(),
 });
 
-export async function findVideoByNameController(request: FastifyRequest, reply: FastifyReply) {
+export async function findVideoByIdController(request: FastifyRequest, reply: FastifyReply) {
 
     const { id } = findVideoBodySchema.parse(request.params);
 

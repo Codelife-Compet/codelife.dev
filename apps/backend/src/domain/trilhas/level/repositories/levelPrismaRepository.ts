@@ -11,6 +11,14 @@ export class LevelsPrismaRepository implements LevelsRepository {
         return levels.map(level => new Level(level, new UniqueEntityID(level.id)));
     }
 
+    async listByIslandId(islandId: string): Promise<Level[]> {
+        const levels = await prisma.level.findMany({
+            where: { islandId }
+        });
+
+        return levels.map(level => new Level(level, new UniqueEntityID(level.id)));
+    }
+
     async create(data: LevelProps): Promise<Level> {
 
         const { slides, ponctuations, ...restData } = data;

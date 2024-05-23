@@ -7,4 +7,5 @@ export interface PonctuationsRepository {
     delete(id: string): Promise<Ponctuation | null>
     update(id: string, data: UpdatePonctuationProps): Promise<Ponctuation | null>
     list(): Promise<Ponctuation[]>
+    listByLevelId(levelId: string): Promise<Ponctuation[]>
 }
