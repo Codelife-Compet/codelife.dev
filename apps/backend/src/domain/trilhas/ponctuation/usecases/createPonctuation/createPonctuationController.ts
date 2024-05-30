@@ -9,7 +9,7 @@ export const createPonctuationBodySchema = z.object({
 	levelId: z.string(),
 });
 
-export async function createController(request: FastifyRequest, reply: FastifyReply) {
+export async function createPonctuationController(request: FastifyRequest, reply: FastifyReply) {
 
 	const { levelId, score, userName } = createPonctuationBodySchema.parse(request.body);
 

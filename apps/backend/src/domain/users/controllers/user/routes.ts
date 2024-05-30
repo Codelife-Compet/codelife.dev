@@ -7,10 +7,10 @@ import { verifyJWT } from '../../middlewares/verify-jwt';
 import { deleteController } from './delete';
 
 export async function userRoutes(app: FastifyInstance) {
-    app.post('/create', create)
+    app.post('/', create)
     app.post('/login', login)
 
-	app.patch('/token/refresh', refresh); // atualiza o token
+	app.patch('/refresh', refresh); // atualiza o token
         // chamada pelo back quando o usuario perder sua autenticaçao (token invalido)
 
     app.get('/me', { onRequest: [verifyJWT] }, profile); 
