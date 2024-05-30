@@ -2,6 +2,10 @@
 
 **Descrição:** cria uma nova pontuação para um usuário em um nível
 
+**Usuario Logado:** Sim
+
+**Administrador:** Sim
+
 **Method:** `POST`
 
 **Body**

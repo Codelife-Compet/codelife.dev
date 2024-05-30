@@ -2,6 +2,10 @@
 
 **Descrição:** cria um novo userCode de um slide
 
+**Usuario Logado:** Sim
+
+**Administrador:** Sim
+
 **Method:** `POST`
 
 **Body**

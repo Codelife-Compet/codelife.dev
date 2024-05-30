@@ -2,6 +2,10 @@
 
 **Descrição:** atualiza um video existente
 
+**Usuario Logado:** Sim
+
+**Administrador:** Sim
+
 **Method:** `PUT`
 
 **Body**

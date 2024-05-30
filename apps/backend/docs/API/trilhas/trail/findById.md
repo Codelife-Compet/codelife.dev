@@ -2,9 +2,14 @@
 
 **Descrição:** retorna a trilha com o id especificado
 
+**Usuario Logado:** Sim
+
+**Administrador:** Não
+
 **Method:** `GET`
 
 **Body**: nao ha
+
 **Params**: em `:id` deve ser passado o id da trilha
 
 **Success Response**: [Trail](../../../../src/domain/trilhas/@entities/trail.ts)

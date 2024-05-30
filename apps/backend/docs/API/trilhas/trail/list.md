@@ -1,7 +1,10 @@
-
 ## /trail/list
 
 **Descrição:** retorna todas as trilhas cadastradas
+
+**Usuario Logado:** Sim
+
+**Administrador:** Não
 
 **Method:** `GET`
 

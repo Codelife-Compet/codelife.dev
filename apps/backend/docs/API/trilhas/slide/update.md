@@ -2,6 +2,10 @@
 
 **Descrição:** atualiza umo nível existente
 
+**Usuario Logado:** Sim
+
+**Administrador:** Sim
+
 **Method:** `PUT`
 
 **Body**

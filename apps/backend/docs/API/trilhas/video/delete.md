@@ -2,9 +2,14 @@
 
 **Descrição:** deleta o video com o id especificado
 
+**Usuario Logado:** Sim
+
+**Administrador:** Sim
+
 **Method:** `DELETE`
 
 **Body**: nao ha
+
 **Params**: em `:id` deve ser passado o id do slide
 
 **Success Response**: [Video](../../../../src/domain/trilhas/@entities/video.ts)

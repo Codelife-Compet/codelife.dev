@@ -1,6 +1,10 @@
-## /me
+## /user/me
 
 **Descrição:** retorna o usuario logado
+
+**Usuario Logado:** Sim
+
+**Administrador:** Não
 
 **Method:** `GET`
 

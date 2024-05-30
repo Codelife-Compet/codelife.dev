@@ -1,6 +1,10 @@
-## /login
+## /user/login
 
 **Descrição:** realiza login de um usuário já existente no sistema
+
+**Usuario Logado:** Não
+
+**Administrador:** Não
 
 **Method:** `POST`
 

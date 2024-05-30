@@ -1,6 +1,10 @@
-## /create
+## /user/
 
 **Descrição:** cria um novo usuário no banco de dados, caso já não exista
+
+**Usuario Logado:** Sim
+
+**Administrador:** Sim
 
 **Method:** `POST`
 

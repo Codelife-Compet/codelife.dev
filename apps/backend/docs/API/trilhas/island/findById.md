@@ -4,7 +4,12 @@
 
 **Method:** `GET`
 
+**Usuario Logado:** Sim
+
+**Administrador:** Não
+
 **Body**: nao ha
+
 **Params**: em `:id` deve ser passado o id da ilha
 
 **Success Response**: [Island](../../../../src/domain/trilhas/@entities/island.ts)

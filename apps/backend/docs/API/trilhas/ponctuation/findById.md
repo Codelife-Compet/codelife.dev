@@ -2,9 +2,14 @@
 
 **Descrição:** retorna a pontuação com o id especificado
 
+**Usuario Logado:** Sim
+
+**Administrador:** Não
+
 **Method:** `GET`
 
 **Body**: nao ha
+
 **Params**: em `:id` deve ser passado o id da pontuação
 
 **Success Response**: [Ponctuation](../../../../src/domain/trilhas/@entities/ponctuation.ts)

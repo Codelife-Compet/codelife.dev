@@ -2,6 +2,10 @@
 
 **Descrição:** retorna todas os userCodes cadastrados
 
+**Usuario Logado:** Sim
+
+**Administrador:** Não
+
 **Method:** `GET`
 
 **Body**: nao ha

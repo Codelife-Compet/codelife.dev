@@ -2,9 +2,14 @@
 
 **Descrição:** retorna o nível com o id especificado
 
+**Usuario Logado:** Sim
+
+**Administrador:** Não
+
 **Method:** `GET`
 
 **Body**: nao ha
+
 **Params**: em `:id` deve ser passado o id do nível
 
 **Success Response**: [Level](../../../../src/domain/trilhas/@entities/level.ts)

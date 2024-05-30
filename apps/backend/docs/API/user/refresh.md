@@ -1,6 +1,10 @@
-## /refresh
+## /user/refresh
 
 **Descrição:** Chamada quando o token do usuário expirar. Confere se este possui um refreshToken válido, gera um novo token e um refreshToken para o usuário
+
+**Usuario Logado:** Sim
+
+**Administrador:** Não
 
 **Method:**: `PATCH`
 

@@ -1,4 +1,4 @@
-## /
+## /user/
 
 **Descrição:** deleta um usuario do sistema
 

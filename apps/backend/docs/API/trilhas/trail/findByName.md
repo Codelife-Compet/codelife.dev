@@ -2,9 +2,14 @@
 
 **Descrição:** retorna a trilha com o nome especificado
 
+**Usuario Logado:** Sim
+
+**Administrador:** Não
+
 **Method:** `GET`
 
 **Body**: nao ha
+
 **Params**: em `:name` deve ser passado o nome da trilha
 
 **Success Response**: [Trail](../../../../src/domain/trilhas/@entities/trail.ts)

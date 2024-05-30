@@ -2,6 +2,10 @@
 
 **Descrição:** cria uma nova ilha para trilha
 
+**Usuario Logado:** Sim
+
+**Administrador:** Sim
+
 **Method:** `POST`
 
 **Body**

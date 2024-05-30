@@ -2,6 +2,10 @@
 
 **Descrição:** atualiza um userCode existente
 
+**Usuario Logado:** Sim
+
+**Administrador:** Não
+
 **Method:** `PUT`
 
 **Body**

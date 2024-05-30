@@ -2,6 +2,10 @@
 
 **Descrição:** atualiza uma ilha existente
 
+**Usuario Logado:** Sim
+
+**Administrador:** Sim
+
 **Method:** `PUT`
 
 **Body**

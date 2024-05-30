@@ -2,6 +2,10 @@
 
 **Descrição:** cria um novo nível de uma ilha
 
+**Usuario Logado:** Sim
+
+**Administrador:** Sim
+
 **Method:** `POST`
 
 **Body**

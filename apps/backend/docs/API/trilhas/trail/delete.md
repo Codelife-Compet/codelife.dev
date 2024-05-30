@@ -2,6 +2,10 @@
 
 **Descrição:** deleta a trilha com o id especificado
 
+**Usuario Logado:** Sim
+
+**Administrador:** Sim
+
 **Method:** `DELETE`
 
 **Body**: nao ha

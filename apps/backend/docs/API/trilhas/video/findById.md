@@ -2,9 +2,14 @@
 
 **Descrição:** retorna o video com o id especificado
 
+**Usuario Logado:** Sim
+
+**Administrador:** Não
+
 **Method:** `GET`
 
 **Body**: nao ha
+
 **Params**: em `:id` deve ser passado o id do video
 
 **Success Response**: [Video](../../../../src/domain/trilhas/@entities/video.ts)

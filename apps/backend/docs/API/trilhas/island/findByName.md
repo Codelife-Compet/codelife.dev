@@ -2,6 +2,10 @@
 
 **Descrição:** retorna a ilha com o nome especificado
 
+**Usuario Logado:** Sim
+
+**Administrador:** Não
+
 **Method:** `GET`
 
 **Body**:
