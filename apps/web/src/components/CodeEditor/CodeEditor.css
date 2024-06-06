@@ -1,0 +1,456 @@
+@import '../../mixins.css';
+
+.panel-title {
+  width: 100%;
+}
+
+.code-editor {
+  align-self: stretch;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+
+  @add-mixin min-md {
+    flex-direction: row;
+  }
+
+  & .code {
+    align-self: stretch;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: 0;
+    border: 1px solid var(--black);
+    background-color: var(--dark-3); /* no sneaky white pixels when zoomed, please */
+
+    /* hidden textarea that recieves all the text */
+    & textarea {
+      /* prevent zoom on mobile */
+      font-size: 16px;
+      /* prevent moving viewport window position upward when typing */
+      /* NOTE: !important necessary for overriding inline style */
+      /* NOTE again: setting width causes the contextual menu (copy/paste/etc) to appear on iOS?? */
+      position: absolute;
+      height: 100% !important;
+      top: 0 !important;
+      /* just in case, make sure the textarea can't be reached */
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* editor highlight line; used for both themes */
+    & .ace_marker-layer > .ace_active-line {
+      background-color: var(--gray);
+      opacity: 0.15;
+    }
+
+    & .panel-title {
+      align-self: flex-start;
+      background-color: var(--black);
+      color: var(--white);
+      padding: var(--gutter-xxs) var(--gutter-xs);
+      & .favicon {
+        font-size: 14px;
+        margin-right: var(--gutter-xxs);
+      }
+    }
+    & .editor {
+      align-self: stretch;
+      flex: 1;
+      font-size: 12px;
+      overflow-y: auto;
+      padding: var(--gutter-xs) var(--gutter-sm);
+      white-space: pre-wrap;
+      /* enable inertia scrolling on mobile */
+      -webkit-overflow-scrolling: touch;
+    }
+    & .codeBlockTooltip {
+      left: 50%;
+      margin-left: -150px;
+      position: absolute;
+      text-align: center;
+      top: 45%;
+      width: 300px;
+    }
+    &.is-read-only {
+      border: 1px solid var(--light-2);
+      background-color: var(--light-1); /* no sneaky white pixels when zoomed, please */
+
+      & .panel-title {
+        background: var(--light-2);
+        color: black;
+      }
+    }
+  }
+}
+
+.drawer {
+  /* border-left: 1px solid var(--light-1);
+  border-right: 1px solid var(--light-1); */
+  overflow: hidden;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+
+  @add-mixin max-md {
+    left: 50%;
+    width: 50%;
+  }
+
+  & .title {
+    background-color: var(--light-1);
+    height: var(--gutter-md);
+    line-height: var(--gutter-md);
+    padding: 0 var(--gutter-xxs);
+    transition: background-color 0.2s;
+    &:hover, &:focus {
+      background-color: var(--sky-light);
+      cursor: default;
+    }
+    & .pt-icon-standard {
+      color: rgba(0, 0, 0, 0.5);
+      margin: 0 var(--gutter-xxs) 0 2px;
+    }
+    & .pt-progress-bar {
+      position: absolute;
+      /* vertical size / position */
+      height: 0.75rem;
+      top: 0.4375rem;
+      /* horizonal size / position */
+      width: calc(100% - 10px);
+      left: 5px;
+
+      &.pt-intent-success .pt-progress-meter {
+        background-color: var(--sky-dark);
+      }
+    }
+    & .completion-indicator-label {
+      color: var(--white);
+      font-size: 0.5rem;
+      padding: 0 0.5em;
+      text-align: center;
+      white-space: nowrap;
+      z-index: 2;
+    }
+    & .console-count {
+      background-color: var(--sky-dark);
+      border-radius: 50%;
+      color: var(--white);
+      display: inline-block;
+      width: 17px;
+      height: 17px;
+      line-height: 17px;
+      margin-left: var(--gutter-xxs);
+      text-align: center;
+      width: 17px;
+    }
+  }
+
+  & .pt-icon-standard.pt-intent-success {
+    color: var(--sky-dark);
+  }
+
+  & .contents {
+    background-color: var(--white);
+    height: 0;
+    overflow-y: scroll;
+    /* enable inertia scrolling on mobile */
+    -webkit-overflow-scrolling: touch;
+
+    & .log {
+      border-bottom: 1px solid var(--light-1);
+      font-family: monospace;
+      font-size: 12px;
+      padding: 3px var(--gutter-xxs) 2px;
+      &:first-child {
+        padding-top: 4px;
+      }
+      &:last-child {
+        border-bottom: 0;
+      }
+      &.error {
+        background-color: var(--danger-light);
+        border-bottom: 1px solid var(--danger-light);
+      }
+      & .pt-icon-standard {
+        color: rgba(0, 0, 0, 0.25);
+        font-size: 12px;
+        margin-right: var(--gutter-xxs);
+
+        &.pt-icon-delete {
+          color: var(--danger);
+        }
+      }
+      & .arg {
+        margin-right: var(--gutter-xs);
+        &.number {
+          color: var(--sky-dark);
+        }
+        &.string {
+          color: var(--dark-2);
+        }
+        &.undefined {
+          color: var(--gray);
+        }
+        &.object {
+          font-style: italic;
+        }
+        &.array {
+          font-style: italic;
+        }
+        &.function {
+          font-style: italic;
+        }
+        &.error {
+          color: var(--danger);
+        }
+      }
+    }
+  }
+  &.open {
+    box-shadow: 0 0 1rem color(var(--black) a(0.5));
+    height: 50%;
+
+    & .contents {
+      height: 100%;
+    }
+
+    /* open state on mobile */
+    @add-mixin max-md {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      height: 100%; /* reset above */
+      resize: both;
+
+      & .title {
+        line-height: 20px;
+        height: 29.5px;
+        padding: 5px;
+      }
+
+      & .contents {
+        height: 100%;
+        transition: none;
+      }
+    }
+  }
+}
+
+.panel-content.ace_dark {
+  background-color: var(--dark-3);
+
+  & + .drawer > .title {
+    background-color: var(--dark-3);
+    border-bottom: none;
+
+    &:hover, &:focus {
+      background-color: var(--black);
+    }
+  }
+}
+
+.render {
+  align-self: stretch;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0; /* fixes overflow bug on smaller screens */
+  border: 1px solid var(--light-2);
+  background-color: var(--light-1); /* no sneaky white pixels when zoomed, please */
+
+  & .panel-title {
+    align-self: flex-start;
+    background-color: var(--light-1);
+    color: black;
+    padding: var(--gutter-xxs) var(--gutter-xs);
+    & .favicon {
+      margin-right: var(--gutter-xxs);
+      vertical-align: middle;
+      width: 16px;
+      &.pt-icon-standard {
+        font-size: 14px;
+        opacity: 0.25;
+      }
+    }
+  }
+  & iframe {
+    align-self: stretch;
+    background-color: var(--white);
+    border: none;
+    flex: 1;
+    overflow: hidden;
+  }
+}
+
+/* remove adjacent border from render when it directly follows a code block */
+.code + .render {
+  @add-mixin max-md {
+    border-top: none;
+  }
+  @add-mixin min-md {
+    border-left: none;
+  }
+}
+
+
+/* slide context */
+.slide-content,
+.admin {
+  & .panel-content {
+    min-height: 40vh;
+  }
+
+  /* add border radius */
+  & .code,
+  & .render {
+    overflow: hidden; /* necessary for border-radius */
+  }
+
+  /* stacked layout */
+  & .code {
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+
+
+  }
+  & .render {
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+  }
+
+
+  /* column layout */
+  @add-mixin min-md {
+    & .code {
+      border-radius: var(--radius-md) 0 0 var(--radius-md);
+    }
+    & .render {
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    }
+  }
+}
+
+/* code block context */
+.pt-dialog > .codeblock-dialog-inner {
+
+  /* reset panel height */
+  & .panel-content {
+    min-height: 0;
+    max-height: 100%;
+  }
+}
+
+/* fullscreen toggle */
+.code-editor-fullscreen-button {
+  /* sizing */
+  width: auto;
+  height: 2.5rem; /* 40px */
+  padding: 0; /* override button default */
+  /* positioning */
+  position: absolute; /* take out of the flow */
+  top: -0.375em;
+  right: 1em;
+  z-index: 2; /* position above code editor & code highlight */
+  /* theming */
+  text-align: center;
+  /* transitions */
+  &.pt-button { /* increase specificity */
+    transition: box-shadow 0.2s;
+  }
+
+  /* hide the hint on big screens */
+  @add-mixin min-md {
+    width: 2.5rem;
+  }
+
+  & .code-editor-fullscreen-text {
+    line-height: 2.5rem;
+    top: -1px;
+    padding-left: 1rem;
+  }
+
+  & .code-editor-fullscreen-text,
+  & .code-editor-fullscreen-icon {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  /* icon sizing */
+  & .code-editor-fullscreen-icon {
+    margin-right: 0; /* blueprint override */
+    font-size: 1.25rem; /* 20px */
+    line-height: 2.5rem; /* button height */
+    top: -1px; /* baseline adjustment */
+    /* transitons */
+    transition: transform 0.2s ease-out;
+
+    @add-mixin max-md {
+      padding-left: 0.5rem;
+      padding-right: 1rem;
+    }
+  }
+
+  /* interactions */
+  &.pt-button { /* increase specificity */
+    &:hover {
+      opacity: 1; /* override button default */
+      box-shadow: 0 2px 1em rgba(8, 26, 24, 0.2) !important; /* override override, feels bad man */
+
+      /* yo dawg I heard you like transforms */
+      @add-mixin min-md {
+      & .code-editor-fullscreen-icon {
+        transform: scale(1.15);
+      }
+      }
+    }
+  }
+  /* reset when clicked */
+  &:active .code-editor-fullscreen-icon {
+    transform: none;
+  }
+}
+
+/* fullscreen editor */
+.code-editor.is-fullscreen {
+  /* pin to the edges of the screen */
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  /* take up 100% screen size */
+  width: 100% !important;
+  height: 100% !important;
+  /* position above navbar */
+  z-index: 20;
+
+  /* kill border radius */
+  & .code,
+  & .render {
+    border-radius: 0;
+  }
+
+  /* fullscreen editor layout dictated by device orientation */
+  @media (orientation: landscape) {
+    flex-direction: row;
+  }
+  @media (orientation: portrait) {
+    flex-direction: column;
+  }
+
+  & .code-editor-fullscreen-button {
+    width: 2.5rem;
+    top: 0.5rem;
+
+    & .code-editor-fullscreen-text {
+      display: none;
+    }
+    & .code-editor-fullscreen-icon {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+}

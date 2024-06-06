@@ -12,7 +12,10 @@ import {
   FaPaste,
   FaTerminal,
 } from 'react-icons/fa'
-// import NavBar from '@/components/NavBar' Componente com defeito visual: linha 23
+import Link from 'next/link'
+import CTA from '../components/CTA'
+import NavBar from '@/components/NavBar'
+// Componente com defeito visual: linha 23
 
 export default function Home() {
   const { signIn } = useAuth()
@@ -27,6 +30,7 @@ export default function Home() {
         <>
           <main className="mb-20 flex items-center flex-col gap-20">
             {/* <NavBar /> Componente com defeito visual no sm breakpoint */}
+            <NavBar />
             <section
               id="codelife-presenter"
               className="max-w-[83%] flex flex-col items-center justify-around h-[80vh] xl:h-auto xl:gap-14 bg-home bg-no-repeat bg-cover"
@@ -103,17 +107,35 @@ export default function Home() {
                   }}
                 >
                   <FaFacebook />
-                  Facebookkk
+                  Facebook
                 </Button>
+                <Link href="FirstSlide">Slide</Link>
               </div>
             </section>
             <section
               id="courses carrousel"
               className="w-max-lg w-[80%] relative flex justify-center items-center"
             ></section>
+            <div
+              id="RightvideoPresenter"
+              className="w-[40%] overflow-hidden rounded border border-gray-500 display"
+            >
+              <Heading as={'h3'} css={{ lineHeight: '$shorter' }}>
+                {t('Home.AboutHeading')}
+              </Heading>
+              <Text size={'lg'} key={'Card-subtitle-2'}>
+                {t('Home.AboutParagraph1')}
+              </Text>
+              <Text size={'lg'} key={'Card-subtitle-2'}>
+                {t('Home.AboutParagraph2')}
+              </Text>
+              <Text size={'lg'} key={'Card-subtitle-2'}>
+                {t('Home.AboutParagraph3')}
+              </Text>
+            </div>
             <section
               id="videoPresenter"
-              className="w-[80%] overflow-hidden rounded border border-gray-500 "
+              className="w-[40%] overflow-hidden rounded border border-gray-500 "
             >
               <iframe
                 className="w-full aspect-video"
@@ -167,6 +189,7 @@ export default function Home() {
                 </Text>
               </Card.Root>
             </section>
+            <CTA></CTA>
           </main>
         </>
       )}
