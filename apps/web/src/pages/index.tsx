@@ -12,7 +12,7 @@ import {
   FaPaste,
   FaTerminal,
 } from 'react-icons/fa'
-// import NavBar from '@/components/NavBar' Componente com defeito visual: linha 23
+import NavBar from '@/components/NavBar'
 
 export default function Home() {
   const { signIn } = useAuth()
@@ -25,11 +25,11 @@ export default function Home() {
     <>
       {hydrated && (
         <>
-          <main className="mb-20 flex items-center flex-col gap-20">
-            {/* <NavBar /> Componente com defeito visual no sm breakpoint */}
+          <NavBar />
+          <main className="mb-20 flex items-center flex-col gap-20 bg-codelife-green-500">
             <section
               id="codelife-presenter"
-              className="max-w-[83%] flex flex-col items-center justify-around h-[80vh] xl:h-auto xl:gap-14 bg-home bg-no-repeat bg-cover"
+              className="bg-white max-w-[83%] flex flex-col items-center justify-around h-[80vh] xl:h-auto xl:gap-14"
             >
               <Heading size={'2xl'} css={{ textAlign: 'center' }}>
                 {t('Home.Headline')}

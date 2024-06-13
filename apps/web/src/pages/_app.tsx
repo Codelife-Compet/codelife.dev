@@ -1,4 +1,5 @@
 import '@/styles/globals.css'
+import '@/styles/navbar.css'
 import type { AppProps } from 'next/app'
 import { GlobalContext } from '@/context'
 import { GlobalStyles } from '@codelife-ui/react'

@@ -1,6 +1,6 @@
 {
   "name": "@codelife-ui/react",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A design system to codelife react-ui components",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -43,6 +43,6 @@
     "@radix-ui/react-switch": "^1.0.2",
     "@stitches/react": "^1.2.8",
     "framer-motion": "^10.12.4",
-    "react-icons": "^4.10.1"
+    "react-icons": "^4.8.0"
   }
 }
