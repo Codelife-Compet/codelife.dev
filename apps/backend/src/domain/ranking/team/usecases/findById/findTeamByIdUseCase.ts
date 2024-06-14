@@ -3,25 +3,25 @@ import { Either, left, right } from "@/core/types/either"
 import { Team } from "@/domain/ranking/@entities/team"
 import { TeamsRepository } from "../../repositories/teamInterfaceRepository"
 
-interface FindTeamByNameUseCaseRequest {
-    name: string
+interface FindTeamByIdUseCaseRequest {
+    teamId: string
 }
 
-type FindTeamByNameUseCaseResponse = Either<
-    ResourceNotFoundError,
+type FindTeamByIdUseCaseResponse = Either<
+    { error: ResourceNotFoundError},
     { team: Team }
 >
 
-export class FindTeamByNameUseCase {
+export class FindTeamByIdUseCase {
 
     constructor(private teamsRepository: TeamsRepository) { }
 
-    async execute({ name }: FindTeamByNameUseCaseRequest): Promise<FindTeamByNameUseCaseResponse> {
+    async execute({ teamId }: FindTeamByIdUseCaseRequest): Promise<FindTeamByIdUseCaseResponse> {
 
-        const team = await this.teamsRepository.findByName(name)
+        const team = await this.teamsRepository.findById(teamId)
 
         if (!team)
-            return left(new ResourceNotFoundError("User"))
+            return left({ error: new ResourceNotFoundError(`Team ${teamId}`)})
 
         return right({ team })
     }

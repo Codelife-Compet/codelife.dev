@@ -1,6 +1,6 @@
 import { prisma } from "@/core/db/prisma";
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
-import { TeamProps, Team } from "../../@entities/team";
+import { TeamProps, Team, UpdateTeamProps } from "../../@entities/team";
 import { TeamsRepository } from "./teamInterfaceRepository";
 import { User, UserProps } from "@/domain/users/entities/user";
 
@@ -90,6 +90,41 @@ export class TeamsPrismaRepository implements TeamsRepository {
         const newUSers = users.map(user => new User({ ...user, accounts: [] }, new UniqueEntityID(user.id)));
 
         return newUSers;
+    }
+
+    async update(id: string, data: UpdateTeamProps): Promise<Team | null> {
+            
+        const team = await prisma.team.update({
+            where: { id },
+            data
+        });
+
+        return (team ? new Team(team, new UniqueEntityID(team.id)) : null);
+    }
+
+    async delete(id: string): Promise<Team | null> {
+        
+        const team = await prisma.team.delete({
+            where: { id }
+        });
+
+        return (team ? new Team(team, new UniqueEntityID(team.id)) : null);
+    }
+
+    async list(): Promise<Team[]> {
+        const teams = await prisma.team.findMany();
+
+        return teams.map(team => new Team(team, new UniqueEntityID(team.id)));
+    }
+
+    async listMembersByTeam(id: string): Promise<User[]> {
+        const users = await prisma.user.findMany({
+            where: {
+                teamId: id
+            }
+        });
+
+        return users.map(user => new User({ ...user, accounts: [] }, new UniqueEntityID(user.id)));
     }
 }
 
