@@ -1,6 +1,6 @@
 import { prisma } from "@/core/db/prisma";
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
-import { Video } from "../../@entities/video";
+import { UpdateVideoProps, Video } from "../../@entities/video";
 import { VideosRepository } from "./videosInterfaceRepository";
 import path from "path"
 import { glob } from "glob";
@@ -22,7 +22,7 @@ export class VideosPrismaRepository implements VideosRepository {
         return (video ? new Video(video, new UniqueEntityID(video.id)) : null);
     }
 
-    async findVideoByVideoKey_SlideId(youtubeId: string, slideId: string): Promise<Video | null> {
+    async findByYoutubeId(youtubeId: string, slideId: string): Promise<Video | null> {
         const video = await prisma.video.findUnique({
             where: {
                 slideId,
@@ -47,9 +47,23 @@ export class VideosPrismaRepository implements VideosRepository {
         return { dirFiles, directory }
     }
 
-    async delete(filePath: string): Promise<boolean> {
-       
-        return true;
+    async delete(id: string): Promise<Video | null> {
+
+        const video = await prisma.video.delete({
+            where: { id }
+        });
+
+        return (video ? new Video(video, new UniqueEntityID(video.id)) : null);
+    }
+
+    async update(id: string, data: UpdateVideoProps): Promise<Video | null> {
+            
+        const video = await prisma.video.update({
+            where: { id },
+            data
+        });
+
+        return (video ? new Video(video, new UniqueEntityID(video.id)) : null);
     }
 }
 

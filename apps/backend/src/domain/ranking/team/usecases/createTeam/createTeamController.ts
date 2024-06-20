@@ -1,6 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { z } from 'zod';
-import { makeCreateTeamUseCase } from './makeCreateTeamUseCase';
+import { TeamsPrismaRepository } from '../../repositories/teamPrismaRepository';
+import { CreateTeamUseCase } from './createTeamUseCase';
 
 export const createTeamBodySchema = z.object({
     name: z.string(),
@@ -12,9 +13,10 @@ export async function createController(request: FastifyRequest, reply: FastifyRe
 
 	const { name, institutinPicture, institutionName } = createTeamBodySchema.parse(request.body);
 
-	const createTeamUseCase = makeCreateTeamUseCase();
+    const teamsRepository = new TeamsPrismaRepository()
+    const useCase = new CreateTeamUseCase(teamsRepository)
 
-	const team = await createTeamUseCase.execute({ name, institutinPicture, institutionName });
+	const team = await useCase.execute({ name, institutinPicture, institutionName });
 
 	if (team.isLeft()) {
 		return reply

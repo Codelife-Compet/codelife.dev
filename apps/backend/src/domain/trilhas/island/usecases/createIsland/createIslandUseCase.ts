@@ -26,10 +26,10 @@ export class CreateIslandUseCase {
 
         const findIslandByNameUseCase = new FindIslandByNameUseCase(this.islandsRepository)
 
-        const possibleIsland = await findIslandByNameUseCase.execute({ name })
+        const possibleIsland = await findIslandByNameUseCase.execute({ islandName: name, trailId })
 
         if (possibleIsland.isRight()) {
-            return left({ error: new ResourceAlreadyExistsError(`Island's ${name} island`) })
+            return left({ error: new ResourceAlreadyExistsError(`Trails's ${trailId} island ${name}`) })
         }
 
         const island = await this.islandsRepository.create({ description, levels, name, theme, trailId })

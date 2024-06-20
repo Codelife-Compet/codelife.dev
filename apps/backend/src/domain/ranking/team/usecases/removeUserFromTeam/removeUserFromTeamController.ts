@@ -18,7 +18,7 @@ export async function removeUserFromTeamController(request: FastifyRequest, repl
 	if (team.isLeft()) 
 		return reply
 			.status(400)
-			.send({ error_message: team.value.error.message })
+			.send(team.value.error)
 
 	return reply
 		.status(201)

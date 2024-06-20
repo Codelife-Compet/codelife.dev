@@ -21,5 +21,5 @@ export async function teamlevelRankingController(request: FastifyRequest, reply:
 			.send(ranking.value.error)
 	}
 
-	return reply.status(201).send(ranking.value.teamsPonctuation);
+	return reply.status(201).send(ranking.value.usersPonctuation);
 }

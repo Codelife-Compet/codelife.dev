@@ -2,6 +2,13 @@ import { Entity } from "@/core/entities/entity";
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 import { Level } from "./level";
 
+export type UpdateIslandProps = {
+    name?: string
+    description?: string
+    theme?: string
+    trailId?: string
+};
+
 export type IslandProps = {
     name: string
     description: string

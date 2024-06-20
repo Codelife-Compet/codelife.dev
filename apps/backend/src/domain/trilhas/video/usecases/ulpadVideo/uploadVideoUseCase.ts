@@ -59,7 +59,10 @@ export class UploadVideoUseCase {
         if (addVideoToPlaylistResponse.isLeft())
             return left({ error: addVideoToPlaylistResponse.value.error })
 
-        const createdVideo = await this.videosRepository.create(new Video({ slideId, youtubeId: videoId }))
+        const youtubePlaylistId = addVideoToPlaylistResponse.value.response[addVideoToPlaylistResponse.value.response.length - 1]
+
+        // TODO: testar se playlistId funciona
+        const createdVideo = await this.videosRepository.create(new Video({ slideId, youtubeId: videoId, youtubePlaylistId }))
 
         return right({ video: createdVideo })
     }

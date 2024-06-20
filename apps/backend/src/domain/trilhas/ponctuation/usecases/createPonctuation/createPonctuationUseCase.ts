@@ -2,11 +2,11 @@ import { Either, left, right } from "@/core/types/either"
 import { ResourceAlreadyExistsError } from "@/core/errors/resource-already-exists-error"
 import { Ponctuation } from "../../../@entities/ponctuation"
 import { PonctuationsRepository } from "../../repositories/ponctuationInterfaceRepository"
-import { FindPonctuationByPonctuationName_LevelId } from "../findPonctuationByUserName&LevelId/findLevelByLevelName&findPonctuationByPonctuationName&LevelIdUseCase"
+import { FindPonctuationByNameUseCase } from "../findPonctuationByUserName&LevelId/findPonctuationByNameUseCase"
 
 interface CreatePonctuationUseCaseRequest {
-    userName: string
     score: number
+    userName: string
     levelId: string
 }
 
@@ -21,7 +21,7 @@ export class CreatePonctuationUseCase {
 
     async execute({ levelId, score, userName }: CreatePonctuationUseCaseRequest): Promise<CreatePonctuationUseCaseResponse> {
 
-        const findPonctuationByUserNameUseCase = new FindPonctuationByPonctuationName_LevelId(this.ponctuationsRepository)
+        const findPonctuationByUserNameUseCase = new FindPonctuationByNameUseCase(this.ponctuationsRepository)
 
         const possiblePonctuation = await findPonctuationByUserNameUseCase.execute({ levelId, userName })
 

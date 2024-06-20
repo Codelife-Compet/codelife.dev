@@ -1,5 +1,10 @@
- import { Entity } from "@/core/entities/entity";
+import { Entity } from "@/core/entities/entity";
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
+
+export type UpdateVideoProps = {
+    youtubeId?: string,
+    youtubePlaylistId?: string
+};
 
 export type VideoProps = {
     youtubeId: string

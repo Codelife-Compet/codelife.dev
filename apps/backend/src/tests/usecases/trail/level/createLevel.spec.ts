@@ -1,5 +1,5 @@
 import { Island } from "@/domain/trilhas/@entities/island";
-import { CreateLevelUseCase } from "@/domain/trilhas/level/usecases/createSlide/createLevelUseCase";
+import { CreateLevelUseCase } from "@/domain/trilhas/level/usecases/createLevel/createLevelUseCase";
 import { makeIsland } from "@/tests/factories/makeIsland";
 import { InMemoryIslandsRepository } from "@/tests/repositories/in-memory-island-repository";
 import { InMemoryLevelsRepository } from "@/tests/repositories/in-memory-level-repository ";

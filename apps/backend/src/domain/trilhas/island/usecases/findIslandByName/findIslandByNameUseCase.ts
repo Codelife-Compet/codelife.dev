@@ -4,11 +4,12 @@ import { Island } from "@/domain/trilhas/@entities/island"
 import { IslandsRepository } from "../../repositories/islandInterfaceRepository"
 
 interface FindIslandByNameUseCaseRequest {
-    name: string
+    islandName: string
+    trailId: string
 }
 
 type FindIslandByNameUseCaseResponse = Either<
-    ResourceNotFoundError,
+    { error: ResourceNotFoundError },
     { island: Island }
 >
 
@@ -16,12 +17,11 @@ export class FindIslandByNameUseCase {
 
     constructor(private islandsRepository: IslandsRepository) { }
 
-    async execute({ name }: FindIslandByNameUseCaseRequest): Promise<FindIslandByNameUseCaseResponse> {
+    async execute({ islandName, trailId }: FindIslandByNameUseCaseRequest): Promise<FindIslandByNameUseCaseResponse> {
 
-        const island = await this.islandsRepository.findByName(name)
-
+        const island = await this.islandsRepository.findByIslandName_TrailId(islandName, trailId)
         if (!island)
-            return left(new ResourceNotFoundError("User"))
+            return left({ error: new ResourceNotFoundError(`Island ${name}`) })
 
         return right({ island })
     }

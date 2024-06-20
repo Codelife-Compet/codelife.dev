@@ -1,6 +1,11 @@
 import { Entity } from "@/core/entities/entity";
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 
+export type UpdatePonctuationProps = {
+    userName?: string
+    score?: number
+};
+
 export type PonctuationProps = {
     userName: string
     score: number

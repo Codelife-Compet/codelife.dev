@@ -9,6 +9,12 @@ export type TeamProps = {
     users?: User[]
 };
 
+export type UpdateTeamProps = {
+    name?: string
+    institutionName?: string | null
+    institutinPicture?: string | null
+};
+
 export class Team extends Entity<TeamProps> {
 
     constructor(props: TeamProps, id?: UniqueEntityID) {

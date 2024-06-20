@@ -3,6 +3,7 @@ import { ResourceAlreadyExistsError } from "@/core/errors/resource-already-exist
 import { UsersRepository } from "@/domain/users/repositories/interface/users-repository"
 import { PonctuationProps } from "@/domain/trilhas/@entities/ponctuation"
 import { ListUserUseCase } from "@/domain/users/usecases/source/list-users"
+import { User } from "@/domain/users/entities/user"
 
 type TeamsLevelRankingUseCaseResponse = Either<
     { error: ResourceAlreadyExistsError },
@@ -47,11 +48,11 @@ export class TeamsLevelRankingUseCase {
 
         for (const user of usersPonctuation) {
 
-            const userData = await this.usersRepository.findByName(user.userName)
+            const userData = await this.usersRepository.findByName(user.userName) as User
 
-            const index = ponctuationPerTeams.findIndex(teams => teams.teamsName === userData?.team?.name)
+            const index = ponctuationPerTeams.findIndex(teams => teams.teamsName === userData?.teamId)
             if (index === -1) {
-                ponctuationPerTeams.push({ teamsName: userData?.team?.name as string, score: user.score })
+                ponctuationPerTeams.push({ teamsName: userData?.teamId as string, score: user.score })
             } else {
                 ponctuationPerTeams[index].score += user.score
             }

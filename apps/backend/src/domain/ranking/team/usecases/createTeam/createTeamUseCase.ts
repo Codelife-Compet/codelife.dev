@@ -2,7 +2,7 @@ import { Either, left, right } from "@/core/types/either"
 import { ResourceAlreadyExistsError } from "@/core/errors/resource-already-exists-error"
 import { Team } from "../../../@entities/team"
 import { TeamsRepository } from "../../repositories/teamInterfaceRepository"
-import { FindTeamByNameUseCase } from "../findIslandByName/findIslandByNameUseCase"
+import { FindTeamByNameUseCase } from "../findByName/findTeamByNameUseCase"
 
 interface CreateTeamUseCaseRequest {
     name: string

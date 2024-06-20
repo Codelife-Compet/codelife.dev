@@ -8,7 +8,7 @@ interface FindTrailByNameUseCaseRequest {
 }
 
 type FindTrailByNameUseCaseResponse = Either<
-    ResourceNotFoundError,
+    { error: ResourceNotFoundError },
     { trail: Trail }
 >
 
@@ -21,7 +21,7 @@ export class FindTrailByNameUseCase {
         const trail = await this.trailsRepository.findByName(name)
 
         if (!trail)
-            return left(new ResourceNotFoundError("Trail"))
+            return left({error: new ResourceNotFoundError("Trail")})
 
         return right({ trail })
     }

@@ -5,10 +5,11 @@ import { UserCodesRepository } from "../../repositories/userCodesInterfaceReposi
 
 interface FindUserCodeByUserNameUseCaseRequest {
     userName: string,
+    slideId: string
 }
 
 type FindUserCodeByUserNameUseCaseResponse = Either<
-    ResourceNotFoundError,
+    { error: ResourceNotFoundError },
     { userCode: UserCode }
 >
 
@@ -16,12 +17,12 @@ export class FindUserCodeByUserNameUseCase {
 
     constructor(private userCodesRepository: UserCodesRepository) { }
 
-    async execute({ userName }: FindUserCodeByUserNameUseCaseRequest): Promise<FindUserCodeByUserNameUseCaseResponse> {
+    async execute({ userName, slideId }: FindUserCodeByUserNameUseCaseRequest): Promise<FindUserCodeByUserNameUseCaseResponse> {
 
-        const userCode = await this.userCodesRepository.findByUserName(userName)
+        const userCode = await this.userCodesRepository.findByUserName(userName, slideId)
 
         if (!userCode)
-            return left(new ResourceNotFoundError("User"))
+            return left({ error: new ResourceNotFoundError(`UserCode from ${userName} in slide ${slideId}`) })
 
         return right({ userCode })
     }

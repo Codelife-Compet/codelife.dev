@@ -1,0 +1,37 @@
+import { Either, left, right } from "@/core/types/either"
+import { ResourceAlreadyExistsError } from "@/core/errors/resource-already-exists-error"
+import { Level } from "../../../@entities/level"
+import { LevelsRepository } from "../../repositories/levelInterfaceRepository"
+import { findByLevelNameIslandId } from "../findLevelByName/findLevelByNameUseCase"
+
+interface CreateLevelUseCaseRequest {
+    name: string
+    description: string
+    theme: string
+    islandId: string
+}
+
+type CreateLevelUseCaseResponse = Either<
+    { error: ResourceAlreadyExistsError },
+    { level: Level }
+>
+
+export class CreateLevelUseCase {
+
+    constructor(private levelsRepository: LevelsRepository) { }
+
+    async execute({ description, islandId, name, theme }: CreateLevelUseCaseRequest): Promise<CreateLevelUseCaseResponse> {
+
+        const findLevelByUserNameUseCase = new findByLevelNameIslandId(this.levelsRepository)
+
+        const possibleLevel = await findLevelByUserNameUseCase.execute({ islandId, levelName: name })
+
+        if (possibleLevel.isRight()) {
+            return left({ error: new ResourceAlreadyExistsError(`Island ${islandId} level ${name}`) })
+        }
+
+        const level = await this.levelsRepository.create({ description, islandId, name, theme, ponctuations: [] })
+
+        return right({ level })
+    }
+}

@@ -1,26 +1,30 @@
 import { Either, left, right } from "@/core/types/either"
-import { ResourceAlreadyExistsError } from "@/core/errors/resource-already-exists-error"
 import { Video } from "../../../@entities/video"
 import { VideosRepository } from "../../repositories/videosInterfaceRepository"
-import { FindVideoByVideoKey_SlideId } from "../findSlideBySlideName&LevelId/findVideoByVideoName&SlideIdUseCase"
+import { ResourceNotFoundError } from "@/core/errors/resource-not-found-error"
 
 interface DeleteVideoUseCaseRequest {
-    directory: string
+    id: string
 }
 
 type DeleteVideoUseCaseResponse = Either<
-    { error: ResourceAlreadyExistsError },
-    { success: boolean }
+    { error: ResourceNotFoundError },
+    { video: Video }
 >
 
 export class DeleteVideoUseCase {
 
     constructor(private videosRepository: VideosRepository) { }
 
-    async execute({ directory }: DeleteVideoUseCaseRequest): Promise<DeleteVideoUseCaseResponse> {
+    async execute({ id }: DeleteVideoUseCaseRequest): Promise<DeleteVideoUseCaseResponse> {
 
-        const success = await this.videosRepository.delete(directory)
+        const video = await this.videosRepository.delete(id)
 
-        return right({ success })
+        if (!video)
+            return left({ error: new ResourceNotFoundError(`Video ${id}`) })
+
+        // TODO: remover do youtube
+
+        return right({ video })
     }
 }
