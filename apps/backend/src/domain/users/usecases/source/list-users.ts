@@ -1,11 +1,10 @@
 import { Either, left, right } from "@/core/types/either"
 import { UsersRepository } from "@/domain/users/repositories/interface/users-repository"
-import { ResourceAlreadyExistsError } from "@/core/errors/resource-already-exists-error"
 import { User } from "@/domain/users/entities/user"
 import { ResourceNotFoundError } from "@/core/errors/resource-not-found-error"
 
 type ListUserUseCaseResponse = Either<
-    ResourceAlreadyExistsError,
+    ResourceNotFoundError,
     { users: User[] }
 >
 
