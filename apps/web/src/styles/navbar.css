@@ -1,0 +1,68 @@
+* {
+    box-sizing: border-box;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    height: 60px;
+    background-color: rgb(66, 220, 207);
+}
+
+.navbar li:hover {
+    text-decoration: underline;
+}
+
+.codelife-logo {
+    width: 120px;
+    height: auto;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    width: 300px;
+    font-size: 15px;
+    font-weight: 400;
+    color: rgb(255, 0, 0);
+    background-color: #ffffffb2;
+    padding: 0px 20px;
+    border-radius: 50px;
+}
+
+.search-icon {
+    font-size: 15px;
+    margin-right: 10px;
+    color: rgba(0, 0, 0, 0.581);
+}
+
+.search-icon:hover {
+    cursor: pointer;
+    color: black;
+}
+
+.input-box {
+    outline: none;
+    flex: 1;
+    background-color: rgba(0, 0, 0, 0);
+    color: rgba(0, 0, 0, 0.794);
+}
+
+.input-box::placeholder {
+    color: rgba(0, 0, 0, 0.395);
+}
+
+.yt:hover, .fb:hover, .ig:hover {
+    cursor: pointer;
+}
+
+.pt-div {
+    border-right: 1px solid #05500c;
+    padding: 5px 7px 5px 0px;
+}
+
+.en-div {
+    margin-left: -8px;
+}
