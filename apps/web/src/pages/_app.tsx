@@ -1,6 +1,6 @@
 import '@/styles/globals.css'
-import '@/styles/slider.css'
 import '@/styles/navbar.css'
+import '@/styles/entrar.css'
 import type { AppProps } from 'next/app'
 import { GlobalContext } from '@/context'
 import { GlobalStyles } from '@codelife-ui/react'
