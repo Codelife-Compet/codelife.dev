@@ -21,7 +21,7 @@ export class FindIslandByNameUseCase {
 
         const island = await this.islandsRepository.findByIslandName_TrailId(islandName, trailId)
         if (!island)
-            return left({ error: new ResourceNotFoundError(`Island ${name}`) })
+            return left({ error: new ResourceNotFoundError(`Island ${islandName}`) })
 
         return right({ island })
     }

@@ -2,6 +2,7 @@ import { prisma } from "@/core/db/prisma";
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 import { IslandProps, Island, UpdateIslandProps } from "../../@entities/island";
 import { IslandsRepository } from "./islandInterfaceRepository";
+import { Optional } from "@/core/types/optional";
 
 export class IslandsPrismaRepository implements IslandsRepository {
 

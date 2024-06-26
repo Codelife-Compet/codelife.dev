@@ -1,3 +1,4 @@
+import { Optional } from "@/core/types/optional"
 import { Island, IslandProps, UpdateIslandProps } from "../../@entities/island"
 
 export interface IslandsRepository { 
