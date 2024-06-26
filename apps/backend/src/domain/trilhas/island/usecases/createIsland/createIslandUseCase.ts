@@ -28,24 +28,18 @@ export class CreateIslandUseCase {
     async execute({ description, name, theme, levels, trailId }: CreateIslandUseCaseRequest): Promise<CreateIslandUseCaseResponse> {
 
         const findIslandByNameUseCase = new FindIslandByNameUseCase(this.islandsRepository)
-
         const possibleIsland = await findIslandByNameUseCase.execute({ islandName: name, trailId })
-
-        if (possibleIsland.isRight()) 
+        if (possibleIsland.isRight())
             return left({ error: new ResourceAlreadyExistsError(`Trails's ${trailId} island ${name}`) })
 
         const findTrailByIdUseCase = new FindTrailByIdUseCase(this.trailsRepository)
-
         const possibleTrail = await findTrailByIdUseCase.execute({ id: trailId })
-
-        if (possibleTrail.isLeft()) {
+        if (possibleTrail.isLeft())
             return left({ error: new ResourceNotFoundError(`Trail ${trailId}`) })
-        }
 
-        const currentIslands = await this.islandsRepository.listByTrailId(trailId)
-        const nextIndex = currentIslands.length + 1 
+        const index = await this.islandsRepository.countIslandsInTrail(trailId)
 
-        const island = await this.islandsRepository.create({ description, levels, name, theme, trailId, index: nextIndex })
+        const island = await this.islandsRepository.create({ description, levels, name, theme, trailId, index })
 
         return right({ island })
     }

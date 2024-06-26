@@ -6,6 +6,13 @@ import { Optional } from "@/core/types/optional";
 
 export class IslandsPrismaRepository implements IslandsRepository {
 
+    async countIslandsInTrail(trailId: string): Promise<number> {
+        
+        return await prisma.island.count({
+            where: { trailId }
+        });
+    }
+
     async list(): Promise<Island[]> {
         const islands = await prisma.island.findMany();
 

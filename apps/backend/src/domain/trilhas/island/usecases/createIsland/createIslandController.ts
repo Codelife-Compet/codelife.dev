@@ -22,7 +22,11 @@ export async function createController(request: FastifyRequest, reply: FastifyRe
 	const island = await createIslandUseCase.execute({ description, name, theme, trailId });
 
 	if (island.isLeft())
-		return reply.status(400).send(island.value.error);
+		return reply
+			.status(400)
+			.send(island.value.error);
 
-	return reply.status(201).send(island.value.island);
+	return reply
+		.status(201)
+		.send(island.value.island);
 }

@@ -93,15 +93,17 @@ model Slide {
   description String
   theme       String
   baseCode    String
+  index       Int   @default(0)
 
   userCodes UserCode[]
   video     Video?
 
   Level   Level   @relation(fields: [levelId], references: [id])
-  levelId String  @unique
+  levelId String  
   videoId String?
 
   @@map("slides")
+  @@unique([levelId, name])
 }
 
 model Level {
@@ -109,15 +111,17 @@ model Level {
   name        String
   description String
   theme       String
+  index       Int   @default(0)
 
   slides Slide[]
 
   Island   Island @relation(fields: [islandId], references: [id])
-  islandId String @unique
+  islandId String 
 
   Ponctuation Ponctuation[]
 
   @@map("levels")
+  @@unique([islandId, name])
 }
 
 model Ponctuation {
@@ -136,13 +140,15 @@ model Island {
   name        String @unique
   description String
   theme       String
+  index       Int   @default(0)
 
   slides Level[]
 
   Trail   Trail  @relation(fields: [trailId], references: [id])
-  trailId String @unique
+  trailId String 
 
   @@map("islands")
+  @@unique([trailId, name])
 }
 
 model Trail {
