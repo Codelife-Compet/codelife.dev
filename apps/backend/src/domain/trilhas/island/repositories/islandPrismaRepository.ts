@@ -48,10 +48,12 @@ export class IslandsPrismaRepository implements IslandsRepository {
 
         const island = await prisma.island.findUnique({
             where: {
-                trailId,
+              unique_trailId_name: {
+                trailId: trailId,
                 name: islandName
+              }
             }
-        });
+          });
 
         return (island ? new Island(island, new UniqueEntityID(island.id)) : null);
     }

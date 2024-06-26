@@ -27,9 +27,8 @@ export class CreateSlideUseCase {
 
         const possibleSlide = await findSlideByUserNameUseCase.execute({ levelId, slideName: name })
 
-        if (possibleSlide.isRight()) {
+        if (possibleSlide.isRight())
             return left({ error: new ResourceAlreadyExistsError(`Slide ${name} in level ${levelId}`) })
-        }
 
         const slide = await this.slidesRepository.create({ baseCode, description, levelId, name, theme })
 

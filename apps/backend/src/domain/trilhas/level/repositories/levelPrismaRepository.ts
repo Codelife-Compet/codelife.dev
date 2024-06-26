@@ -45,8 +45,13 @@ export class LevelsPrismaRepository implements LevelsRepository {
 
     async findByLevelNameIslandId(levelName: string, islandId: string): Promise<Level | null> {
 
-        const level = await prisma.level.findFirst({
-            where: { name: levelName, islandId }
+        const level = await prisma.level.findUnique({
+            where: {
+                unique_islandId_name: {
+                    islandId: islandId,
+                    name: levelName
+                }
+            }
         });
 
         return (level ? new Level(level, new UniqueEntityID(level.id)) : null);
