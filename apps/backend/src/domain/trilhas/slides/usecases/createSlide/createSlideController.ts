@@ -2,6 +2,7 @@ import { FastifyReply, FastifyRequest } from 'fastify';
 import { z } from 'zod';
 import { SlidesPrismaRepository } from '../../repositories/slidesPrismaRepository';
 import { CreateSlideUseCase } from './createSlideUseCase';
+import { LevelsPrismaRepository } from '@/domain/trilhas/level/repositories/levelPrismaRepository';
 
 export const createSlideBodySchema = z.object({
 	name: z.string(),
@@ -16,7 +17,8 @@ export async function createSlideController(request: FastifyRequest, reply: Fast
 	const { baseCode, description, levelId, name, theme } = createSlideBodySchema.parse(request.body);
 
     const slidesRepository = new SlidesPrismaRepository()
-    const createSlideUseCase = new CreateSlideUseCase(slidesRepository)
+	const levelsRepository = new LevelsPrismaRepository()
+    const createSlideUseCase = new CreateSlideUseCase(slidesRepository, levelsRepository)
 	const slide = await createSlideUseCase.execute({ baseCode, description, levelId, name, theme });
 
 	if (slide.isLeft())

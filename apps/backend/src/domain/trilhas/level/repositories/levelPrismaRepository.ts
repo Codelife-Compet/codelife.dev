@@ -36,6 +36,7 @@ export class LevelsPrismaRepository implements LevelsRepository {
     }
 
     async findById(id: string): Promise<Level | null> {
+
         const level = await prisma.level.findUnique({
             where: { id }
         });
