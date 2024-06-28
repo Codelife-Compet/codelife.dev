@@ -3,6 +3,7 @@ import { useAuth } from '@/context/auth/AuthContext'
 import { Button, Heading, Text, Card } from '@codelife-ui/react'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import CTA from '@/components/CTA'
 import {
   FaArrowRight,
   FaFacebook,
@@ -167,6 +168,7 @@ export default function Home() {
                 </Text>
               </Card.Root>
             </section>
+              <CTA />
           </main>
         </>
       )}

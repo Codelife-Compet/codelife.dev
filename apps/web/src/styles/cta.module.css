@@ -1,0 +1,50 @@
+.ctaContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+}
+
+.box{
+    width: 47.5rem;
+    height: 17.2225rem;
+    color: white;
+    background-color: white;
+    border-radius: 10px;
+    display: grid;
+    margin-top: -1.7rem;
+}
+
+.h2{
+    color: #233233;
+    letter-spacing: -1px;
+    text-transform: none;
+    font-size: 2.375rem;
+    line-height: 1.25;
+    font-weight: 700;
+    margin: 2rem 2rem 0;
+    z-index: 2;
+    display: block;
+    text-align: center;
+}
+
+.img{
+    display: block;
+    justify-content: center;
+    align-items: center;
+}
+
+.button{
+    background-color: #0f807e;
+    border-radius: 25px;
+    width: 11rem;
+    align-items: center;
+    margin: 0 auto 3rem;
+    font-weight: 700;
+}
+
+.button:hover{
+    background-color: #0b5b5c;
+    transition: 0.3s;
+}

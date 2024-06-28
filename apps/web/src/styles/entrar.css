@@ -1,0 +1,238 @@
+
+* {
+    box-sizing: border-box;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+    pointer-events: none;
+}
+
+.entre-container {
+    position: absolute;
+    z-index: 999;
+    padding: 35px 50px 50px 50px;
+    width: 93vw;
+    max-width: 750px;
+    height: 80vh;
+    background-color: rgb(255, 255, 255);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 5px;
+}
+
+.btn-exit {
+    position: absolute;
+    top: 8px;
+    right: 20px;
+    color: rgb(164, 164, 164);
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.btn-exit:hover {
+    color: rgb(31, 136, 134);
+}
+
+.first-container {
+    text-align: center;
+}
+
+.first-container > h1 {
+    font-size: 35px;
+}
+
+.second-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0px 30px 0px;
+    height: 68%;
+    width: 100%;
+}
+
+.left-box {
+    width: 42.5%;
+}
+
+.label-2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    color: rgb(98, 98, 98);
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+.label-2 > a {
+    display: flex;
+    justify-content: space-between;
+    color: rgb(29, 135, 134);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.label-2 > a:hover {
+    color: rgba(29, 135, 133, 0.763);
+    text-decoration: underline;
+}
+
+.left-box > h3 {
+    color: rgb(98, 98, 98);
+    font-size: 14px;
+}
+
+.middle-box {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 15%;
+    color: rgb(172, 176, 176);
+}
+
+.middle-box > h1 {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.middle-box::before,
+.middle-box::after {
+    content: '';
+    position: absolute;
+    width: 1px;
+    background-color: rgb(172, 176, 176);
+}
+
+.middle-box::before {
+    top: 0;
+    bottom: 160px;
+    left: 50%;
+}
+
+.middle-box::after {
+    top: 160px;
+    bottom: 0;
+    right: 50%;
+}
+
+.right-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 42.5%;
+}
+
+.third-container {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    text-align: center;
+    margin-top: auto;
+}
+
+.third-container > h3 {
+    color: rgb(98, 98, 98);
+    font-size: 14px;
+}
+
+.third-container > a {
+    color: rgb(29, 135, 134);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.third-container > a:hover {
+    color: rgba(29, 135, 133, 0.763);
+    cursor: pointer;
+}
+
+.label-text {
+    font-size: 15px;
+}
+
+.form {
+    background-color: rgb(227, 228, 228);
+    width: 100%;
+    height: 50px;
+    border-radius: 3px;
+    border: 1px solid rgb(144, 150, 150);
+    margin-bottom: 10px;
+    margin-top: 3px;
+}
+
+.form input {
+    transition: background-color 0.3s ease;
+    transition: border 0.3s ease;
+}
+
+.form input:hover {
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(15, 128, 126);
+}
+
+.form input:focus {
+    background-color: rgb(115, 255, 241);
+    border: 1px solid rgb(15, 128, 126);
+}
+
+.form > input {
+    height: 100%;
+    width: 100%;
+    padding-left: 40px;
+}
+
+button {
+    width: 100%;
+    min-width: 200px;
+    height: 47px;
+    border-radius: 30px;
+    padding: 10px;
+    margin: 15px 0;
+    font-size: 17px;
+    font-weight: 450;
+}
+
+.btn-entrar {
+    color: white;
+    background-color: rgb(31, 136, 134);
+}
+
+.btn-entrar:hover {
+    background-color: rgba(31, 136, 134, 0.916);
+}
+
+.btn-twitter {
+    color: white;
+    background-color: rgb(20, 178, 238);
+}
+
+.btn-twitter:hover {
+    background-color: rgba(20, 176, 238, 0.922);
+}
+
+.btn-facebook {
+    color: white;
+    background-color: rgb(62, 91, 153);
+}
+
+.btn-facebook:hover {
+    background-color: rgba(62, 91, 153, 0.916);
+}
+
+.btn-instagram {
+    color: white;
+    background-image: linear-gradient(to right, #8a3ab9, #fd7e14);
+}
+
+.btn-instagram:hover {
+    background-image: linear-gradient(to right, #8a3ab9ec, #fd7d14e4);
+}
