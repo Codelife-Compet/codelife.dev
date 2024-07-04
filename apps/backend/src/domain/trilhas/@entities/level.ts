@@ -7,12 +7,14 @@ export type UpdateLevelProps = {
     name?: string
     description?: string
     theme?: string
+    index?: number
 };
 
 export type LevelProps = {
     name: string
     description: string
     theme: string
+    index: number
     ponctuations?: Ponctuation[]
     slides?: Slide[]
     islandId: string
@@ -27,6 +29,7 @@ export class Level extends Entity<LevelProps> {
     get name() { return this.props.name }
     get description() { return this.props.description }
     get theme() { return this.props.theme }
+    get index() { return this.props.index }
     get ponctuations() { return this.props.ponctuations }
     get slides() { return this.props.slides }
     get islandId() { return this.props.islandId }

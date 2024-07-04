@@ -3,6 +3,7 @@ import { Slide, SlideProps, UpdateSlideProps } from "../../@entities/slide"
 export interface SlidesRepository { 
     create(data: SlideProps): Promise<Slide>
     findById(id: string): Promise<Slide | null>
+    countSlidesInLevel(levelId: string): Promise<number>
     findSlideBySlideName_LevelId(slideName: string, levelId: string): Promise<Slide | null>
     list(): Promise<Slide[]>
     listByLevelId(levelId: string): Promise<Slide[]>

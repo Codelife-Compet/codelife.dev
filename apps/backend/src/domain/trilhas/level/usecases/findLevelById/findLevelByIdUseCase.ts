@@ -19,7 +19,6 @@ export class FindLevelByIdUseCase {
     async execute({ id }: FindLevelByIdRequest): Promise<FindLevelByIdResponse> {
 
         const level = await this.levelsRepository.findById(id)
-
         if (!level)
             return left({ error: new ResourceNotFoundError(`Level ${id}`) })
 

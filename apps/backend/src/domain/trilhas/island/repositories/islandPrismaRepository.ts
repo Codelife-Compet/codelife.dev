@@ -2,8 +2,16 @@ import { prisma } from "@/core/db/prisma";
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 import { IslandProps, Island, UpdateIslandProps } from "../../@entities/island";
 import { IslandsRepository } from "./islandInterfaceRepository";
+import { Optional } from "@/core/types/optional";
 
 export class IslandsPrismaRepository implements IslandsRepository {
+
+    async countIslandsInTrail(trailId: string): Promise<number> {
+        
+        return await prisma.island.count({
+            where: { trailId }
+        });
+    }
 
     async list(): Promise<Island[]> {
         const islands = await prisma.island.findMany();
@@ -40,10 +48,12 @@ export class IslandsPrismaRepository implements IslandsRepository {
 
         const island = await prisma.island.findUnique({
             where: {
-                trailId,
+              unique_trailId_name: {
+                trailId: trailId,
                 name: islandName
+              }
             }
-        });
+          });
 
         return (island ? new Island(island, new UniqueEntityID(island.id)) : null);
     }

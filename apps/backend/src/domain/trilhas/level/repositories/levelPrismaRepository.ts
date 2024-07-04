@@ -11,6 +11,13 @@ export class LevelsPrismaRepository implements LevelsRepository {
         return levels.map(level => new Level(level, new UniqueEntityID(level.id)));
     }
 
+    async countLevelsInIsland(islandId: string): Promise<number> {
+
+        return await prisma.level.count({
+            where: { islandId }
+        });
+    }
+
     async listByIslandId(islandId: string): Promise<Level[]> {
         const levels = await prisma.level.findMany({
             where: { islandId }
@@ -29,6 +36,7 @@ export class LevelsPrismaRepository implements LevelsRepository {
     }
 
     async findById(id: string): Promise<Level | null> {
+
         const level = await prisma.level.findUnique({
             where: { id }
         });
@@ -40,8 +48,10 @@ export class LevelsPrismaRepository implements LevelsRepository {
 
         const level = await prisma.level.findUnique({
             where: {
-                islandId,
-                name: levelName
+                unique_islandId_name: {
+                    islandId: islandId,
+                    name: levelName
+                }
             }
         });
 

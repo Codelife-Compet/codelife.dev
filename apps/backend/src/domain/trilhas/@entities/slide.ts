@@ -8,6 +8,7 @@ export type UpdateSlideProps = {
     description?: string
     theme?: string
     baseCode?: string
+    index?: number // Add index attribute
 };
 
 export type SlideProps = {
@@ -18,6 +19,7 @@ export type SlideProps = {
     userCodes?: UserCode[] // código previamente digitado pelo usuário
     video?: Video
     levelId: string
+    index: number // Add index attribute
 };
 
 export class Slide extends Entity<SlideProps> {
@@ -33,5 +35,5 @@ export class Slide extends Entity<SlideProps> {
     get userCodes() { return this.props.userCodes }
     get video() { return this.props.video }
     get levelId() { return this.props.levelId }
-    // get video() { return this.props.video }
+    get index() { return this.props.index } // Add index getter
 }

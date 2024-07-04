@@ -19,6 +19,12 @@ export class SlidesPrismaRepository implements SlidesRepository {
         return slides.map(slide => new Slide(slide, new UniqueEntityID(slide.id)));
     }
 
+    async countSlidesInLevel(levelId: string): Promise<number> {
+        return prisma.slide.count({
+            where: { levelId }
+        });
+    }
+
     async create(data: SlideProps): Promise<Slide> {
 
         const { userCodes, video, ...restData } = data;
@@ -39,8 +45,10 @@ export class SlidesPrismaRepository implements SlidesRepository {
     async findSlideBySlideName_LevelId(slideName: string, levelId: string): Promise<Slide | null> {
         const slide = await prisma.slide.findUnique({
             where: {
-                levelId,
-                name: slideName
+                unique_levelId_name: {
+                    levelId: levelId,
+                    name: slideName
+                }
             }
         });
 
